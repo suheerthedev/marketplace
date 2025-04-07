@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:stacked/stacked.dart';
 
@@ -176,7 +177,8 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed:
+                          viewModel.navigationService.navigateToBuyerLoginView,
                       child: Text(
                         "Create an Account",
                         style: GoogleFonts.hankenGrotesk(
@@ -261,7 +263,8 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                           fontSize: 16, color: lightTextColor),
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap:
+                          viewModel.navigationService.navigateToBuyerLoginView,
                       child: Text(
                         "Log In",
                         style: GoogleFonts.hankenGrotesk(
