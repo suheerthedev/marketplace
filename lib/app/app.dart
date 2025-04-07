@@ -5,6 +5,7 @@ import 'package:marketplace/ui/views/startup/startup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:marketplace/ui/views/buyer_sign_up/buyer_sign_up_view.dart';
+import 'package:marketplace/ui/views/buyer_login/buyer_login_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -12,6 +13,7 @@ import 'package:marketplace/ui/views/buyer_sign_up/buyer_sign_up_view.dart';
     MaterialRoute(page: HomeView),
     MaterialRoute(page: StartupView),
     MaterialRoute(page: BuyerSignUpView),
+    MaterialRoute(page: BuyerLoginView),
 // @stacked-route
   ],
   dependencies: [
