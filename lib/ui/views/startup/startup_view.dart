@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/ui/styles/text_styles.dart';
 import 'package:stacked/stacked.dart';
 
@@ -59,7 +60,8 @@ class StartupView extends StackedView<StartupViewModel> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () {},
+                onPressed:
+                    viewModel.navigationService.navigateToBuyerSignUpView,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
