@@ -4,13 +4,15 @@ import 'package:marketplace/ui/views/home/home_view.dart';
 import 'package:marketplace/ui/views/startup/startup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:marketplace/ui/views/buyer_sign_up/buyer_sign_up_view.dart';
 // @stacked-import
 
 @StackedApp(
   routes: [
     MaterialRoute(page: HomeView),
     MaterialRoute(page: StartupView),
-    // @stacked-route
+    MaterialRoute(page: BuyerSignUpView),
+// @stacked-route
   ],
   dependencies: [
     LazySingleton(classType: BottomSheetService),
