@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:marketplace/ui/styles/text_styles.dart';
 import 'package:stacked/stacked.dart';
 
 import 'startup_viewmodel.dart';
@@ -23,17 +24,8 @@ class StartupView extends StackedView<StartupViewModel> {
               top: 12,
               left: 5,
               right: 16,
-              child: Text(
-                "Why choose others, if you own this one.com",
-                style: GoogleFonts.hankenGrotesk(
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: -4,
-                  wordSpacing: -4,
-                  fontSize: 74,
-                  height: 0.9,
-                  color: Colors.black,
-                ),
-              ),
+              child: Text("Why choose others, if you own this one.com",
+                  style: AppTextStyles.mainHeading),
             ),
             Positioned(
               right: 0,
