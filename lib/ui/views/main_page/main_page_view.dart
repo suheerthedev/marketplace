@@ -143,8 +143,8 @@ class MainPageView extends StackedView<MainPageViewModel> {
                         }).toList(),
                         options: CarouselOptions(
                           height: 150,
-                          enableInfiniteScroll: true,
-                          autoPlay: true,
+                          enableInfiniteScroll: false,
+                          autoPlay: false,
                           autoPlayInterval: const Duration(seconds: 5),
                           viewportFraction: 0.9,
                         ),
@@ -152,20 +152,18 @@ class MainPageView extends StackedView<MainPageViewModel> {
                       const SizedBox(height: 20),
 
                       // Brands Section
-                      SizedBox(
-                        width: double.infinity,
-                        height: 30,
+                      Container(
+                        color: Color(0xFFF7F7F7),
+                        height: 40,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: viewModel.brandLogos.length,
                           itemBuilder: (context, index) {
-                            return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: SvgPicture.asset(
-                                viewModel.brandLogos[index],
-                                height: 20,
-                              ),
+                            return SvgPicture.asset(
+                              viewModel.brandLogos[index],
+                              height:
+                                  20, // test if it’s rendering in black on black bg
+                              fit: BoxFit.contain,
                             );
                           },
                         ),

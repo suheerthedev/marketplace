@@ -28,7 +28,7 @@ class MainPageViewModel extends BaseViewModel {
     },
   ];
 
-  List<String> brandLogos = [
+  final List<String> brandLogos = [
     'assets/images/brand_logos/brand_1.svg',
     'assets/images/brand_logos/brand_2.svg',
     'assets/images/brand_logos/brand_3.svg',
