@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:marketplace/ui/widgets/common/custom_button/custom_button.dart';
+import 'package:marketplace/ui/widgets/common/social_button/social_button.dart';
 import 'package:stacked/stacked.dart';
 
 import 'buyer_login_viewmodel.dart';
@@ -198,38 +199,17 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                   ),
 
                   //Google Button
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: 10,
-                        children: [
-                          const FaIcon(
-                            FontAwesomeIcons.google,
-                            color: Colors.black,
-                            size: 25,
-                          ),
-                          Text(
-                            "Login with Google",
-                            style: GoogleFonts.hankenGrotesk(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  SocialButton(
+                      title: "Login with Google",
+                      onTap: () {},
+                      bgColor: secondaryBackgroundColor,
+                      textColor: mainTextColor,
+                      borderColor: lightBackgroundColor,
+                      hasIcon: true,
+                      icon: const Icon(
+                        FontAwesomeIcons.google,
+                        color: mainTextColor,
+                      ))
                 ],
               ),
               Expanded(

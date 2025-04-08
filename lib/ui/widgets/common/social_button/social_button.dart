@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 
-import 'custom_button_model.dart';
+import 'social_button_model.dart';
 
-class CustomButton extends StackedView<CustomButtonModel> {
+class SocialButton extends StackedView<SocialButtonModel> {
   final String title;
   final VoidCallback onTap;
   final Color bgColor;
   final Color textColor;
   final Color borderColor;
   final bool hasIcon;
-  const CustomButton(
+  final Icon icon;
+  const SocialButton(
       {required this.title,
       required this.onTap,
       required this.bgColor,
       required this.textColor,
       required this.borderColor,
       required this.hasIcon,
+      required this.icon,
       super.key});
 
   @override
   Widget builder(
     BuildContext context,
-    CustomButtonModel viewModel,
+    SocialButtonModel viewModel,
     Widget? child,
   ) {
     return ElevatedButton(
@@ -43,6 +46,7 @@ class CustomButton extends StackedView<CustomButtonModel> {
         mainAxisAlignment: MainAxisAlignment.center,
         spacing: 10,
         children: [
+          hasIcon ? icon : const SizedBox(),
           Text(
             title,
             style: GoogleFonts.hankenGrotesk(
@@ -52,20 +56,14 @@ class CustomButton extends StackedView<CustomButtonModel> {
               fontSize: 18,
             ),
           ),
-          hasIcon
-              ? Icon(
-                  Icons.arrow_forward,
-                  color: textColor,
-                )
-              : const SizedBox()
         ],
       ),
     );
   }
 
   @override
-  CustomButtonModel viewModelBuilder(
+  SocialButtonModel viewModelBuilder(
     BuildContext context,
   ) =>
-      CustomButtonModel();
+      SocialButtonModel();
 }
