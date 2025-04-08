@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:marketplace/ui/widgets/common/custom_button/custom_button.dart';
+import 'package:marketplace/ui/widgets/common/custom_text_field/custom_text_field.dart';
 import 'package:marketplace/ui/widgets/common/social_button/social_button.dart';
 import 'package:stacked/stacked.dart';
 
@@ -58,75 +59,21 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                 child: Column(
                   spacing: 14,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      spacing: 2,
-                      children: [
-                        Text(
-                          "Email",
-                          style: GoogleFonts.hankenGrotesk(
-                              color: mainTextColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400),
-                        ),
-                        TextField(
-                          decoration: InputDecoration(
-                            hintText: "Enter your email",
-                            hintStyle: GoogleFonts.hankenGrotesk(
-                              color: lightTextColor,
-                              fontWeight: FontWeight.w300,
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: Colors.red),
-                            ),
-                          ),
-                        ),
-                      ],
+                    const CustomTextField(
+                      title: "Email",
+                      hintText: "abc@gmail.com",
+                      hasSuffix: false,
                     ),
-                    Column(
-                      spacing: 2,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Password",
-                          style: GoogleFonts.hankenGrotesk(
-                              color: mainTextColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400),
-                        ),
-                        TextField(
-                          decoration: InputDecoration(
-                            hintText: "Enter your password",
-                            hintStyle: GoogleFonts.hankenGrotesk(
-                              color: lightTextColor,
-                              fontWeight: FontWeight.w300,
-                            ),
-                            suffixIcon: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
-                                  Icons.visibility_off_outlined,
-                                  color: iconColor,
-                                )),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            errorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: Colors.red),
-                            ),
-                          ),
-                        ),
-                      ],
+                    CustomTextField(
+                      title: "Password",
+                      hintText: "Enter your password",
+                      hasSuffix: false,
+                      suffixIcon: IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.visibility_off_outlined,
+                            color: iconColor,
+                          )),
                     ),
                     Row(
                       children: [
