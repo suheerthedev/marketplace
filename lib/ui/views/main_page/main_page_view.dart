@@ -208,7 +208,7 @@ class MainPageView extends StackedView<MainPageViewModel> {
                           crossAxisSpacing: 15,
                           mainAxisSpacing: 15,
                         ),
-                        itemCount: 2, // Show only 2 product cards as requested
+                        itemCount: 2,
                         itemBuilder: (context, index) {
                           return _buildProductCard();
                         },
