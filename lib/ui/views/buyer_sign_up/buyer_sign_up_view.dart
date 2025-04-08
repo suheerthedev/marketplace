@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
+import 'package:marketplace/ui/widgets/common/custom_button/custom_button.dart';
 import 'package:stacked/stacked.dart';
 
 import 'buyer_sign_up_viewmodel.dart';
@@ -169,29 +170,12 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
               Column(
                 spacing: 18,
                 children: [
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.black,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      onPressed:
-                          viewModel.navigationService.navigateToBuyerLoginView,
-                      child: Text(
-                        "Create an Account",
-                        style: GoogleFonts.hankenGrotesk(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                  ),
-
+                  const CustomButton(
+                      title: "Create Account",
+                      bgColor: mainBackgroundColor,
+                      textColor: secondaryTextColor,
+                      borderColor: mainBackgroundColor,
+                      hasIcon: false),
                   //Divider
                   Row(
                     mainAxisSize: MainAxisSize.max,
