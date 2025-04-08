@@ -24,7 +24,7 @@ class StartupView extends StackedView<StartupViewModel> {
           children: [
             Positioned(
               top: 12,
-              left: 5,
+              left: 16,
               right: 16,
               child: Text("Why choose others, if you own this one.com",
                   style: AppTextStyles.mainHeading),
