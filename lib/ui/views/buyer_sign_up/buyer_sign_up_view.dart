@@ -170,8 +170,10 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
               Column(
                 spacing: 18,
                 children: [
-                  const CustomButton(
+                  CustomButton(
                       title: "Create Account",
+                      onTap:
+                          viewModel.navigationService.navigateToBuyerLoginView,
                       bgColor: mainBackgroundColor,
                       textColor: secondaryTextColor,
                       borderColor: mainBackgroundColor,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:marketplace/ui/styles/text_styles.dart';
