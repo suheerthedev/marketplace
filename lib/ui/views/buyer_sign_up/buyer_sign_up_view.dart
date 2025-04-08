@@ -40,7 +40,9 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                   Text(
                     "Let's create your account.",
                     style: GoogleFonts.hankenGrotesk(
-                        fontSize: 18, fontWeight: FontWeight.w400),
+                        color: lightTextColor,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400),
                   ),
                 ],
               ),

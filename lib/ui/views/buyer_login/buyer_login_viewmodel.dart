@@ -1,3 +1,7 @@
+import 'package:marketplace/app/app.locator.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
-class BuyerLoginViewModel extends BaseViewModel {}
+class BuyerLoginViewModel extends BaseViewModel {
+  final navigationService = locator<NavigationService>();
+}
