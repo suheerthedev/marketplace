@@ -6,6 +6,7 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:marketplace/ui/views/buyer_sign_up/buyer_sign_up_view.dart';
 import 'package:marketplace/ui/views/buyer_login/buyer_login_view.dart';
+import 'package:marketplace/ui/views/forgot_password/forgot_password_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -14,6 +15,7 @@ import 'package:marketplace/ui/views/buyer_login/buyer_login_view.dart';
     MaterialRoute(page: StartupView),
     MaterialRoute(page: BuyerSignUpView),
     MaterialRoute(page: BuyerLoginView),
+    MaterialRoute(page: ForgotPasswordView),
 // @stacked-route
   ],
   dependencies: [
