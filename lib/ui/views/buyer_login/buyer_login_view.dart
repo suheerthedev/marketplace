@@ -116,7 +116,7 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                 children: [
                   CustomButton(
                       title: "Login",
-                      onTap: () {},
+                      onTap: viewModel.navigationService.navigateToMainPageView,
                       bgColor: mainBackgroundColor,
                       textColor: secondaryTextColor,
                       borderColor: mainBackgroundColor,
