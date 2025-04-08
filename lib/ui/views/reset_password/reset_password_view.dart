@@ -70,7 +70,7 @@ class ResetPasswordView extends StackedView<ResetPasswordViewModel> {
               ),
               CustomButton(
                   title: "Save",
-                  onTap: () {},
+                  onTap: viewModel.navigateToLogin,
                   bgColor: mainBackgroundColor,
                   textColor: secondaryTextColor,
                   borderColor: lightBackgroundColor,
