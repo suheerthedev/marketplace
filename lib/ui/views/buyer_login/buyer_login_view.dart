@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:marketplace/ui/widgets/common/custom_button/custom_button.dart';
 import 'package:marketplace/ui/widgets/common/custom_text_field/custom_text_field.dart';
@@ -85,7 +86,8 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                           ),
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: viewModel
+                              .navigationService.navigateToForgotPasswordView,
                           child: Text(
                             "Reset your password",
                             style: GoogleFonts.hankenGrotesk(

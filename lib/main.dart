@@ -3,6 +3,7 @@ import 'package:marketplace/app/app.bottomsheets.dart';
 import 'package:marketplace/app/app.dialogs.dart';
 import 'package:marketplace/app/app.locator.dart';
 import 'package:marketplace/app/app.router.dart';
+import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 Future<void> main() async {
@@ -20,7 +21,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+      theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme:
+              const AppBarTheme(backgroundColor: secondaryBackgroundColor)),
       initialRoute: Routes.startupView,
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,

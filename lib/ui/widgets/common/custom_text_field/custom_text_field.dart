@@ -8,8 +8,14 @@ import 'custom_text_field_model.dart';
 class CustomTextField extends StackedView<CustomTextFieldModel> {
   final String title;
   final String hintText;
+  final bool hasSuffix;
+  final Widget? suffixIcon;
   const CustomTextField(
-      {required this.title, required this.hintText, super.key});
+      {required this.title,
+      required this.hintText,
+      required this.hasSuffix,
+      this.suffixIcon,
+      super.key});
 
   @override
   Widget builder(
@@ -34,6 +40,7 @@ class CustomTextField extends StackedView<CustomTextFieldModel> {
               color: lightTextColor,
               fontWeight: FontWeight.w300,
             ),
+            suffixIcon: hasSuffix ? suffixIcon : null,
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
             ),
