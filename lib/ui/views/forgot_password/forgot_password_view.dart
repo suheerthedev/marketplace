@@ -31,16 +31,16 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
                 children: [
                   Text(
                     "Forgot password",
-                    style: GoogleFonts.hankenGrotesk(
+                    style: GoogleFonts.roboto(
                         letterSpacing: -2,
                         wordSpacing: 0,
                         color: mainTextColor,
                         fontSize: 36,
-                        fontWeight: FontWeight.w800),
+                        fontWeight: FontWeight.w600),
                   ),
                   Text(
                     "Enter your email to get reset password link",
-                    style: GoogleFonts.hankenGrotesk(
+                    style: GoogleFonts.roboto(
                         color: lightTextColor,
                         fontSize: 16,
                         fontWeight: FontWeight.w400),
@@ -67,11 +67,10 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
                     const Icon(Icons.arrow_back),
                     Text(
                       "Back to Login",
-                      style: GoogleFonts.hankenGrotesk(
-                        letterSpacing: -1,
+                      style: GoogleFonts.roboto(
                         color: mainTextColor,
                         fontWeight: FontWeight.w400,
-                        fontSize: 18,
+                        fontSize: 17,
                       ),
                     )
                   ],
