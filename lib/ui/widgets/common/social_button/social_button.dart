@@ -48,10 +48,9 @@ class SocialButton extends StackedView<SocialButtonModel> {
           hasIcon ? icon : const SizedBox(),
           Text(
             title,
-            style: GoogleFonts.hankenGrotesk(
-              letterSpacing: -1,
+            style: GoogleFonts.roboto(
               color: textColor,
-              fontWeight: FontWeight.w700,
+              fontWeight: FontWeight.w400,
               fontSize: 18,
             ),
           ),

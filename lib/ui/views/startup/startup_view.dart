@@ -23,8 +23,8 @@ class StartupView extends StackedView<StartupViewModel> {
         child: Stack(
           children: [
             Positioned(
-              top: 12,
-              left: 16,
+              top: 24,
+              left: 24,
               right: 16,
               child: Text("Why choose others, if you own this one.com",
                   style: AppTextStyles.mainHeading),
@@ -45,28 +45,26 @@ class StartupView extends StackedView<StartupViewModel> {
       // Bottom Navigation Bar
       bottomNavigationBar: SizedBox(
         width: double.infinity,
-        height: 170,
+        height: 160,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
           child: Column(
             spacing: 10,
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
             children: [
               CustomButton(
-                  title: "Continue as Buyer",
-                  onTap: viewModel.navigationService.navigateToBuyerSignUpView,
-                  bgColor: mainBackgroundColor,
-                  textColor: secondaryTextColor,
-                  borderColor: mainBackgroundColor,
-                  hasIcon: true),
+                title: "Continue as Buyer",
+                onTap: viewModel.navigationService.navigateToBuyerSignUpView,
+                bgColor: mainBackgroundColor,
+                textColor: secondaryTextColor,
+                borderColor: mainBackgroundColor,
+              ),
               CustomButton(
-                  title: "Continue as Seller",
-                  onTap: () {},
-                  bgColor: secondaryBackgroundColor,
-                  textColor: mainTextColor,
-                  borderColor: mainBackgroundColor,
-                  hasIcon: true)
+                title: "Continue as Seller",
+                onTap: () {},
+                bgColor: secondaryBackgroundColor,
+                textColor: mainTextColor,
+                borderColor: mainBackgroundColor,
+              )
             ],
           ),
         ),

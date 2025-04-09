@@ -33,18 +33,17 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                 children: [
                   Text(
                     "Create an account",
-                    style: GoogleFonts.hankenGrotesk(
+                    style: GoogleFonts.roboto(
                         letterSpacing: -2,
-                        wordSpacing: 0,
                         color: mainTextColor,
                         fontSize: 36,
-                        fontWeight: FontWeight.w800),
+                        fontWeight: FontWeight.w600),
                   ),
                   Text(
                     "Let's create your account.",
-                    style: GoogleFonts.hankenGrotesk(
+                    style: GoogleFonts.roboto(
                         color: lightTextColor,
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.w400),
                   ),
                 ],
@@ -78,9 +77,9 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                   //terms and conditon text
                   Text(
                     "By signing up you agree to our Terms, Privacy Policy, and Cookie Use",
-                    style: GoogleFonts.hankenGrotesk(
+                    style: GoogleFonts.roboto(
                       fontSize: 16,
-                      fontWeight: FontWeight.w300,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
                 ],
@@ -91,13 +90,12 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                 spacing: 18,
                 children: [
                   CustomButton(
-                      title: "Create Account",
-                      onTap:
-                          viewModel.navigationService.navigateToBuyerLoginView,
-                      bgColor: mainBackgroundColor,
-                      textColor: secondaryTextColor,
-                      borderColor: mainBackgroundColor,
-                      hasIcon: false),
+                    title: "Create Account",
+                    onTap: viewModel.navigationService.navigateToBuyerLoginView,
+                    bgColor: mainBackgroundColor,
+                    textColor: secondaryTextColor,
+                    borderColor: mainBackgroundColor,
+                  ),
                   //Divider
                   Row(
                     mainAxisSize: MainAxisSize.max,
@@ -111,8 +109,7 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                         ),
                       ),
                       Text("Or",
-                          style:
-                              GoogleFonts.hankenGrotesk(color: lightTextColor)),
+                          style: GoogleFonts.roboto(color: lightTextColor)),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.4,
                         child: const Divider(
@@ -146,17 +143,21 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                   children: [
                     Text(
                       "Already have an account? ",
-                      style: GoogleFonts.hankenGrotesk(
-                          fontSize: 16, color: lightTextColor),
+                      style: GoogleFonts.roboto(
+                          fontSize: 16,
+                          color: lightTextColor,
+                          fontWeight: FontWeight.w400),
                     ),
                     InkWell(
                       onTap:
                           viewModel.navigationService.navigateToBuyerLoginView,
                       child: Text(
-                        "Log In",
-                        style: GoogleFonts.hankenGrotesk(
+                        "Login",
+                        style: GoogleFonts.roboto(
                             color: mainTextColor,
                             fontSize: 16,
+                            height: 1,
+                            fontWeight: FontWeight.w500,
                             decoration: TextDecoration.underline),
                       ),
                     )

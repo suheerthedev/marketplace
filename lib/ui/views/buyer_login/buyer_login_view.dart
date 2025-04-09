@@ -115,12 +115,12 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                 spacing: 18,
                 children: [
                   CustomButton(
-                      title: "Login",
-                      onTap: viewModel.navigationService.navigateToMainView,
-                      bgColor: mainBackgroundColor,
-                      textColor: secondaryTextColor,
-                      borderColor: mainBackgroundColor,
-                      hasIcon: false),
+                    title: "Login",
+                    onTap: viewModel.navigationService.navigateToMainView,
+                    bgColor: mainBackgroundColor,
+                    textColor: secondaryTextColor,
+                    borderColor: mainBackgroundColor,
+                  ),
 
                   //Divider
                   Row(

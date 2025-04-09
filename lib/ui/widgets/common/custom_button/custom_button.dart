@@ -10,14 +10,12 @@ class CustomButton extends StackedView<CustomButtonModel> {
   final Color bgColor;
   final Color textColor;
   final Color borderColor;
-  final bool hasIcon;
   const CustomButton(
       {required this.title,
       required this.onTap,
       required this.bgColor,
       required this.textColor,
       required this.borderColor,
-      required this.hasIcon,
       super.key});
 
   @override
@@ -45,19 +43,12 @@ class CustomButton extends StackedView<CustomButtonModel> {
         children: [
           Text(
             title,
-            style: GoogleFonts.hankenGrotesk(
-              letterSpacing: -1,
+            style: GoogleFonts.roboto(
               color: textColor,
-              fontWeight: FontWeight.w700,
-              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              fontSize: 17,
             ),
           ),
-          hasIcon
-              ? Icon(
-                  Icons.arrow_forward,
-                  color: textColor,
-                )
-              : const SizedBox()
         ],
       ),
     );

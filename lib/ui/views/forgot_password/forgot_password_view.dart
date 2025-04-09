@@ -52,13 +52,12 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
                   hintText: "Enter your email",
                   hasSuffix: false),
               CustomButton(
-                  title: "Send",
-                  onTap:
-                      viewModel.navigationSerivce.navigateToResetPasswordView,
-                  bgColor: mainBackgroundColor,
-                  textColor: secondaryTextColor,
-                  borderColor: lightBackgroundColor,
-                  hasIcon: false),
+                title: "Send",
+                onTap: viewModel.navigationSerivce.navigateToResetPasswordView,
+                bgColor: mainBackgroundColor,
+                textColor: secondaryTextColor,
+                borderColor: lightBackgroundColor,
+              ),
               InkWell(
                 onTap: viewModel.navigationSerivce.back,
                 child: Row(

@@ -29,16 +29,17 @@ class CustomTextField extends StackedView<CustomTextFieldModel> {
       children: [
         Text(
           title,
-          style: GoogleFonts.hankenGrotesk(
+          style: GoogleFonts.roboto(
               color: mainTextColor, fontSize: 16, fontWeight: FontWeight.w400),
         ),
         TextField(
           decoration: InputDecoration(
             alignLabelWithHint: true,
             hintText: hintText,
-            hintStyle: GoogleFonts.hankenGrotesk(
+            hintStyle: GoogleFonts.roboto(
+              fontSize: 16,
               color: lightTextColor,
-              fontWeight: FontWeight.w300,
+              fontWeight: FontWeight.w400,
             ),
             suffixIcon: hasSuffix ? suffixIcon : null,
             enabledBorder: OutlineInputBorder(
