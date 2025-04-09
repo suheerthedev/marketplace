@@ -13,7 +13,7 @@ import 'package:marketplace/ui/views/buyer_sign_up/buyer_sign_up_view.dart'
 import 'package:marketplace/ui/views/forgot_password/forgot_password_view.dart'
     as _i6;
 import 'package:marketplace/ui/views/home/home_view.dart' as _i2;
-import 'package:marketplace/ui/views/main_page/main_page_view.dart' as _i8;
+import 'package:marketplace/ui/views/main/main_view.dart' as _i8;
 import 'package:marketplace/ui/views/reset_password/reset_password_view.dart'
     as _i7;
 import 'package:marketplace/ui/views/startup/startup_view.dart' as _i3;
@@ -33,7 +33,7 @@ class Routes {
 
   static const resetPasswordView = '/reset-password-view';
 
-  static const mainPageView = '/main-page-view';
+  static const mainView = '/main-view';
 
   static const all = <String>{
     homeView,
@@ -42,7 +42,7 @@ class Routes {
     buyerLoginView,
     forgotPasswordView,
     resetPasswordView,
-    mainPageView,
+    mainView,
   };
 }
 
@@ -73,8 +73,8 @@ class StackedRouter extends _i1.RouterBase {
       page: _i7.ResetPasswordView,
     ),
     _i1.RouteDef(
-      Routes.mainPageView,
-      page: _i8.MainPageView,
+      Routes.mainView,
+      page: _i8.MainView,
     ),
   ];
 
@@ -115,9 +115,9 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i8.MainPageView: (data) {
+    _i8.MainView: (data) {
       return _i9.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i8.MainPageView(),
+        builder: (context) => const _i8.MainView(),
         settings: data,
       );
     },
@@ -215,14 +215,14 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToMainPageView([
+  Future<dynamic> navigateToMainView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return navigateTo<dynamic>(Routes.mainPageView,
+    return navigateTo<dynamic>(Routes.mainView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -313,14 +313,14 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithMainPageView([
+  Future<dynamic> replaceWithMainView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return replaceWith<dynamic>(Routes.mainPageView,
+    return replaceWith<dynamic>(Routes.mainView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

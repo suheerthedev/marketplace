@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-class MainPageViewModel extends BaseViewModel {
+class MainViewModel extends BaseViewModel {
   final PageController pageController = PageController();
   int selectedIndex = 0;
 

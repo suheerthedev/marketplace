@@ -5,15 +5,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:stacked/stacked.dart';
 
-import 'main_page_viewmodel.dart';
+import 'main_viewmodel.dart';
 
-class MainPageView extends StackedView<MainPageViewModel> {
-  const MainPageView({Key? key}) : super(key: key);
+class MainView extends StackedView<MainViewModel> {
+  const MainView({Key? key}) : super(key: key);
 
   @override
   Widget builder(
     BuildContext context,
-    MainPageViewModel viewModel,
+    MainViewModel viewModel,
     Widget? child,
   ) {
     return Scaffold(
@@ -161,8 +161,7 @@ class MainPageView extends StackedView<MainPageViewModel> {
                           itemBuilder: (context, index) {
                             return SvgPicture.asset(
                               viewModel.brandLogos[index],
-                              height:
-                                  20, // test if it’s rendering in black on black bg
+                              height: 20,
                               fit: BoxFit.contain,
                             );
                           },
@@ -372,8 +371,8 @@ class MainPageView extends StackedView<MainPageViewModel> {
   }
 
   @override
-  MainPageViewModel viewModelBuilder(
+  MainViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      MainPageViewModel();
+      MainViewModel();
 }

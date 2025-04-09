@@ -8,7 +8,7 @@ import 'package:marketplace/ui/views/buyer_sign_up/buyer_sign_up_view.dart';
 import 'package:marketplace/ui/views/buyer_login/buyer_login_view.dart';
 import 'package:marketplace/ui/views/forgot_password/forgot_password_view.dart';
 import 'package:marketplace/ui/views/reset_password/reset_password_view.dart';
-import 'package:marketplace/ui/views/main_page/main_page_view.dart';
+import 'package:marketplace/ui/views/main/main_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -19,7 +19,7 @@ import 'package:marketplace/ui/views/main_page/main_page_view.dart';
     MaterialRoute(page: BuyerLoginView),
     MaterialRoute(page: ForgotPasswordView),
     MaterialRoute(page: ResetPasswordView),
-    MaterialRoute(page: MainPageView),
+    MaterialRoute(page: MainView),
 // @stacked-route
   ],
   dependencies: [
