@@ -2,6 +2,7 @@ class Product {
   final String id;
   final String title;
   final String description;
+  final String brandImagePath;
   final List<String> sizes;
   final String imagePath;
   final double price;
@@ -13,6 +14,7 @@ class Product {
       {required this.id,
       required this.title,
       required this.description,
+      required this.brandImagePath,
       required this.sizes,
       required this.imagePath,
       required this.price,

@@ -7,6 +7,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:flutter/material.dart' as _i10;
 import 'package:flutter/material.dart';
+import 'package:marketplace/models/product_model.dart' as _i11;
 import 'package:marketplace/ui/views/buyer_login/buyer_login_view.dart' as _i5;
 import 'package:marketplace/ui/views/buyer_sign_up/buyer_sign_up_view.dart'
     as _i4;
@@ -20,7 +21,7 @@ import 'package:marketplace/ui/views/reset_password/reset_password_view.dart'
     as _i7;
 import 'package:marketplace/ui/views/startup/startup_view.dart' as _i3;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i11;
+import 'package:stacked_services/stacked_services.dart' as _i12;
 
 class Routes {
   static const homeView = '/home-view';
@@ -131,8 +132,10 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i9.ProductDetailView: (data) {
+      final args = data.getArgs<ProductDetailViewArguments>(nullOk: false);
       return _i10.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i9.ProductDetailView(),
+        builder: (context) =>
+            _i9.ProductDetailView(product: args.product, key: args.key),
         settings: data,
       );
     },
@@ -145,7 +148,34 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i11.NavigationService {
+class ProductDetailViewArguments {
+  const ProductDetailViewArguments({
+    required this.product,
+    this.key,
+  });
+
+  final _i11.Product product;
+
+  final _i10.Key? key;
+
+  @override
+  String toString() {
+    return '{"product": "$product", "key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant ProductDetailViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.product == product && other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return product.hashCode ^ key.hashCode;
+  }
+}
+
+extension NavigatorStateExtension on _i12.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -244,14 +274,17 @@ extension NavigatorStateExtension on _i11.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToProductDetailView([
+  Future<dynamic> navigateToProductDetailView({
+    required _i11.Product product,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.productDetailView,
+        arguments: ProductDetailViewArguments(product: product, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -356,14 +389,17 @@ extension NavigatorStateExtension on _i11.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithProductDetailView([
+  Future<dynamic> replaceWithProductDetailView({
+    required _i11.Product product,
+    _i10.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.productDetailView,
+        arguments: ProductDetailViewArguments(product: product, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

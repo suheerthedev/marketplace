@@ -25,7 +25,7 @@ class MainApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
           appBarTheme:
               const AppBarTheme(backgroundColor: secondaryBackgroundColor),
-          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
               backgroundColor: secondaryBackgroundColor)),
       initialRoute: Routes.startupView,
       onGenerateRoute: StackedRouter().onGenerateRoute,

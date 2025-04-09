@@ -8,12 +8,10 @@ import 'product_card_1_model.dart';
 
 class ProductCard1 extends StackedView<ProductCard1Model> {
   final Product product;
-  final VoidCallback onToggleSaved;
   final VoidCallback? onTapped;
   final bool isTappable;
   const ProductCard1(
       {required this.product,
-      required this.onToggleSaved,
       this.onTapped,
       required this.isTappable,
       super.key});
@@ -107,7 +105,7 @@ class ProductCard1 extends StackedView<ProductCard1Model> {
               right: 0,
               left: 0,
               child: Image.asset(
-                'assets/images/cassette.png',
+                product.imagePath,
                 width: 230,
                 height: 150,
               ))

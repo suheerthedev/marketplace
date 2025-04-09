@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:marketplace/ui/widgets/common/category_card/category_card.dart';
 import 'package:marketplace/ui/widgets/common/product_card_1/product_card_1.dart';
@@ -153,7 +154,7 @@ class MainView extends StackedView<MainViewModel> {
 
                     // Brands Section
                     Container(
-                      color: Color(0xFFF7F7F7),
+                      color: const Color(0xFFF7F7F7),
                       height: 40,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
@@ -229,13 +230,14 @@ class MainView extends StackedView<MainViewModel> {
                       itemCount: viewModel.products.length,
                       itemBuilder: (context, index) {
                         final product = viewModel.products[index];
-                        final onToggleSaved = () {};
-                        final isTappable = true;
 
                         return ProductCard1(
                           product: product,
-                          onToggleSaved: onToggleSaved,
-                          isTappable: isTappable,
+                          isTappable: true,
+                          onTapped: () {
+                            viewModel.navigationSerivce
+                                .navigateToProductDetailView(product: product);
+                          },
                         );
                       },
                     ),

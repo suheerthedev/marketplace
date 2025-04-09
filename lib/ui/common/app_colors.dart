@@ -17,11 +17,13 @@ const Color mainTextColor = Color(0xFF1A1A1A);
 const Color secondaryTextColor = Color(0xFFFFFFFF);
 const Color lightTextColor = Color(0xFF999999);
 const Color darkTextColor = Color(0xFF1A1A1A);
+const Color brownTextColor = Color(0xFF996E4E);
 
 //Container Colors
 const Color mainContainerColor = Color(0xFF1A1A1A);
 const Color secondaryContainerColor = Color(0xFFFFFFFF);
 const Color lightContainerColor = Color(0xFFECECEC);
+const Color brownContainerColor = Color(0xFF996E4E);
 
 //Icon Colors
 const Color iconColor = Color(0xFF999999);

@@ -3,8 +3,10 @@ import 'package:marketplace/app/app.locator.dart';
 import 'package:marketplace/models/product_model.dart';
 import 'package:marketplace/services/product_service.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class MainViewModel extends BaseViewModel {
+  final navigationSerivce = locator<NavigationService>();
   final PageController pageController = PageController();
 
   final ProductService productService = locator<ProductService>();
