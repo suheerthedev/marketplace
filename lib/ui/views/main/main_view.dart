@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
+import 'package:marketplace/ui/views/home/home_view.dart';
 import 'package:marketplace/ui/widgets/common/category_card/category_card.dart';
 import 'package:marketplace/ui/widgets/common/product_card_1/product_card_1.dart';
 import 'package:stacked/stacked.dart';
@@ -25,229 +26,27 @@ class MainView extends StackedView<MainViewModel> {
         backgroundColor: secondaryBackgroundColor,
         surfaceTintColor: secondaryBackgroundColor,
         automaticallyImplyLeading: false,
-        title: Container(
-          decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search',
-                    hintStyle: GoogleFonts.roboto(
-                        color: lightTextColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500),
-                    border: InputBorder.none,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 10.0),
-                child: Icon(Icons.search, color: Colors.grey[500]),
-              ),
-            ],
+        title: Text(
+          "Marketplace",
+          style: GoogleFonts.roboto(
+            color: mainTextColor,
+            fontWeight: FontWeight.w600,
+            fontSize: 18,
           ),
         ),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16.0),
-            child: Column(
-              children: [
-                // Flash Discounts section
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Flash Discounts',
-                      style: GoogleFonts.roboto(
-                        fontSize: 16,
-                        color: mainBackgroundColor,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-
-                    // Flash Discount Cards
-                    CarouselSlider(
-                      items: viewModel.cardList.map((item) {
-                        final cardColor = item['color'] ?? Colors.brown;
-                        final cardTitle = item['title'] ?? '';
-                        final cardImage = item['image'] ?? '';
-
-                        return Builder(
-                          builder: (BuildContext context) {
-                            return Container(
-                              margin: const EdgeInsets.symmetric(horizontal: 8),
-                              decoration: BoxDecoration(
-                                color: cardColor,
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    spacing: 5,
-                                    children: [
-                                      Text(
-                                        cardTitle,
-                                        textAlign: TextAlign.start,
-                                        style: GoogleFonts.roboto(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 100,
-                                        height: 30,
-                                        child: ElevatedButton(
-                                          onPressed: () {},
-                                          style: ElevatedButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            backgroundColor: Colors.white,
-                                            foregroundColor: cardColor,
-                                          ),
-                                          child: Text(
-                                            "Shop now!",
-                                            style: GoogleFonts.roboto(
-                                              color: cardColor,
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SvgPicture.asset(
-                                    cardImage,
-                                    height: 50,
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        );
-                      }).toList(),
-                      options: CarouselOptions(
-                        height: 150,
-                        enableInfiniteScroll: false,
-                        autoPlay: false,
-                        autoPlayInterval: const Duration(seconds: 5),
-                        viewportFraction: 0.9,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-
-                    // Brands Section
-                    Container(
-                      color: const Color(0xFFF7F7F7),
-                      height: 40,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: viewModel.brandLogos.length,
-                        itemBuilder: (context, index) {
-                          return SvgPicture.asset(
-                            viewModel.brandLogos[index],
-                            height: 20,
-                            fit: BoxFit.contain,
-                          );
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-
-                    // Categories
-                    Text(
-                      'Categories',
-                      style: GoogleFonts.roboto(
-                        fontSize: 16,
-                        color: mainTextColor,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-
-                    // Category Icons
-                    const SizedBox(
-                      height: 90,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CategoryCard(
-                            name: 'Amplifiers',
-                            imagePath:
-                                'assets/images/category_items/item_1.png',
-                            icon: Icons.radio,
-                          ),
-                          CategoryCard(
-                            name: 'Turntables',
-                            imagePath:
-                                'assets/images/category_items/item_2.png',
-                            icon: Icons.album,
-                          ),
-                          CategoryCard(
-                            name: 'CD Players',
-                            imagePath:
-                                'assets/images/category_items/item_3.png',
-                            icon: Icons.album_outlined,
-                          ),
-                          CategoryCard(
-                            name: 'Cassette Players',
-                            imagePath:
-                                'assets/images/category_items/item_4.png',
-                            icon: Icons.podcasts,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-
-                    // Products Grid
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 0.7,
-                        crossAxisSpacing: 15,
-                        mainAxisSpacing: 0,
-                      ),
-                      itemCount: viewModel.products.length,
-                      itemBuilder: (context, index) {
-                        final product = viewModel.products[index];
-
-                        return ProductCard1(
-                          product: product,
-                          isTappable: true,
-                          onTapped: () {
-                            viewModel.navigationSerivce
-                                .navigateToProductDetailView(product: product);
-                          },
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
+      body: PageView(
+        controller: viewModel.pageController,
+        onPageChanged: (index) {
+          viewModel.selectedIndex = index;
+          viewModel.notifyListeners();
+        },
+        children: [
+          HomeView(), // Replace with your actual screen widgets
+          HomeView(),
+          HomeView(),
+          HomeView(),
+        ],
       ),
       bottomNavigationBar: NavigationBar(
         backgroundColor: secondaryBackgroundColor,
