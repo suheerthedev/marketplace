@@ -12,6 +12,7 @@ import 'package:marketplace/ui/views/main/main_view.dart';
 import 'package:marketplace/services/product_service.dart';
 import 'package:marketplace/ui/views/product_detail/product_detail_view.dart';
 import 'package:marketplace/ui/views/cart/cart_view.dart';
+import 'package:marketplace/ui/views/saved/saved_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -25,6 +26,7 @@ import 'package:marketplace/ui/views/cart/cart_view.dart';
     MaterialRoute(page: MainView),
     MaterialRoute(page: ProductDetailView),
     MaterialRoute(page: CartView),
+    MaterialRoute(page: SavedView),
 // @stacked-route
   ],
   dependencies: [
