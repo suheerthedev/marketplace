@@ -8,7 +8,9 @@ class Product {
   final double price;
   final double discount;
   final double rating;
+
   bool isSaved;
+  final List reviews;
 
   Product(
       {required this.id,
@@ -20,5 +22,6 @@ class Product {
       required this.price,
       required this.discount,
       required this.rating,
-      this.isSaved = false});
+      this.isSaved = false,
+      required this.reviews});
 }
