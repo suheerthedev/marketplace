@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:marketplace/ui/widgets/common/category_card/category_card.dart';
+import 'package:marketplace/ui/widgets/common/product_card_1/product_card_1.dart';
 import 'package:stacked/stacked.dart';
 
 import 'main_viewmodel.dart';
@@ -221,13 +222,21 @@ class MainView extends StackedView<MainViewModel> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        childAspectRatio: 0.8,
+                        childAspectRatio: 0.7,
                         crossAxisSpacing: 15,
-                        mainAxisSpacing: 15,
+                        mainAxisSpacing: 0,
                       ),
-                      itemCount: 2,
+                      itemCount: viewModel.products.length,
                       itemBuilder: (context, index) {
-                        return _buildProductCard();
+                        final product = viewModel.products[index];
+                        final onToggleSaved = () {};
+                        final isTappable = true;
+
+                        return ProductCard1(
+                          product: product,
+                          onToggleSaved: onToggleSaved,
+                          isTappable: isTappable,
+                        );
                       },
                     ),
                     const SizedBox(height: 20),

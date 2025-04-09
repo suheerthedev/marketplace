@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/app/app.locator.dart';
+import 'package:marketplace/models/product_model.dart';
+import 'package:marketplace/services/product_service.dart';
 import 'package:stacked/stacked.dart';
 
 class MainViewModel extends BaseViewModel {
   final PageController pageController = PageController();
+
+  final ProductService productService = locator<ProductService>();
+
+  List<Product> get products => productService.products;
   int selectedIndex = 0;
 
   List<Map<String, dynamic>> cardList = [

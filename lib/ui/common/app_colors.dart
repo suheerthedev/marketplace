@@ -16,6 +16,12 @@ const Color lightBackgroundColor = Color(0xFF999999);
 const Color mainTextColor = Color(0xFF1A1A1A);
 const Color secondaryTextColor = Color(0xFFFFFFFF);
 const Color lightTextColor = Color(0xFF999999);
+const Color darkTextColor = Color(0xFF1A1A1A);
+
+//Container Colors
+const Color mainContainerColor = Color(0xFF1A1A1A);
+const Color secondaryContainerColor = Color(0xFFFFFFFF);
+const Color lightContainerColor = Color(0xFFECECEC);
 
 //Icon Colors
 const Color iconColor = Color(0xFF999999);

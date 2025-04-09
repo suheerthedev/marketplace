@@ -5,6 +5,7 @@ class Product {
   final List<String> sizes;
   final String imagePath;
   final double price;
+  final double discount;
   final double rating;
   bool isSaved;
 
@@ -15,6 +16,7 @@ class Product {
       required this.sizes,
       required this.imagePath,
       required this.price,
+      required this.discount,
       required this.rating,
       this.isSaved = false});
 }

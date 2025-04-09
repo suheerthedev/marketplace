@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:marketplace/models/product_model.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:stacked/stacked.dart';
@@ -31,33 +30,54 @@ class ProductCard1 extends StackedView<ProductCard1Model> {
         child: Stack(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 5,
+            spacing: 0,
             children: [
               ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Container(
                       width: double.infinity,
                       height: 170,
-                      color: Colors.black)),
+                      color: lightContainerColor)),
               Text(
                 softWrap: true,
                 product.title,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.hankenGrotesk(
-                    fontSize: 20,
-                    letterSpacing: -1,
-                    fontWeight: FontWeight.bold,
+                style: GoogleFonts.roboto(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
                     color: mainTextColor),
               ),
-              Text(
-                "\$ ${product.price}",
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.hankenGrotesk(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: lightTextColor),
+              Row(
+                spacing: 5,
+                children: [
+                  Text(
+                    "\$ ${product.price}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.red),
+                  ),
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFDE7E7),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      '${product.discount}%',
+                      maxLines: 1,
+                      style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 10,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ),
+                ],
               )
             ],
           ),
@@ -65,30 +85,32 @@ class ProductCard1 extends StackedView<ProductCard1Model> {
             alignment: Alignment.topRight,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: Container(
-                  padding: EdgeInsets.zero,
-                  width: 35,
-                  height: 35,
-                  color: Colors.white70,
-                  child: IconButton(
-                    isSelected: product.isSaved,
-                    selectedIcon: const Icon(
-                      Iconsax.heart,
-                      color: Colors.red,
-                    ),
-                    padding: EdgeInsets.zero,
-                    onPressed: onToggleSaved,
-                    icon: const Icon(
-                      Iconsax.heart_copy,
-                      color: mainIconColor,
-                    ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.star, color: Colors.amber, size: 16),
+                  const SizedBox(width: 4),
+                  Text(
+                    '4.0/5',
+                    style: GoogleFonts.roboto(
+                        color: darkTextColor,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400),
                   ),
-                ),
+                ],
               ),
             ),
           ),
+          Positioned(
+              top: 0,
+              bottom: 70,
+              right: 0,
+              left: 0,
+              child: Image.asset(
+                'assets/images/cassette.png',
+                width: 230,
+                height: 150,
+              ))
         ]),
       ),
     );
