@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
+import 'package:marketplace/ui/views/account/account_view.dart';
+import 'package:marketplace/ui/views/cart/cart_view.dart';
 import 'package:marketplace/ui/views/home/home_view.dart';
+import 'package:marketplace/ui/views/saved/saved_view.dart';
 import 'package:stacked/stacked.dart';
 
 import 'main_viewmodel.dart';
@@ -36,11 +39,11 @@ class MainView extends StackedView<MainViewModel> {
           viewModel.selectedIndex = index;
           viewModel.notifyListeners();
         },
-        children: [
+        children: const [
           HomeView(),
-          HomeView(),
-          HomeView(),
-          HomeView(),
+          CartView(),
+          SavedView(),
+          AccountView(),
         ],
       ),
       bottomNavigationBar: NavigationBar(
