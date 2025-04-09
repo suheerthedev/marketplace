@@ -9,6 +9,7 @@ import 'package:marketplace/ui/views/buyer_login/buyer_login_view.dart';
 import 'package:marketplace/ui/views/forgot_password/forgot_password_view.dart';
 import 'package:marketplace/ui/views/reset_password/reset_password_view.dart';
 import 'package:marketplace/ui/views/main/main_view.dart';
+import 'package:marketplace/services/product_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -26,7 +27,8 @@ import 'package:marketplace/ui/views/main/main_view.dart';
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
-    // @stacked-service
+    LazySingleton(classType: ProductService),
+// @stacked-service
   ],
   bottomsheets: [
     StackedBottomsheet(classType: NoticeSheet),
