@@ -32,18 +32,17 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                 children: [
                   Text(
                     "Login to your account",
-                    style: GoogleFonts.hankenGrotesk(
+                    style: GoogleFonts.roboto(
                         letterSpacing: -2,
-                        wordSpacing: 0,
                         color: mainTextColor,
                         fontSize: 36,
-                        fontWeight: FontWeight.w800),
+                        fontWeight: FontWeight.w600),
                   ),
                   Text(
                     "It's great to see you again.",
-                    style: GoogleFonts.hankenGrotesk(
+                    style: GoogleFonts.roboto(
                         color: lightTextColor,
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.w400),
                   ),
                 ],
@@ -80,9 +79,9 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                       children: [
                         Text(
                           "Forgot your password? ",
-                          style: GoogleFonts.hankenGrotesk(
+                          style: GoogleFonts.roboto(
                             fontSize: 16,
-                            fontWeight: FontWeight.w300,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                         InkWell(
@@ -90,10 +89,10 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                               .navigationService.navigateToForgotPasswordView,
                           child: Text(
                             "Reset your password",
-                            style: GoogleFonts.hankenGrotesk(
+                            style: GoogleFonts.roboto(
                               decoration: TextDecoration.underline,
                               fontSize: 16,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
                         ),
@@ -135,8 +134,7 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                         ),
                       ),
                       Text("Or",
-                          style:
-                              GoogleFonts.hankenGrotesk(color: lightTextColor)),
+                          style: GoogleFonts.roboto(color: lightTextColor)),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.4,
                         child: const Divider(
@@ -173,17 +171,21 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                   children: [
                     Text(
                       "Don't have an account? ",
-                      style: GoogleFonts.hankenGrotesk(
-                          fontSize: 16, color: lightTextColor),
+                      style: GoogleFonts.roboto(
+                          fontSize: 16,
+                          color: lightTextColor,
+                          fontWeight: FontWeight.w400),
                     ),
                     InkWell(
                       onTap: viewModel.navigationService.back,
                       child: Text(
                         "Join",
-                        style: GoogleFonts.hankenGrotesk(
+                        style: GoogleFonts.roboto(
                             color: mainTextColor,
                             fontSize: 16,
-                            decoration: TextDecoration.underline),
+                            height: 1,
+                            decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.w500),
                       ),
                     )
                   ],
