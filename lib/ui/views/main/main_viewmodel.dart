@@ -39,6 +39,25 @@ class MainViewModel extends BaseViewModel {
     'assets/images/brand_logos/brand_8.svg',
   ];
 
+  List<Map> categoryList = [
+    {
+      'title': 'Amplifier',
+      'image': 'assets/images/category_items/item_1.png',
+    },
+    {
+      'title': 'Turntables',
+      'image': 'assets/images/category_items/item_2.png',
+    },
+    {
+      'title': 'CD Players',
+      'image': 'assets/images/category_items/item_3.png',
+    },
+    {
+      'title': 'Cassette Players',
+      'image': 'assets/images/category_items/item_4.png',
+    },
+  ];
+
   // Method to change bottom navigation index
   void changeNavbarIndex(int index) {
     selectedIndex = index;
