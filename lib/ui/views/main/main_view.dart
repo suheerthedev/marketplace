@@ -275,8 +275,7 @@ class MainView extends StackedView<MainViewModel> {
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
         children: [
           // Rating
           Padding(
