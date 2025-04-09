@@ -37,6 +37,7 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                         letterSpacing: -2,
                         color: mainTextColor,
                         fontSize: 36,
+                        height: 0,
                         fontWeight: FontWeight.w600),
                   ),
                   Text(
@@ -44,6 +45,7 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                     style: GoogleFonts.roboto(
                         color: lightTextColor,
                         fontSize: 16,
+                        height: 0,
                         fontWeight: FontWeight.w400),
                   ),
                 ],

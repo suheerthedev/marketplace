@@ -36,6 +36,7 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
                         wordSpacing: 0,
                         color: mainTextColor,
                         fontSize: 36,
+                        height: 0,
                         fontWeight: FontWeight.w600),
                   ),
                   Text(
@@ -43,6 +44,7 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
                     style: GoogleFonts.roboto(
                         color: lightTextColor,
                         fontSize: 16,
+                        height: 0,
                         fontWeight: FontWeight.w400),
                   ),
                 ],

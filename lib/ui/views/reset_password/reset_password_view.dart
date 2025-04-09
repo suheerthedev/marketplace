@@ -30,18 +30,20 @@ class ResetPasswordView extends StackedView<ResetPasswordViewModel> {
                 children: [
                   Text(
                     "Reset Password",
-                    style: GoogleFonts.hankenGrotesk(
+                    style: GoogleFonts.roboto(
                         letterSpacing: -2,
                         wordSpacing: 0,
+                        height: 0,
                         color: mainTextColor,
                         fontSize: 36,
-                        fontWeight: FontWeight.w800),
+                        fontWeight: FontWeight.w600),
                   ),
                   Text(
                     "Enter your new password",
-                    style: GoogleFonts.hankenGrotesk(
+                    style: GoogleFonts.roboto(
                         color: lightTextColor,
-                        fontSize: 18,
+                        fontSize: 16,
+                        height: 0,
                         fontWeight: FontWeight.w400),
                   ),
                 ],
