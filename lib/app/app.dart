@@ -10,6 +10,7 @@ import 'package:marketplace/ui/views/forgot_password/forgot_password_view.dart';
 import 'package:marketplace/ui/views/reset_password/reset_password_view.dart';
 import 'package:marketplace/ui/views/main/main_view.dart';
 import 'package:marketplace/services/product_service.dart';
+import 'package:marketplace/ui/views/product_detail/product_detail_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -21,6 +22,7 @@ import 'package:marketplace/services/product_service.dart';
     MaterialRoute(page: ForgotPasswordView),
     MaterialRoute(page: ResetPasswordView),
     MaterialRoute(page: MainView),
+    MaterialRoute(page: ProductDetailView),
 // @stacked-route
   ],
   dependencies: [
