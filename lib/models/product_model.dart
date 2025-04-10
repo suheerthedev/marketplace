@@ -10,6 +10,7 @@ class Product {
   final double rating;
 
   bool isSaved;
+  bool isInCart;
   final List reviews;
 
   Product(
@@ -23,5 +24,6 @@ class Product {
       required this.discount,
       required this.rating,
       this.isSaved = false,
+      this.isInCart = false,
       required this.reviews});
 }

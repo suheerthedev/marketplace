@@ -20,19 +20,6 @@ class MainView extends StackedView<MainViewModel> {
   ) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: secondaryBackgroundColor,
-        surfaceTintColor: secondaryBackgroundColor,
-        automaticallyImplyLeading: false,
-        title: Text(
-          "Marketplace",
-          style: GoogleFonts.roboto(
-            color: mainTextColor,
-            fontWeight: FontWeight.w600,
-            fontSize: 18,
-          ),
-        ),
-      ),
       body: PageView(
         controller: viewModel.pageController,
         onPageChanged: (index) {
