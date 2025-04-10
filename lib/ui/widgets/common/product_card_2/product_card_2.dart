@@ -51,9 +51,7 @@ class ProductCard2 extends StackedView<ProductCard2Model> {
                 child: Center(
                   child: Image.asset(
                     product.imagePath,
-                    fit: BoxFit.cover,
-                    height: 100,
-                    width: 100,
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),
