@@ -292,7 +292,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
             Expanded(
               flex: 3,
               child: InkWell(
-                onTap: () {},
+                onTap: () => viewModel.buyNow(product),
                 child: Container(
                   height: 40,
                   margin: const EdgeInsets.symmetric(horizontal: 8),
@@ -308,9 +308,10 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                     child: Text(
                       "Buy Now",
                       style: GoogleFonts.roboto(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: brownTextColor),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: const Color(0xFF996E4E),
+                      ),
                     ),
                   ),
                 ),
@@ -321,7 +322,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
             Expanded(
               flex: 3,
               child: InkWell(
-                onTap: () {},
+                onTap: () => viewModel.addToCart(product),
                 child: Container(
                   height: 40,
                   decoration: BoxDecoration(

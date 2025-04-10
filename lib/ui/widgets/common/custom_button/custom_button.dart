@@ -39,7 +39,6 @@ class CustomButton extends StackedView<CustomButtonModel> {
       onPressed: onTap,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        spacing: 10,
         children: [
           Text(
             title,

@@ -25,32 +25,35 @@ class CustomTextField extends StackedView<CustomTextFieldModel> {
   ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 2,
       children: [
         Text(
           title,
           style: GoogleFonts.roboto(
               color: mainTextColor, fontSize: 16, fontWeight: FontWeight.w400),
         ),
-        TextField(
-          decoration: InputDecoration(
-            alignLabelWithHint: true,
-            hintText: hintText,
-            hintStyle: GoogleFonts.roboto(
-              fontSize: 16,
-              color: lightTextColor,
-              fontWeight: FontWeight.w400,
-            ),
-            suffixIcon: hasSuffix ? suffixIcon : null,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.red),
+        const SizedBox(height: 8),
+        SizedBox(
+          height: 48,
+          child: TextField(
+            decoration: InputDecoration(
+              alignLabelWithHint: true,
+              hintText: hintText,
+              hintStyle: GoogleFonts.roboto(
+                fontSize: 16,
+                color: lightTextColor,
+                fontWeight: FontWeight.w400,
+              ),
+              suffixIcon: hasSuffix ? suffixIcon : null,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(color: Colors.red),
+              ),
             ),
           ),
         ),

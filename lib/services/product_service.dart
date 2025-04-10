@@ -14,8 +14,9 @@ class ProductService with ListenableServiceMixin {
         price: 60,
         discount: 10,
         rating: 4.9,
+        companyName: 'Sony',
         isSaved: false,
-        isInCart: false,
+        isInCart: true,
         reviews: [
           {
             'id': '1',
@@ -64,8 +65,9 @@ class ProductService with ListenableServiceMixin {
         price: 60,
         discount: 10,
         rating: 4.9,
+        companyName: 'Sony',
         isSaved: false,
-        isInCart: false,
+        isInCart: true,
         reviews: [
           {
             'id': '1',
@@ -114,8 +116,9 @@ class ProductService with ListenableServiceMixin {
         price: 60,
         discount: 10,
         rating: 4.9,
+        companyName: 'Sony',
         isSaved: false,
-        isInCart: false,
+        isInCart: true,
         reviews: [
           {
             'id': '1',
@@ -164,6 +167,7 @@ class ProductService with ListenableServiceMixin {
         price: 60,
         discount: 10,
         rating: 4.9,
+        companyName: 'Sony',
         isSaved: false,
         isInCart: false,
         reviews: [
@@ -214,6 +218,7 @@ class ProductService with ListenableServiceMixin {
         price: 60,
         discount: 10,
         rating: 4.9,
+        companyName: 'Sony',
         isSaved: false,
         isInCart: false,
         reviews: [
@@ -264,6 +269,7 @@ class ProductService with ListenableServiceMixin {
         price: 60,
         discount: 10,
         rating: 4.9,
+        companyName: 'Sony',
         isSaved: false,
         isInCart: false,
         reviews: [
@@ -314,6 +320,7 @@ class ProductService with ListenableServiceMixin {
         price: 160,
         discount: 10,
         rating: 4.9,
+        companyName: 'Sony',
         isSaved: false,
         isInCart: false,
         reviews: [
@@ -364,6 +371,7 @@ class ProductService with ListenableServiceMixin {
         price: 78.99,
         discount: 10,
         rating: 4.9,
+        companyName: 'Sony',
         isSaved: false,
         isInCart: false,
         reviews: [
@@ -447,6 +455,7 @@ class ProductService with ListenableServiceMixin {
         price: _products[index].price,
         discount: _products[index].discount,
         rating: _products[index].rating,
+        companyName: _products[index].companyName,
         isSaved: !_products[index].isSaved,
         reviews: _products[index].reviews,
         // Toggle the saved status

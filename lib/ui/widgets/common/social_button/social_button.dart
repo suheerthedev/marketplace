@@ -43,9 +43,11 @@ class SocialButton extends StackedView<SocialButtonModel> {
       onPressed: onTap,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        spacing: 10,
         children: [
-          hasIcon ? icon : const SizedBox(),
+          if (hasIcon) ...[
+            icon,
+            const SizedBox(width: 10),
+          ],
           Text(
             title,
             style: GoogleFonts.roboto(

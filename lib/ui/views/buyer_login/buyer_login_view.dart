@@ -25,7 +25,6 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 22),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 0,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,6 +38,7 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                         height: 0,
                         fontWeight: FontWeight.w600),
                   ),
+                  const SizedBox(height: 8),
                   Text(
                     "It's great to see you again.",
                     style: GoogleFonts.roboto(
@@ -50,22 +50,19 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                 ],
               ),
 
-              Expanded(
-                flex: 1,
-                child: Container(),
-              ),
+              const Spacer(),
 
               //All The TextFields
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Column(
-                  spacing: 14,
                   children: [
                     const CustomTextField(
                       title: "Email",
                       hintText: "abc@gmail.com",
                       hasSuffix: false,
                     ),
+                    const SizedBox(height: 14),
                     CustomTextField(
                       title: "Password",
                       hintText: "Enter your password",
@@ -77,6 +74,7 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                             color: iconColor,
                           )),
                     ),
+                    const SizedBox(height: 14),
                     Row(
                       children: [
                         Text(
@@ -104,16 +102,10 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                 ),
               ),
 
-              Expanded(
-                flex: 1,
-                child: Container(),
-              ),
-
-              //terms and conditon text
+              const Spacer(),
 
               //Login button
               Column(
-                spacing: 18,
                 children: [
                   CustomButton(
                     title: "Login",
@@ -122,7 +114,7 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                     textColor: secondaryTextColor,
                     borderColor: mainBackgroundColor,
                   ),
-
+                  const SizedBox(height: 18),
                   //Divider
                   Row(
                     mainAxisSize: MainAxisSize.max,
@@ -146,7 +138,7 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                       ),
                     ],
                   ),
-
+                  const SizedBox(height: 18),
                   //Google Button
                   SocialButton(
                       title: "Login with Google",
@@ -161,10 +153,7 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                       ))
                 ],
               ),
-              Expanded(
-                flex: 6,
-                child: Container(),
-              ),
+              const Spacer(flex: 6),
               //Footer
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),

@@ -93,7 +93,6 @@ class HomeView extends StackedView<HomeViewModel> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    spacing: 5,
                                     children: [
                                       Text(
                                         cardTitle,
@@ -104,6 +103,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                           fontSize: 18,
                                         ),
                                       ),
+                                      const SizedBox(height: 5),
                                       SizedBox(
                                         width: 100,
                                         height: 30,

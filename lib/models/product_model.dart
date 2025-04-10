@@ -8,7 +8,7 @@ class Product {
   final double price;
   final double discount;
   final double rating;
-
+  final String companyName;
   bool isSaved;
   bool isInCart;
   final List reviews;
@@ -23,6 +23,7 @@ class Product {
       required this.price,
       required this.discount,
       required this.rating,
+      required this.companyName,
       this.isSaved = false,
       this.isInCart = false,
       required this.reviews});
