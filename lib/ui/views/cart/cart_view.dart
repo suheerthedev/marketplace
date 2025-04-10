@@ -108,7 +108,6 @@ class CartView extends StackedView<CartViewModel> {
         children: [
           _buildPriceRow(
               "Sub-total", "\$ ${viewModel.subtotal.toStringAsFixed(2)}"),
-          _buildPriceRow("VAT (%)", "\$ ${viewModel.vat.toStringAsFixed(2)}"),
           _buildPriceRow(
               "Shipping Fee", "\$ ${viewModel.shippingFee.toStringAsFixed(2)}"),
           const Divider(height: 24),
