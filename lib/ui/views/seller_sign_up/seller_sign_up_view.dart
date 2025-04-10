@@ -95,7 +95,8 @@ class SellerSignUpView extends StackedView<SellerSignUpViewModel> {
               //Create account button
               CustomButton(
                 title: "Create Account",
-                onTap: viewModel.navigationService.navigateToBuyerLoginView,
+                onTap:
+                    viewModel.navigationService.navigateToSellerDashboardView,
                 bgColor: mainBackgroundColor,
                 textColor: secondaryTextColor,
                 borderColor: mainBackgroundColor,

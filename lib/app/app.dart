@@ -15,6 +15,7 @@ import 'package:marketplace/ui/views/cart/cart_view.dart';
 import 'package:marketplace/ui/views/saved/saved_view.dart';
 import 'package:marketplace/ui/views/account/account_view.dart';
 import 'package:marketplace/ui/views/seller_sign_up/seller_sign_up_view.dart';
+import 'package:marketplace/ui/views/seller_dashboard/seller_dashboard_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -31,6 +32,7 @@ import 'package:marketplace/ui/views/seller_sign_up/seller_sign_up_view.dart';
     MaterialRoute(page: SavedView),
     MaterialRoute(page: AccountView),
     MaterialRoute(page: SellerSignUpView),
+    MaterialRoute(page: SellerDashboardView),
 // @stacked-route
   ],
   dependencies: [
