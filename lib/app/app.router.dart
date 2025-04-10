@@ -51,8 +51,6 @@ class Routes {
 
   static const accountView = '/account-view';
 
-  static const productCard3View = '/product-card3-view';
-
   static const all = <String>{
     homeView,
     startupView,
@@ -65,7 +63,6 @@ class Routes {
     cartView,
     savedView,
     accountView,
-    productCard3View,
   };
 }
 
@@ -114,10 +111,6 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.accountView,
       page: _i12.AccountView,
-    ),
-    _i1.RouteDef(
-      Routes.productCard3View,
-      page: _i13.ProductCard3View,
     ),
   ];
 
@@ -187,12 +180,6 @@ class StackedRouter extends _i1.RouterBase {
     _i12.AccountView: (data) {
       return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i12.AccountView(),
-        settings: data,
-      );
-    },
-    _i13.ProductCard3View: (data) {
-      return _i14.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i13.ProductCard3View(),
         settings: data,
       );
     },
@@ -390,20 +377,6 @@ extension NavigatorStateExtension on _i16.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToProductCard3View([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return navigateTo<dynamic>(Routes.productCard3View,
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
   Future<dynamic> replaceWithHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -555,20 +528,6 @@ extension NavigatorStateExtension on _i16.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.accountView,
-        id: routerId,
-        preventDuplicates: preventDuplicates,
-        parameters: parameters,
-        transition: transition);
-  }
-
-  Future<dynamic> replaceWithProductCard3View([
-    int? routerId,
-    bool preventDuplicates = true,
-    Map<String, String>? parameters,
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transition,
-  ]) async {
-    return replaceWith<dynamic>(Routes.productCard3View,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

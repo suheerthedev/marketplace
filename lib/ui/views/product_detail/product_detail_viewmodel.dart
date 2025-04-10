@@ -12,8 +12,8 @@ class ProductDetailViewModel extends BaseViewModel {
   String selectedSize = 'S';
 
   void onToggleSaved(Product product) {
-    productService.toggleSavedStatus(product.id);
-    rebuildUi();
+    product.isSaved = !product.isSaved;
+    notifyListeners();
   }
 
   void addToCart(Product product) {

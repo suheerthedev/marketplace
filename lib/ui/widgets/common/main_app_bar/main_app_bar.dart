@@ -20,7 +20,6 @@ class MainAppBar extends StackedView<MainAppBarModel>
     return AppBar(
       surfaceTintColor: secondaryBackgroundColor,
       automaticallyImplyLeading: false,
-      centerTitle: true,
       title: Text(
         title,
         style: GoogleFonts.roboto(
