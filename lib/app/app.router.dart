@@ -17,8 +17,6 @@ import 'package:marketplace/ui/views/forgot_password/forgot_password_view.dart'
     as _i6;
 import 'package:marketplace/ui/views/home/home_view.dart' as _i2;
 import 'package:marketplace/ui/views/main/main_view.dart' as _i8;
-import 'package:marketplace/ui/views/product_card_3/product_card_3_view.dart'
-    as _i13;
 import 'package:marketplace/ui/views/product_detail/product_detail_view.dart'
     as _i9;
 import 'package:marketplace/ui/views/reset_password/reset_password_view.dart'

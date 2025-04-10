@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:marketplace/ui/widgets/common/main_app_bar/main_app_bar.dart';
-import 'package:marketplace/ui/widgets/common/product_card_1/product_card_1.dart';
 import 'package:marketplace/ui/widgets/common/product_card_3/product_card_3.dart';
 import 'package:stacked/stacked.dart';
 
