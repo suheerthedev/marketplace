@@ -22,6 +22,8 @@ import 'package:marketplace/ui/views/product_detail/product_detail_view.dart'
 import 'package:marketplace/ui/views/reset_password/reset_password_view.dart'
     as _i7;
 import 'package:marketplace/ui/views/saved/saved_view.dart' as _i11;
+import 'package:marketplace/ui/views/seller_sign_up/seller_sign_up_view.dart'
+    as _i13;
 import 'package:marketplace/ui/views/startup/startup_view.dart' as _i3;
 import 'package:stacked/stacked.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i16;
@@ -49,6 +51,8 @@ class Routes {
 
   static const accountView = '/account-view';
 
+  static const sellerSignUpView = '/seller-sign-up-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -61,6 +65,7 @@ class Routes {
     cartView,
     savedView,
     accountView,
+    sellerSignUpView,
   };
 }
 
@@ -109,6 +114,10 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.accountView,
       page: _i12.AccountView,
+    ),
+    _i1.RouteDef(
+      Routes.sellerSignUpView,
+      page: _i13.SellerSignUpView,
     ),
   ];
 
@@ -178,6 +187,12 @@ class StackedRouter extends _i1.RouterBase {
     _i12.AccountView: (data) {
       return _i14.MaterialPageRoute<dynamic>(
         builder: (context) => const _i12.AccountView(),
+        settings: data,
+      );
+    },
+    _i13.SellerSignUpView: (data) {
+      return _i14.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i13.SellerSignUpView(),
         settings: data,
       );
     },
@@ -375,6 +390,20 @@ extension NavigatorStateExtension on _i16.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToSellerSignUpView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.sellerSignUpView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -526,6 +555,20 @@ extension NavigatorStateExtension on _i16.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.accountView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithSellerSignUpView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.sellerSignUpView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
