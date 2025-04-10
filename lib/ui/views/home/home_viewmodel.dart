@@ -8,44 +8,44 @@ import 'package:stacked_services/stacked_services.dart';
 class HomeViewModel extends BaseViewModel {
   final navigationSerivce = locator<NavigationService>();
   final PageController pageController = PageController();
+  final ScrollController brandScrollController = ScrollController();
 
   final ProductService productService = locator<ProductService>();
 
   List<Product> get products => productService.products;
   int selectedIndex = 0;
-
   List<Map<String, dynamic>> cardList = [
     {
       'title': 'Get your special\ndiscount up to 50%',
       'color': Colors.brown,
-      'image': 'assets/images/retro_1.svg'
+      'image': 'assets/images/retro.png'
     },
     {
       'title': 'Get your special\ndiscount up to 50%',
       'color': const Color.fromARGB(255, 227, 204, 0),
-      'image': 'assets/images/casate_1.svg'
+      'image': 'assets/images/cassette.png'
     },
     {
       'title': 'Get your special\ndiscount up to 50%',
       'color': const Color.fromARGB(255, 65, 48, 42),
-      'image': 'assets/images/retro_1.svg'
+      'image': 'assets/images/retro.png'
     },
     {
       'title': 'Get your special\ndiscount up to 50%',
       'color': Colors.brown,
-      'image': 'assets/images/casate_1.svg'
+      'image': 'assets/images/cassette.png'
     },
   ];
 
   final List<String> brandLogos = [
-    'assets/images/brand_logos/brand_1.svg',
-    'assets/images/brand_logos/brand_2.svg',
-    'assets/images/brand_logos/brand_3.svg',
-    'assets/images/brand_logos/brand_4.svg',
-    'assets/images/brand_logos/brand_5.svg',
-    'assets/images/brand_logos/brand_6.svg',
-    'assets/images/brand_logos/brand_7.svg',
-    'assets/images/brand_logos/brand_8.svg',
+    'assets/images/brand_logos/brand_1.png',
+    'assets/images/brand_logos/brand_2.png',
+    'assets/images/brand_logos/brand_3.png',
+    'assets/images/brand_logos/brand_4.png',
+    'assets/images/brand_logos/brand_5.png',
+    'assets/images/brand_logos/brand_6.png',
+    'assets/images/brand_logos/brand_7.png',
+    'assets/images/brand_logos/brand_8.png',
   ];
 
   List<Map> categoryList = [

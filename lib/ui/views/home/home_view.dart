@@ -1,13 +1,11 @@
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/ui/widgets/common/category_card/category_card.dart';
 import 'package:marketplace/ui/widgets/common/product_card_1/product_card_1.dart';
 import 'package:stacked/stacked.dart';
-import 'package:marketplace/ui/common/app_colors.dart';
 
 import 'home_viewmodel.dart';
 
@@ -19,8 +17,7 @@ class HomeView extends StackedView<HomeViewModel> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: secondaryBackgroundColor,
-        surfaceTintColor: secondaryBackgroundColor,
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         title: Container(
           decoration: BoxDecoration(
@@ -34,7 +31,7 @@ class HomeView extends StackedView<HomeViewModel> {
                   decoration: InputDecoration(
                     hintText: 'Search',
                     hintStyle: GoogleFonts.roboto(
-                        color: lightTextColor,
+                        color: Colors.grey[600],
                         fontSize: 16,
                         fontWeight: FontWeight.w500),
                     border: InputBorder.none,
@@ -64,7 +61,7 @@ class HomeView extends StackedView<HomeViewModel> {
                       'Flash Discounts',
                       style: GoogleFonts.roboto(
                         fontSize: 16,
-                        color: mainBackgroundColor,
+                        color: Colors.black,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -129,7 +126,7 @@ class HomeView extends StackedView<HomeViewModel> {
                                       ),
                                     ],
                                   ),
-                                  SvgPicture.asset(
+                                  Image.asset(
                                     cardImage,
                                     height: 50,
                                   ),
@@ -149,7 +146,7 @@ class HomeView extends StackedView<HomeViewModel> {
                     ),
                     const SizedBox(height: 20),
 
-                    // Brands Section
+                    // Animated Brand Logos
                     Container(
                       color: const Color(0xFFF7F7F7),
                       height: 40,
@@ -157,10 +154,12 @@ class HomeView extends StackedView<HomeViewModel> {
                         scrollDirection: Axis.horizontal,
                         itemCount: viewModel.brandLogos.length,
                         itemBuilder: (context, index) {
-                          return SvgPicture.asset(
-                            viewModel.brandLogos[index],
-                            height: 20,
-                            fit: BoxFit.contain,
+                          return Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Image.asset(
+                              viewModel.brandLogos[index],
+                              fit: BoxFit.fill,
+                            ),
                           );
                         },
                       ),
@@ -172,7 +171,7 @@ class HomeView extends StackedView<HomeViewModel> {
                       'Categories',
                       style: GoogleFonts.roboto(
                         fontSize: 16,
-                        color: mainTextColor,
+                        color: Colors.black,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
