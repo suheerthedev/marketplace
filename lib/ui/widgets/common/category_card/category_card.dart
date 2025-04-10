@@ -23,22 +23,23 @@ class CategoryCard extends StackedView<CategoryCardModel> {
     return Column(
       children: [
         Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(30),
-              border: Border.all(color: Colors.grey.shade300),
-            ),
-            child: Icon(
-              icon,
-              size: 40,
-            )
-            // Image.asset(
-            //   imagePath,
-            //   fit: BoxFit.contain,
-            // ),
-            ),
+          width: 60,
+          height: 60,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(color: Colors.grey.shade300),
+          ),
+          child:
+              // Icon(
+              //   icon,
+              //   size: 40,
+              // )
+              Image.asset(
+            imagePath,
+            fit: BoxFit.scaleDown,
+          ),
+        ),
         const SizedBox(height: 5),
         Text(
           name,

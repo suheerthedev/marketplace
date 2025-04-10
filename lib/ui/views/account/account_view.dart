@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:stacked/stacked.dart';
 
 import 'account_viewmodel.dart';
@@ -26,7 +27,7 @@ class AccountView extends StackedView<AccountViewModel> {
               const SizedBox(height: 24),
               _buildPromotionsSection(context),
               const SizedBox(height: 24),
-              _buildGeneralSection(context),
+              _buildGeneralSection(context, items: viewModel.generalItems),
               const SizedBox(height: 24),
               _buildLogoutButton(context),
             ],
@@ -97,27 +98,37 @@ class AccountView extends StackedView<AccountViewModel> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildOrderItem(icon: Icons.payment, label: 'To Pay'),
-            _buildOrderItem(icon: Icons.star_border, label: 'To Review'),
             _buildOrderItem(
-                icon: Icons.local_shipping_outlined, label: 'To Receive'),
+                image: 'assets/images/icons/money.png', label: 'To Pay'),
             _buildOrderItem(
-                icon: Icons.refresh, label: 'Order Return\n& Cancellation'),
+                image: 'assets/images/icons/star.png', label: 'To Review'),
+            _buildOrderItem(
+                image: 'assets/images/icons/car.png', label: 'To Receive'),
+            _buildOrderItem(
+                image: 'assets/images/icons/return.png',
+                label: 'Order Return\n& Cancellation'),
           ],
         ),
       ],
     );
   }
 
-  Widget _buildOrderItem({required IconData icon, required String label}) {
+  Widget _buildOrderItem({required String image, required String label}) {
     return Column(
+      spacing: 5,
       children: [
-        Icon(icon, color: const Color(0xFF996E4E)),
-        const SizedBox(height: 8),
+        Image.asset(
+          image,
+          fit: BoxFit.cover,
+        ),
         Text(
           label,
           textAlign: TextAlign.center,
-          style: GoogleFonts.roboto(fontSize: 12),
+          style: GoogleFonts.roboto(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+              height: 0,
+              color: brownTextColor),
         ),
       ],
     );
@@ -129,6 +140,7 @@ class AccountView extends StackedView<AccountViewModel> {
         Expanded(
           child: _buildPromotionCard(
             title: 'Collect Vouchers',
+            image: 'assets/images/icons/voucher.png',
             buttonText: 'Collect',
             onTap: () {},
           ),
@@ -137,6 +149,7 @@ class AccountView extends StackedView<AccountViewModel> {
         Expanded(
           child: _buildPromotionCard(
             title: 'Flash Sale',
+            image: 'assets/images/icons/sale.png',
             buttonText: 'Shop',
             onTap: () {},
           ),
@@ -147,17 +160,20 @@ class AccountView extends StackedView<AccountViewModel> {
 
   Widget _buildPromotionCard({
     required String title,
+    required String image,
     required String buttonText,
     required VoidCallback onTap,
   }) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(8),
+      height: 120,
       decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(12),
+        color: lightContainerColor,
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
             title,
@@ -167,22 +183,42 @@ class AccountView extends StackedView<AccountViewModel> {
             ),
           ),
           const SizedBox(height: 8),
-          ElevatedButton(
-            onPressed: onTap,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF996E4E),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                image,
+                fit: BoxFit.contain,
+                width: 70,
+                height: 70,
               ),
-            ),
-            child: Text(buttonText),
+              SizedBox(
+                width: 60,
+                height: 30,
+                child: ElevatedButton(
+                  onPressed: onTap,
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    backgroundColor: const Color(0xFF996E4E),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: Text(
+                    buttonText,
+                    style: GoogleFonts.roboto(
+                        fontSize: 10, color: secondaryTextColor),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
     );
   }
 
-  Widget _buildGeneralSection(BuildContext context) {
+  Widget _buildGeneralSection(BuildContext context, {required List items}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -194,25 +230,31 @@ class AccountView extends StackedView<AccountViewModel> {
           ),
         ),
         const SizedBox(height: 16),
-        _buildGeneralItem(icon: Icons.help_outline, title: 'Help center'),
-        _buildGeneralItem(icon: Icons.business, title: 'App for business'),
-        _buildGeneralItem(
-            icon: Icons.description_outlined, title: 'Terms & Policies'),
-        _buildGeneralItem(icon: Icons.language, title: 'Language - English'),
+        _buildGeneralItem(generalItems: items),
       ],
     );
   }
 
-  Widget _buildGeneralItem({required IconData icon, required String title}) {
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: Icon(icon, color: Colors.grey[600]),
-      title: Text(
-        title,
-        style: GoogleFonts.roboto(fontSize: 14),
-      ),
-      trailing: Icon(Icons.chevron_right, color: Colors.grey[600]),
-      onTap: () {},
+  Widget _buildGeneralItem({required List generalItems}) {
+    return SizedBox(
+      child: ListView.separated(
+          shrinkWrap: true,
+          itemCount: generalItems.length,
+          separatorBuilder: (context, index) => const Divider(height: 0),
+          itemBuilder: (context, index) {
+            return ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading:
+                  Icon(generalItems[index]['icon'], color: mainBackgroundColor),
+              title: Text(
+                generalItems[index]['title'],
+                style: GoogleFonts.roboto(fontSize: 14, color: mainTextColor),
+              ),
+              trailing:
+                  const Icon(Icons.chevron_right, color: lightBackgroundColor),
+              onTap: () {},
+            );
+          }),
     );
   }
 
