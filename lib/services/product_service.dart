@@ -15,6 +15,7 @@ class ProductService with ListenableServiceMixin {
         discount: 10,
         rating: 4.9,
         isSaved: false,
+        isInCart: false,
         reviews: [
           {
             'id': '1',
@@ -64,6 +65,7 @@ class ProductService with ListenableServiceMixin {
         discount: 10,
         rating: 4.9,
         isSaved: false,
+        isInCart: false,
         reviews: [
           {
             'id': '1',
@@ -113,6 +115,7 @@ class ProductService with ListenableServiceMixin {
         discount: 10,
         rating: 4.9,
         isSaved: false,
+        isInCart: false,
         reviews: [
           {
             'id': '1',
@@ -162,6 +165,7 @@ class ProductService with ListenableServiceMixin {
         discount: 10,
         rating: 4.9,
         isSaved: false,
+        isInCart: false,
         reviews: [
           {
             'id': '1',
@@ -211,6 +215,7 @@ class ProductService with ListenableServiceMixin {
         discount: 10,
         rating: 4.9,
         isSaved: false,
+        isInCart: false,
         reviews: [
           {
             'id': '1',
@@ -260,6 +265,7 @@ class ProductService with ListenableServiceMixin {
         discount: 10,
         rating: 4.9,
         isSaved: false,
+        isInCart: false,
         reviews: [
           {
             'id': '1',
@@ -309,6 +315,7 @@ class ProductService with ListenableServiceMixin {
         discount: 10,
         rating: 4.9,
         isSaved: false,
+        isInCart: false,
         reviews: [
           {
             'id': '1',
@@ -358,6 +365,7 @@ class ProductService with ListenableServiceMixin {
         discount: 10,
         rating: 4.9,
         isSaved: false,
+        isInCart: false,
         reviews: [
           {
             'id': '1',
