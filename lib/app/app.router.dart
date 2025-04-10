@@ -24,8 +24,7 @@ import 'package:marketplace/ui/views/reset_password/reset_password_view.dart'
 import 'package:marketplace/ui/views/saved/saved_view.dart' as _i11;
 import 'package:marketplace/ui/views/seller_dashboard/seller_dashboard_view.dart'
     as _i14;
-import 'package:marketplace/ui/views/seller_main_view/seller_main_view_view.dart'
-    as _i16;
+import 'package:marketplace/ui/views/seller_main/seller_main_view.dart' as _i16;
 import 'package:marketplace/ui/views/seller_products/seller_products_view.dart'
     as _i15;
 import 'package:marketplace/ui/views/seller_sign_up/seller_sign_up_view.dart'
@@ -63,7 +62,7 @@ class Routes {
 
   static const sellerProductsView = '/seller-products-view';
 
-  static const sellerMainViewView = '/seller-main-view-view';
+  static const sellerMainView = '/seller-main-view';
 
   static const all = <String>{
     homeView,
@@ -80,7 +79,7 @@ class Routes {
     sellerSignUpView,
     sellerDashboardView,
     sellerProductsView,
-    sellerMainViewView,
+    sellerMainView,
   };
 }
 
@@ -143,8 +142,8 @@ class StackedRouter extends _i1.RouterBase {
       page: _i15.SellerProductsView,
     ),
     _i1.RouteDef(
-      Routes.sellerMainViewView,
-      page: _i16.SellerMainViewView,
+      Routes.sellerMainView,
+      page: _i16.SellerMainView,
     ),
   ];
 
@@ -235,9 +234,9 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i16.SellerMainViewView: (data) {
+    _i16.SellerMainView: (data) {
       return _i17.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i16.SellerMainViewView(),
+        builder: (context) => const _i16.SellerMainView(),
         settings: data,
       );
     },
@@ -477,14 +476,14 @@ extension NavigatorStateExtension on _i19.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToSellerMainViewView([
+  Future<dynamic> navigateToSellerMainView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return navigateTo<dynamic>(Routes.sellerMainViewView,
+    return navigateTo<dynamic>(Routes.sellerMainView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -690,14 +689,14 @@ extension NavigatorStateExtension on _i19.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithSellerMainViewView([
+  Future<dynamic> replaceWithSellerMainView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return replaceWith<dynamic>(Routes.sellerMainViewView,
+    return replaceWith<dynamic>(Routes.sellerMainView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

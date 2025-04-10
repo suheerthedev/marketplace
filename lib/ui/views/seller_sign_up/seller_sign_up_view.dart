@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:marketplace/ui/widgets/common/custom_button/custom_button.dart';
 import 'package:marketplace/ui/widgets/common/custom_text_field/custom_text_field.dart';
-import 'package:marketplace/ui/widgets/common/social_button/social_button.dart';
 import 'package:stacked/stacked.dart';
 
 import 'seller_sign_up_viewmodel.dart';
@@ -95,8 +93,7 @@ class SellerSignUpView extends StackedView<SellerSignUpViewModel> {
               //Create account button
               CustomButton(
                 title: "Create Account",
-                onTap:
-                    viewModel.navigationService.navigateToSellerDashboardView,
+                onTap: viewModel.navigationService.navigateToSellerMainView,
                 bgColor: mainBackgroundColor,
                 textColor: secondaryTextColor,
                 borderColor: mainBackgroundColor,
