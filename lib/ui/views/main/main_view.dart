@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:marketplace/ui/views/account/account_view.dart';
 import 'package:marketplace/ui/views/cart/cart_view.dart';
