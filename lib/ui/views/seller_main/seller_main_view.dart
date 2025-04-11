@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
+import 'package:marketplace/ui/views/seller_account/seller_account_view.dart';
 import 'package:marketplace/ui/views/seller_dashboard/seller_dashboard_view.dart';
+import 'package:marketplace/ui/views/seller_inbox/seller_inbox_view.dart';
 import 'package:marketplace/ui/views/seller_products/seller_products_view.dart';
 import 'package:stacked/stacked.dart';
 
@@ -26,8 +28,8 @@ class SellerMainView extends StackedView<SellerMainViewModel> {
         children: const [
           SellerDashboardView(),
           SellerProductsView(),
-          SellerDashboardView(),
-          SellerDashboardView(),
+          SellerInboxView(),
+          SellerAccountView(),
         ],
       ),
       bottomNavigationBar: NavigationBar(
@@ -37,8 +39,8 @@ class SellerMainView extends StackedView<SellerMainViewModel> {
         onDestinationSelected: viewModel.changeNavbarIndex,
         destinations: const [
           NavigationDestination(
-            selectedIcon: Icon(Icons.home),
-            icon: Icon(Icons.home_outlined),
+            selectedIcon: Icon(Icons.dashboard),
+            icon: Icon(Icons.dashboard_outlined),
             label: "Dashboard",
           ),
           NavigationDestination(

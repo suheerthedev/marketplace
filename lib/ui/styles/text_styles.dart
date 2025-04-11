@@ -32,14 +32,14 @@ class AppTextStyles {
   static final bodyText2 = GoogleFonts.roboto(
     letterSpacing: -1,
     color: Colors.black,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
     fontSize: 18,
   );
 
   static final caption = GoogleFonts.roboto(
     letterSpacing: -1,
     fontSize: 12,
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w400,
     color: Colors.grey,
   );
 }
