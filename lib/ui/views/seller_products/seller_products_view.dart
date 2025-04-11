@@ -3,8 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/ui/widgets/common/search_bar/search_bar.dart';
 import 'package:stacked/stacked.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
-import 'package:marketplace/ui/common/ui_helpers.dart';
-import 'package:marketplace/ui/styles/text_styles.dart';
 
 import 'seller_products_viewmodel.dart';
 
@@ -69,14 +67,15 @@ class SellerProductsView extends StackedView<SellerProductsViewModel> {
           crossAxisSpacing: 12,
           mainAxisSpacing: 12,
         ),
-        itemCount: 4, // Show 4 items as in the design
+        itemCount: viewModel.products.length, // Show 4 items as in the design
         itemBuilder: (context, index) {
+          final card = viewModel.products[index];
           return _buildProductCard(
-            name: 'Sony Cd Player',
-            image: 'assets/images/cassette.png',
+            name: card.title,
+            image: card.imagePath,
             quantity: '30',
             date: 'Mar 24,2025',
-            price: '\$ 60',
+            price: '\$ ${card.price}',
           );
         },
       ),
@@ -145,101 +144,55 @@ class SellerProductsView extends StackedView<SellerProductsViewModel> {
             )
           ],
         ),
-        const Align(
+        Align(
           alignment: Alignment.topRight,
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(Icons.more_vert, size: 20),
+          child: PopupMenuButton<String>(
+            padding: EdgeInsets.zero,
+            color: secondaryBackgroundColor,
+            surfaceTintColor: secondaryBackgroundColor,
+            icon: const Icon(Icons.more_vert, size: 20),
+            onSelected: (value) {
+              if (value == 'edit') {
+                // Handle edit action
+              } else if (value == 'delete') {
+                // Handle delete action
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                const PopupMenuItem<String>(
+                  height: 0,
+                  value: 'edit',
+                  child: Row(
+                    spacing: 10,
+                    children: [
+                      Icon(Icons.edit_outlined, size: 20),
+                      Text('Edit Product'),
+                    ],
+                  ),
+                ),
+                const PopupMenuItem<String>(
+                  height: 0,
+                  enabled: false,
+                  child: Divider(),
+                ),
+                const PopupMenuItem<String>(
+                  height: 0,
+                  value: 'delete',
+                  child: Row(
+                    spacing: 10,
+                    children: [
+                      Icon(Icons.delete_outline, size: 20),
+                      Text('Delete Product'),
+                    ],
+                  ),
+                ),
+              ];
+            },
           ),
         ),
       ]),
     );
-    // return Container(
-    //   decoration: BoxDecoration(
-    //     borderRadius: BorderRadius.circular(8),
-    //   ),
-    //   child: Column(
-    //     crossAxisAlignment: CrossAxisAlignment.start,
-    //     children: [
-    //       Stack(
-    //         children: [
-    //           AspectRatio(
-    //             aspectRatio: 1.2,
-    //             child: Container(
-    //               decoration: BoxDecoration(
-    //                 color: Colors.grey.shade300,
-    //                 borderRadius: const BorderRadius.only(
-    //                   topLeft: Radius.circular(8),
-    //                   topRight: Radius.circular(8),
-    //                 ),
-    //               ),
-    //               child: Center(
-    //                 child: Container(
-    //                   width: 80,
-    //                   height: 60,
-    //                   decoration: BoxDecoration(
-    //                     color: Colors.black,
-    //                     border: Border.all(color: Colors.yellow, width: 2),
-    //                     borderRadius: BorderRadius.circular(4),
-    //                   ),
-    //                   child: Center(
-    //                     child: Container(
-    //                       width: 40,
-    //                       height: 3,
-    //                       color: Colors.yellow,
-    //                     ),
-    //                   ),
-    //                 ),
-    //               ),
-    //             ),
-    //           ),
-    //           Positioned(
-    //             top: 8,
-    //             right: 8,
-    //             child: Icon(
-    //               Icons.more_vert,
-    //               color: Colors.grey.shade700,
-    //               size: 20,
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //       Padding(
-    //         padding: const EdgeInsets.only(
-    //             left: 8.0, right: 8.0, top: 8.0, bottom: 4.0),
-    //         child: Text(
-    //           name,
-    //           style: GoogleFonts.roboto(
-    //             fontSize: 14,
-    //             fontWeight: FontWeight.w500,
-    //             color: Colors.black,
-    //           ),
-    //         ),
-    //       ),
-    //       Padding(
-    //         padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 4.0),
-    //         child: Text(
-    //           'Quantity: $quantity · $date',
-    //           style: GoogleFonts.roboto(
-    //             fontSize: 12,
-    //             color: Colors.grey.shade700,
-    //           ),
-    //         ),
-    //       ),
-    //       Padding(
-    //         padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
-    //         child: Text(
-    //           price,
-    //           style: GoogleFonts.roboto(
-    //             fontSize: 14,
-    //             fontWeight: FontWeight.w500,
-    //             color: Colors.red,
-    //           ),
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 
   @override
