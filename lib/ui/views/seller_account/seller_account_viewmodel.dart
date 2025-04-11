@@ -1,10 +1,12 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:marketplace/app/app.locator.dart';
-import 'package:marketplace/app/app.router.dart';
 
 class SellerAccountViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
+  bool _notificationsEnabled = true; // Default value
+
+  bool get notificationsEnabled => _notificationsEnabled;
 
   void openSettings() {
     // Open settings
@@ -46,20 +48,12 @@ class SellerAccountViewModel extends BaseViewModel {
     // Logout
   }
 
-  void navigateToIndex(int index) {
-    switch (index) {
-      case 0:
-        _navigationService.navigateToSellerDashboardView();
-        break;
-      case 1:
-        _navigationService.navigateToSellerProductsView();
-        break;
-      case 2:
-        _navigationService.navigateToSellerInboxView();
-        break;
-      case 3:
-        // Already on Account
-        break;
-    }
+  void toggleNotifications(bool value) {
+    _notificationsEnabled = value; // Update the state
+    notifyListeners(); // Notify listeners to rebuild the UI
+  }
+
+  void toggleEmailNotifications() {
+    // Toggle email notifications
   }
 }
