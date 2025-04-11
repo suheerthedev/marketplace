@@ -1,9 +1,10 @@
+import 'package:marketplace/app/app.router.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:marketplace/app/app.locator.dart';
 
 class SellerAccountViewModel extends BaseViewModel {
-  final navigationService = locator<NavigationService>();
+  final _navigationService = locator<NavigationService>();
   bool _notificationsEnabled = true; // Default value
 
   bool get notificationsEnabled => _notificationsEnabled;
@@ -16,12 +17,14 @@ class SellerAccountViewModel extends BaseViewModel {
     // Navigate to edit profile
   }
 
-  void openShopDetails() {
+  void openSellerProfile() {
     // Navigate to shop details
+    _navigationService.navigateToSellerProfileView();
   }
 
-  void openPaymentInfo() {
+  void openSellerWallet() {
     // Navigate to payment info
+    _navigationService.navigateToSellerMyWalletView();
   }
 
   void openShippingSettings() {
@@ -38,6 +41,7 @@ class SellerAccountViewModel extends BaseViewModel {
 
   void openHelpCenter() {
     // Navigate to help center
+    _navigationService.navigateToSellerHelpCenterView();
   }
 
   void contactSupport() {

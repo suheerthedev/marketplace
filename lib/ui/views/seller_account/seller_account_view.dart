@@ -63,12 +63,12 @@ class SellerAccountView extends StackedView<SellerAccountViewModel> {
               _buildOptionTile(
                 icon: Icons.person_outline,
                 title: 'Seller Profile',
-                onTap: viewModel.openShopDetails,
+                onTap: viewModel.openSellerProfile,
               ),
               _buildOptionTile(
                 icon: Icons.account_balance_wallet_outlined,
                 title: 'My Wallet',
-                onTap: viewModel.openPaymentInfo,
+                onTap: viewModel.openSellerWallet,
               ),
               _buildSwitchTile(
                 icon: Icons.notifications_outlined,
