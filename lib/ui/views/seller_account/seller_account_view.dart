@@ -62,7 +62,7 @@ class SellerAccountView extends StackedView<SellerAccountViewModel> {
             children: [
               _buildOptionTile(
                 icon: Icons.person_outline,
-                title: 'Seller Account',
+                title: 'Seller Profile',
                 onTap: viewModel.openShopDetails,
               ),
               _buildOptionTile(
