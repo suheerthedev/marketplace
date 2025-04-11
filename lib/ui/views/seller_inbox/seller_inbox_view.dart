@@ -53,7 +53,9 @@ class SellerInboxView extends StackedView<SellerInboxViewModel> {
                 'Have you had a chance to review the latest draft of the proposal? I wanted to make sure it meets your requirements',
             imageUrl: 'assets/images/profile.png',
             hasUnread: hasUnread,
-            onTap: () {});
+            onTap: () {
+              viewModel.openChat(index);
+            });
       },
     );
   }

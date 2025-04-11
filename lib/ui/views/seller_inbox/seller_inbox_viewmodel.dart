@@ -11,7 +11,7 @@ class SellerInboxViewModel extends BaseViewModel {
   }
 
   void openChat(int index) {
-    // Navigate to chat screen
+    _navigationService.navigateToSellerChatView();
   }
 
   void navigateToIndex(int index) {

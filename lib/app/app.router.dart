@@ -73,7 +73,7 @@ class Routes {
 
   static const sellerAccountView = '/seller-account-view';
 
-  static const sellerChatViewView = '/seller-chat-view-view';
+  static const sellerChatView = '/seller-chat-view';
 
   static const all = <String>{
     homeView,
@@ -93,7 +93,7 @@ class Routes {
     sellerMainView,
     sellerInboxView,
     sellerAccountView,
-    sellerChatViewView,
+    sellerChatView,
   };
 }
 
@@ -168,7 +168,7 @@ class StackedRouter extends _i1.RouterBase {
       page: _i18.SellerAccountView,
     ),
     _i1.RouteDef(
-      Routes.sellerChatViewView,
+      Routes.sellerChatView,
       page: _i19.SellerChatView,
     ),
   ];
@@ -562,14 +562,14 @@ extension NavigatorStateExtension on _i22.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToSellerChatViewView([
+  Future<dynamic> navigateToSellerChatView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return navigateTo<dynamic>(Routes.sellerChatViewView,
+    return navigateTo<dynamic>(Routes.sellerChatView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -817,14 +817,14 @@ extension NavigatorStateExtension on _i22.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithSellerChatViewView([
+  Future<dynamic> replaceWithSellerChatView([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   ]) async {
-    return replaceWith<dynamic>(Routes.sellerChatViewView,
+    return replaceWith<dynamic>(Routes.sellerChatView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
