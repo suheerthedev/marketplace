@@ -23,6 +23,7 @@ import 'package:marketplace/ui/views/seller_account/seller_account_view.dart';
 import 'package:marketplace/ui/views/seller_chat/seller_chat_view.dart';
 import 'package:marketplace/ui/views/seller_profile/seller_profile_view.dart';
 import 'package:marketplace/ui/views/seller_my_wallet/seller_my_wallet_view.dart';
+import 'package:marketplace/ui/views/seller_help_center/seller_help_center_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -47,6 +48,7 @@ import 'package:marketplace/ui/views/seller_my_wallet/seller_my_wallet_view.dart
     MaterialRoute(page: SellerChatView),
     MaterialRoute(page: SellerProfileView),
     MaterialRoute(page: SellerMyWalletView),
+    MaterialRoute(page: SellerHelpCenterView),
 // @stacked-route
   ],
   dependencies: [
