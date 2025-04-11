@@ -3,7 +3,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:marketplace/app/app.locator.dart';
 
 class SellerAccountViewModel extends BaseViewModel {
-  final _navigationService = locator<NavigationService>();
+  final navigationService = locator<NavigationService>();
   bool _notificationsEnabled = true; // Default value
 
   bool get notificationsEnabled => _notificationsEnabled;
