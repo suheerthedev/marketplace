@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:stacked/stacked.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:marketplace/ui/common/ui_helpers.dart';
@@ -18,20 +19,19 @@ class SellerInboxView extends StackedView<SellerInboxViewModel> {
     return Scaffold(
       backgroundColor: secondaryBackgroundColor,
       appBar: AppBar(
+        surfaceTintColor: secondaryBackgroundColor,
         backgroundColor: secondaryBackgroundColor,
         elevation: 0,
-        title: Text('Inbox', style: AppTextStyles.heading1),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search, color: mainTextColor),
-            onPressed: viewModel.searchMessages,
-          ),
-        ],
+        automaticallyImplyLeading: false,
+        title: Text("Messages",
+            style: GoogleFonts.roboto(
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+                color: mainTextColor)),
       ),
       body: SafeArea(
         child: Column(
           children: [
-            _buildChatTabs(viewModel),
             Expanded(
               child: _buildChatList(viewModel),
             ),
@@ -41,56 +41,56 @@ class SellerInboxView extends StackedView<SellerInboxViewModel> {
     );
   }
 
-  Widget _buildChatTabs(SellerInboxViewModel viewModel) {
-    return Container(
-      height: 50,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        children: [
-          _buildChatTab('All', true, viewModel),
-          horizontalSpaceSmall,
-          _buildChatTab('Unread', false, viewModel),
-          horizontalSpaceSmall,
-          _buildChatTab('Archive', false, viewModel),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildChatTab(
-      String title, bool isActive, SellerInboxViewModel viewModel) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
-        color: isActive ? mainBtnColor : lightContainerColor,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Text(
-        title,
-        style: AppTextStyles.bodyText1.copyWith(
-          color: isActive ? secondaryTextColor : mainTextColor,
-          fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-        ),
-      ),
-    );
-  }
-
   Widget _buildChatList(SellerInboxViewModel viewModel) {
     return ListView.separated(
       padding: const EdgeInsets.all(16),
-      itemCount: 10,
+      itemCount: 4,
       separatorBuilder: (context, index) => const Divider(height: 1),
       itemBuilder: (context, index) {
         final bool hasUnread = index % 3 == 0;
-        return _buildChatItem(
-          userName: 'Customer ${index + 1}',
-          lastMessage: 'Hello, is this product still available?',
-          time:
-              '${(index + 1) % 12}:${(index * 10) % 60} ${(index % 2 == 0) ? 'AM' : 'PM'}',
-          imageUrl: 'assets/images/avatar${(index % 5) + 1}.jpg',
-          hasUnread: hasUnread,
-          onTap: () => viewModel.openChat(index),
+
+        return ListTile(
+          contentPadding: EdgeInsets.zero,
+          leading: CircleAvatar(
+            radius: 25,
+            backgroundImage: const AssetImage('assets/images/profile.png'),
+            backgroundColor: lightContainerColor,
+            child:
+                const AssetImage('assets/images/profile.png').toString().isEmpty
+                    ? const Icon(Icons.person, color: mainTextColor)
+                    : null,
+          ),
+          title: Text(
+            'Thomas Jepkins',
+            style: TextStyle(
+              fontWeight: hasUnread ? FontWeight.normal : FontWeight.bold,
+            ),
+          ),
+          subtitle: Text(
+            'Have you had a chance to review the latest draft of the proposal? I wanted to make sure it meets your requirements',
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: hasUnread ? Colors.grey : Colors.black,
+              fontWeight: hasUnread ? FontWeight.normal : FontWeight.bold,
+            ),
+          ),
+          trailing: hasUnread
+              ? null
+              : Icon(Icons.circle, size: 10, color: Colors.blue),
+          onTap: () {
+            // mark as read logic
+          },
         );
+        // return _buildChatItem(
+        //   userName: 'Customer ${index + 1}',
+        //   lastMessage: 'Hello, is this product still available?',
+        //   time:
+        //       '${(index + 1) % 12}:${(index * 10) % 60} ${(index % 2 == 0) ? 'AM' : 'PM'}',
+        //   imageUrl: 'assets/images/avatar${(index % 5) + 1}.jpg',
+        //   hasUnread: hasUnread,
+        //   onTap: () => viewModel.openChat(index),
+        // );
       },
     );
   }
