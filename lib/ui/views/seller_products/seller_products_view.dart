@@ -18,6 +18,7 @@ class SellerProductsView extends StackedView<SellerProductsViewModel> {
     return Scaffold(
       backgroundColor: secondaryBackgroundColor,
       appBar: AppBar(
+        surfaceTintColor: secondaryBackgroundColor,
         backgroundColor: secondaryBackgroundColor,
         elevation: 0,
         automaticallyImplyLeading: false,

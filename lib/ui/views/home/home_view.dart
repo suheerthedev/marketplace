@@ -19,7 +19,7 @@ class HomeView extends StackedView<HomeViewModel> {
       appBar: AppBar(
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
-          title: CustomSearchBar(
+          title: const CustomSearchBar(
             isAppBar: true,
           )),
       body: SafeArea(
