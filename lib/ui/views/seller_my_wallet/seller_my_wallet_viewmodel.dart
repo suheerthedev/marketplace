@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:marketplace/models/transaction_model.dart';
 import 'package:stacked/stacked.dart';
 
