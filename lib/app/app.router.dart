@@ -24,8 +24,7 @@ import 'package:marketplace/ui/views/reset_password/reset_password_view.dart'
 import 'package:marketplace/ui/views/saved/saved_view.dart' as _i11;
 import 'package:marketplace/ui/views/seller_account/seller_account_view.dart'
     as _i18;
-import 'package:marketplace/ui/views/seller_chat_view/seller_chat_view_view.dart'
-    as _i19;
+import 'package:marketplace/ui/views/seller_chat/seller_chat_view.dart' as _i19;
 import 'package:marketplace/ui/views/seller_dashboard/seller_dashboard_view.dart'
     as _i14;
 import 'package:marketplace/ui/views/seller_inbox/seller_inbox_view.dart'
@@ -170,7 +169,7 @@ class StackedRouter extends _i1.RouterBase {
     ),
     _i1.RouteDef(
       Routes.sellerChatViewView,
-      page: _i19.SellerChatViewView,
+      page: _i19.SellerChatView,
     ),
   ];
 
@@ -279,9 +278,9 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i19.SellerChatViewView: (data) {
+    _i19.SellerChatView: (data) {
       return _i20.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i19.SellerChatViewView(),
+        builder: (context) => const _i19.SellerChatView(),
         settings: data,
       );
     },

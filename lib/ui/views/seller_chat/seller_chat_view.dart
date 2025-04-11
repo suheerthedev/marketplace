@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import 'seller_chat_view_viewmodel.dart';
+import 'seller_chat_viewmodel.dart';
 
-class SellerChatViewView extends StackedView<SellerChatViewViewModel> {
-  const SellerChatViewView({Key? key}) : super(key: key);
+class SellerChatView extends StackedView<SellerChatViewModel> {
+  const SellerChatView({Key? key}) : super(key: key);
 
   @override
   Widget builder(
     BuildContext context,
-    SellerChatViewViewModel viewModel,
+    SellerChatViewModel viewModel,
     Widget? child,
   ) {
     return Scaffold(
@@ -22,8 +22,8 @@ class SellerChatViewView extends StackedView<SellerChatViewViewModel> {
   }
 
   @override
-  SellerChatViewViewModel viewModelBuilder(
+  SellerChatViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      SellerChatViewViewModel();
+      SellerChatViewModel();
 }
