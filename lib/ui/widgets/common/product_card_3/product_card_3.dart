@@ -27,7 +27,7 @@ class ProductCard3 extends StackedView<ProductCard3Model> {
   ) {
     return InkWell(
       onTap: isTappable ? onTapped : () {},
-      child: Expanded(
+      child: SizedBox(
         child: Stack(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

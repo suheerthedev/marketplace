@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/ui/widgets/common/category_card/category_card.dart';
 import 'package:marketplace/ui/widgets/common/product_card_1/product_card_1.dart';
+import 'package:marketplace/ui/widgets/common/search_bar/search_bar.dart';
 import 'package:stacked/stacked.dart';
 
 import 'home_viewmodel.dart';
@@ -16,36 +17,11 @@ class HomeView extends StackedView<HomeViewModel> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        automaticallyImplyLeading: false,
-        title: Container(
-          decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search',
-                    hintStyle: GoogleFonts.roboto(
-                        color: Colors.grey[600],
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500),
-                    border: InputBorder.none,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 10.0),
-                child: Icon(Icons.search, color: Colors.grey[500]),
-              ),
-            ],
-          ),
-        ),
-      ),
+          backgroundColor: Colors.white,
+          automaticallyImplyLeading: false,
+          title: CustomSearchBar(
+            isAppBar: true,
+          )),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
