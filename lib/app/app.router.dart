@@ -5,14 +5,15 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i28;
+import 'package:flutter/material.dart' as _i29;
 import 'package:flutter/material.dart';
-import 'package:marketplace/models/product_model.dart' as _i29;
+import 'package:marketplace/models/product_model.dart' as _i30;
 import 'package:marketplace/ui/views/account/account_view.dart' as _i12;
 import 'package:marketplace/ui/views/buyer_login/buyer_login_view.dart' as _i5;
 import 'package:marketplace/ui/views/buyer_sign_up/buyer_sign_up_view.dart'
     as _i4;
 import 'package:marketplace/ui/views/cart/cart_view.dart' as _i10;
+import 'package:marketplace/ui/views/category/category_view.dart' as _i28;
 import 'package:marketplace/ui/views/forgot_password/forgot_password_view.dart'
     as _i6;
 import 'package:marketplace/ui/views/home/home_view.dart' as _i2;
@@ -52,7 +53,7 @@ import 'package:marketplace/ui/views/seller_trending_products/seller_trending_pr
     as _i26;
 import 'package:marketplace/ui/views/startup/startup_view.dart' as _i3;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i30;
+import 'package:stacked_services/stacked_services.dart' as _i31;
 
 class Routes {
   static const homeView = '/home-view';
@@ -107,6 +108,8 @@ class Routes {
 
   static const sellerInvoiceDetailView = '/seller-invoice-detail-view';
 
+  static const categoryView = '/category-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -134,6 +137,7 @@ class Routes {
     notificationView,
     sellerTrendingProductsView,
     sellerInvoiceDetailView,
+    categoryView,
   };
 }
 
@@ -243,164 +247,174 @@ class StackedRouter extends _i1.RouterBase {
       Routes.sellerInvoiceDetailView,
       page: _i27.SellerInvoiceDetailView,
     ),
+    _i1.RouteDef(
+      Routes.categoryView,
+      page: _i28.CategoryView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.BuyerSignUpView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.BuyerSignUpView(),
         settings: data,
       );
     },
     _i5.BuyerLoginView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.BuyerLoginView(),
         settings: data,
       );
     },
     _i6.ForgotPasswordView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.ForgotPasswordView(),
         settings: data,
       );
     },
     _i7.ResetPasswordView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.ResetPasswordView(),
         settings: data,
       );
     },
     _i8.MainView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.MainView(),
         settings: data,
       );
     },
     _i9.ProductDetailView: (data) {
       final args = data.getArgs<ProductDetailViewArguments>(nullOk: false);
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i9.ProductDetailView(product: args.product, key: args.key),
         settings: data,
       );
     },
     _i10.CartView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.CartView(),
         settings: data,
       );
     },
     _i11.SavedView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.SavedView(),
         settings: data,
       );
     },
     _i12.AccountView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i12.AccountView(),
         settings: data,
       );
     },
     _i13.SellerSignUpView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i13.SellerSignUpView(),
         settings: data,
       );
     },
     _i14.SellerDashboardView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i14.SellerDashboardView(),
         settings: data,
       );
     },
     _i15.SellerProductsView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i15.SellerProductsView(),
         settings: data,
       );
     },
     _i16.SellerMainView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i16.SellerMainView(),
         settings: data,
       );
     },
     _i17.SellerInboxView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i17.SellerInboxView(),
         settings: data,
       );
     },
     _i18.SellerAccountView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i18.SellerAccountView(),
         settings: data,
       );
     },
     _i19.SellerChatView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i19.SellerChatView(),
         settings: data,
       );
     },
     _i20.SellerProfileView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i20.SellerProfileView(),
         settings: data,
       );
     },
     _i21.SellerMyWalletView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i21.SellerMyWalletView(),
         settings: data,
       );
     },
     _i22.SellerHelpCenterView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i22.SellerHelpCenterView(),
         settings: data,
       );
     },
     _i23.SellerEditProductView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i23.SellerEditProductView(),
         settings: data,
       );
     },
     _i24.SellerAddProductView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i24.SellerAddProductView(),
         settings: data,
       );
     },
     _i25.NotificationView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i25.NotificationView(),
         settings: data,
       );
     },
     _i26.SellerTrendingProductsView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i26.SellerTrendingProductsView(),
         settings: data,
       );
     },
     _i27.SellerInvoiceDetailView: (data) {
-      return _i28.MaterialPageRoute<dynamic>(
+      return _i29.MaterialPageRoute<dynamic>(
         builder: (context) => const _i27.SellerInvoiceDetailView(),
+        settings: data,
+      );
+    },
+    _i28.CategoryView: (data) {
+      return _i29.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i28.CategoryView(),
         settings: data,
       );
     },
@@ -419,9 +433,9 @@ class ProductDetailViewArguments {
     this.key,
   });
 
-  final _i29.Product product;
+  final _i30.Product product;
 
-  final _i28.Key? key;
+  final _i29.Key? key;
 
   @override
   String toString() {
@@ -440,7 +454,7 @@ class ProductDetailViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i30.NavigationService {
+extension NavigatorStateExtension on _i31.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -540,8 +554,8 @@ extension NavigatorStateExtension on _i30.NavigationService {
   }
 
   Future<dynamic> navigateToProductDetailView({
-    required _i29.Product product,
-    _i28.Key? key,
+    required _i30.Product product,
+    _i29.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -808,6 +822,20 @@ extension NavigatorStateExtension on _i30.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToCategoryView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.categoryView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -907,8 +935,8 @@ extension NavigatorStateExtension on _i30.NavigationService {
   }
 
   Future<dynamic> replaceWithProductDetailView({
-    required _i29.Product product,
-    _i28.Key? key,
+    required _i30.Product product,
+    _i29.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1169,6 +1197,20 @@ extension NavigatorStateExtension on _i30.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.sellerInvoiceDetailView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithCategoryView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.categoryView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
