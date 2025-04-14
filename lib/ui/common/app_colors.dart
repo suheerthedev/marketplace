@@ -15,6 +15,7 @@ const Color lightBackgroundColor = Color(0xFF999999);
 //Text Colors
 const Color mainTextColor = Color(0xFF1A1A1A);
 const Color secondaryTextColor = Color(0xFFFFFFFF);
+const Color mediumLightTextColor = Color(0xFF838383);
 const Color lightTextColor = Color(0xFF999999);
 const Color darkTextColor = Color(0xFF1A1A1A);
 const Color brownTextColor = Color(0xFF996E4E);
