@@ -36,19 +36,26 @@ class SellerEditProductView extends StackedView<SellerEditProductViewModel> {
               width: double.infinity,
               height: 140,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade400),
+                border: Border.all(color: lightContainerColor),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.image, size: 30, color: Colors.grey),
-                  SizedBox(height: 5),
-                  Text('Select file', style: TextStyle(color: Colors.grey)),
-                  SizedBox(height: 5),
+                  const Icon(Icons.image, size: 30, color: Colors.grey),
+                  const SizedBox(height: 5),
+                  Text('Select file',
+                      style: GoogleFonts.roboto(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: lightTextColor)),
+                  const SizedBox(height: 5),
                   Text(
                     'Supported Formats : JPG, PNG only',
-                    style: TextStyle(fontSize: 10, color: Colors.grey),
+                    style: GoogleFonts.roboto(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w400,
+                        color: lightTextColor),
                   ),
                 ],
               ),
@@ -77,7 +84,7 @@ class SellerEditProductView extends StackedView<SellerEditProductViewModel> {
             _buildLabel('Description'),
             const SizedBox(height: 8),
             _buildTextField(
-              hint: 'Lorem ipsum...',
+              hint: 'Enter product description',
               maxLines: 3,
               showCounter: true,
               maxLength: 100,
@@ -115,11 +122,12 @@ class SellerEditProductView extends StackedView<SellerEditProductViewModel> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   'Done',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
+                  style: GoogleFonts.roboto(
+                    fontSize: 16,
+                    color: secondaryBackgroundColor,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
@@ -134,9 +142,19 @@ class SellerEditProductView extends StackedView<SellerEditProductViewModel> {
   Widget _buildLabel(String label) {
     return Text.rich(
       TextSpan(
-        text: label,
-        children: const [
-          TextSpan(text: ' *', style: TextStyle(color: Colors.red)),
+        children: [
+          TextSpan(
+              text: label,
+              style: GoogleFonts.roboto(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: mainTextColor)),
+          TextSpan(
+              text: ' *',
+              style: GoogleFonts.roboto(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: errorColor)),
         ],
       ),
       style: const TextStyle(fontWeight: FontWeight.w600),
@@ -165,6 +183,7 @@ class SellerEditProductView extends StackedView<SellerEditProductViewModel> {
           borderRadius: BorderRadius.circular(10),
         ),
         enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: lightContainerColor),
           borderRadius: BorderRadius.circular(10),
         ),
         contentPadding:
@@ -191,8 +210,9 @@ class SellerEditProductView extends StackedView<SellerEditProductViewModel> {
       onChanged: (_) {},
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-        enabledBorder:
-            OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: lightContainerColor),
+            borderRadius: BorderRadius.circular(10)),
         focusedBorder:
             OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         contentPadding:
@@ -209,7 +229,7 @@ class SellerEditProductView extends StackedView<SellerEditProductViewModel> {
     return Container(
       height: 50,
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade400),
+        border: Border.all(color: lightContainerColor),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
