@@ -24,6 +24,7 @@ import 'package:marketplace/ui/views/seller_chat/seller_chat_view.dart';
 import 'package:marketplace/ui/views/seller_profile/seller_profile_view.dart';
 import 'package:marketplace/ui/views/seller_my_wallet/seller_my_wallet_view.dart';
 import 'package:marketplace/ui/views/seller_help_center/seller_help_center_view.dart';
+import 'package:marketplace/ui/dialogs/confirmation/confirmation_dialog.dart';
 // @stacked-import
 
 @StackedApp(
@@ -64,7 +65,8 @@ import 'package:marketplace/ui/views/seller_help_center/seller_help_center_view.
   ],
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),
-    // @stacked-dialog
+    StackedDialog(classType: ConfirmationDialog),
+// @stacked-dialog
   ],
 )
 class App {}
