@@ -60,7 +60,7 @@ class CheckoutView extends StackedView<CheckoutViewModel> {
                 const SizedBox(height: 24),
                 CustomButton(
                     title: "Next",
-                    onTap: () {},
+                    onTap: viewModel.proceedToPay,
                     bgColor: brownContainerColor,
                     textColor: secondaryTextColor,
                     borderColor: brownContainerColor),
