@@ -1,3 +1,4 @@
+import 'package:marketplace/app/app.dialogs.dart';
 import 'package:marketplace/app/app.router.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -5,6 +6,7 @@ import 'package:marketplace/app/app.locator.dart';
 
 class SellerAccountViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
+  final _dialogService = locator<DialogService>();
   bool _notificationsEnabled = true; // Default value
 
   bool get notificationsEnabled => _notificationsEnabled;
@@ -50,6 +52,11 @@ class SellerAccountViewModel extends BaseViewModel {
 
   void logout() {
     // Logout
+    _dialogService.showCustomDialog(
+        variant: DialogType.confirmation,
+        title: 'Are you sure you want to logout?',
+        mainButtonTitle: 'Logout',
+        secondaryButtonTitle: 'Cancel');
   }
 
   void toggleNotifications(bool value) {
