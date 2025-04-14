@@ -8,5 +8,6 @@ class ResetPasswordViewModel extends BaseViewModel {
   void navigateToLogin() {
     navigationSerivce.back();
     navigationSerivce.back();
+    navigationSerivce.back();
   }
 }

@@ -18,7 +18,9 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
@@ -55,7 +57,7 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
                   hasSuffix: false),
               CustomButton(
                 title: "Send",
-                onTap: viewModel.navigationSerivce.navigateToResetPasswordView,
+                onTap: viewModel.navigationSerivce.navigateToVerificationView,
                 bgColor: mainBackgroundColor,
                 textColor: secondaryTextColor,
                 borderColor: lightBackgroundColor,
