@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
+import 'package:marketplace/ui/widgets/common/custom_button/custom_button.dart';
 import 'package:marketplace/ui/widgets/common/main_app_bar/main_app_bar.dart';
 import 'package:marketplace/ui/widgets/common/product_card_2/product_card_2.dart';
 import 'package:stacked/stacked.dart';
@@ -150,49 +151,19 @@ class CartView extends StackedView<CartViewModel> {
   Widget _buildButtons(BuildContext context, CartViewModel viewModel) {
     return Column(
       children: [
-        SizedBox(
-          width: double.infinity,
-          height: 50,
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF996E4E),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            onPressed: viewModel.proceedToCheckout,
-            child: Text(
-              "Proceed to Checkout",
-              style: GoogleFonts.roboto(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-                fontSize: 18,
-              ),
-            ),
-          ),
-        ),
+        CustomButton(
+            title: "Proceed to Checkout",
+            onTap: viewModel.proceedToCheckout,
+            bgColor: brownContainerColor,
+            textColor: secondaryTextColor,
+            borderColor: brownContainerColor),
         const SizedBox(height: 12),
-        SizedBox(
-          width: double.infinity,
-          height: 50,
-          child: OutlinedButton(
-            style: OutlinedButton.styleFrom(
-              side: const BorderSide(color: Color(0xFF996E4E)),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            onPressed: viewModel.continueShopping,
-            child: Text(
-              "Continue Shopping",
-              style: GoogleFonts.roboto(
-                color: const Color(0xFF996E4E),
-                fontWeight: FontWeight.w600,
-                fontSize: 18,
-              ),
-            ),
-          ),
-        ),
+        CustomButton(
+            title: "Continue Shopping",
+            onTap: () {},
+            bgColor: secondaryContainerColor,
+            textColor: brownTextColor,
+            borderColor: brownContainerColor)
       ],
     );
   }

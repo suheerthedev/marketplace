@@ -49,7 +49,7 @@ class CartViewModel extends BaseViewModel {
 
   void proceedToCheckout() {
     // Navigate to checkout view
-    // navigationService.navigateToCheckoutView();
+    navigationService.navigateToCheckoutView();
   }
 
   void continueShopping() {
