@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:marketplace/app/app.locator.dart';
 import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/models/product_model.dart';
@@ -16,10 +17,15 @@ class ProductDetailViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void addToCart(Product product) {
+  void addToCart(Product product, BuildContext context) {
     product.isInCart = true;
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text("Added To Cart Successfully"),
+        duration: Duration(seconds: 2),
+      ),
+    );
     rebuildUi();
-    navigationService.back();
   }
 
   void buyNow(Product product) {

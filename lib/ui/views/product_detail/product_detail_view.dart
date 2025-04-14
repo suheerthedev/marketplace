@@ -321,7 +321,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
             Expanded(
               flex: 3,
               child: InkWell(
-                onTap: () => viewModel.addToCart(product),
+                onTap: () => viewModel.addToCart(product, context),
                 child: Container(
                   height: 40,
                   decoration: BoxDecoration(
