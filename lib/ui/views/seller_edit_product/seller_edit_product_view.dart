@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:marketplace/main.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:marketplace/ui/widgets/common/main_app_bar/main_app_bar.dart';
 import 'package:stacked/stacked.dart';
