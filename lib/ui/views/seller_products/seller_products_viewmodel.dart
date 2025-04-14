@@ -1,4 +1,5 @@
 import 'package:marketplace/app/app.dialogs.dart';
+import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/services/product_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -31,7 +32,7 @@ class SellerProductsViewModel extends BaseViewModel {
   }
 
   void editProduct(int index) {
-    //Handle edit product
+    _navigationService.navigateToSellerEditProductView();
   }
 
   void deleteProduct(int index) {
