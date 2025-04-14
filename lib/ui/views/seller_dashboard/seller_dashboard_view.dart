@@ -93,6 +93,7 @@ class SellerDashboardView extends StackedView<SellerDashboardViewModel> {
         Row(
           children: [
             _buildStatCard(
+              onTap: () {},
               title: 'Total Earning',
               value: '\$ 10,000',
               icon: Icons.attach_money,
@@ -100,6 +101,7 @@ class SellerDashboardView extends StackedView<SellerDashboardViewModel> {
             ),
             horizontalSpaceSmall,
             _buildStatCard(
+              onTap: () {},
               title: 'Total Products',
               value: '45',
               icon: Icons.inventory_2_outlined,
@@ -111,6 +113,7 @@ class SellerDashboardView extends StackedView<SellerDashboardViewModel> {
         Row(
           children: [
             _buildStatCard(
+              onTap: () {},
               title: 'Total Invoice',
               value: '20',
               icon: Icons.receipt_outlined,
@@ -118,6 +121,7 @@ class SellerDashboardView extends StackedView<SellerDashboardViewModel> {
             ),
             horizontalSpaceSmall,
             _buildStatCard(
+              onTap: viewModel.openTrendingProductsView,
               title: 'Trending Products',
               value: '15',
               icon: Icons.trending_up_outlined,
@@ -134,43 +138,47 @@ class SellerDashboardView extends StackedView<SellerDashboardViewModel> {
     required String value,
     required IconData icon,
     required Color iconColor,
+    required VoidCallback onTap,
   }) {
     return Expanded(
-      child: Container(
-        padding: const EdgeInsets.all(16),
-        decoration: BoxDecoration(
-          color: secondaryContainerColor,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: brownContainerColor),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  title,
-                  style: GoogleFonts.roboto(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: brownTextColor),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Icon(icon, color: brownTextColor, size: 20),
-              ],
-            ),
-            verticalSpaceTiny,
-            Text(
-              value,
-              style: GoogleFonts.roboto(
-                  fontSize: 18,
-                  letterSpacing: -0.3,
-                  fontWeight: FontWeight.w500,
-                  color: mainTextColor),
-            ),
-          ],
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: secondaryContainerColor,
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: brownContainerColor),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    title,
+                    style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: brownTextColor),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Icon(icon, color: brownTextColor, size: 20),
+                ],
+              ),
+              verticalSpaceTiny,
+              Text(
+                value,
+                style: GoogleFonts.roboto(
+                    fontSize: 18,
+                    letterSpacing: -0.3,
+                    fontWeight: FontWeight.w500,
+                    color: mainTextColor),
+              ),
+            ],
+          ),
         ),
       ),
     );

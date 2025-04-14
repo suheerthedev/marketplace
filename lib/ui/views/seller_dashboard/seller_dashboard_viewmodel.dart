@@ -22,4 +22,8 @@ class SellerDashboardViewModel extends BaseViewModel {
   void addNewProduct() {
     _navigationService.navigateToSellerAddProductView();
   }
+
+  void openTrendingProductsView() {
+    _navigationService.navigateToSellerTrendingProductsView();
+  }
 }
