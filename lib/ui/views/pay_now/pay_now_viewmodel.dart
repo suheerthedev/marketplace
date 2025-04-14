@@ -1,7 +1,11 @@
+import 'package:marketplace/app/app.locator.dart';
+import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/models/saved_card.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class PayNowViewModel extends BaseViewModel {
+  final _navigationService = locator<NavigationService>();
   String _cardNumber = '';
   String _expiryDate = '';
   String _cvc = '';
@@ -106,5 +110,6 @@ class PayNowViewModel extends BaseViewModel {
 
   void pay() {
     // Implement payment logic
+    _navigationService.navigateToConfirmationView();
   }
 }
