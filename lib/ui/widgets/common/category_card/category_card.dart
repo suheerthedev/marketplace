@@ -8,8 +8,10 @@ class CategoryCard extends StackedView<CategoryCardModel> {
   final String name;
   final String imagePath;
   final IconData icon;
+  final VoidCallback onTap;
   const CategoryCard(
-      {required this.name,
+      {required this.onTap,
+      required this.name,
       required this.imagePath,
       required this.icon,
       super.key});
@@ -22,22 +24,20 @@ class CategoryCard extends StackedView<CategoryCardModel> {
   ) {
     return Column(
       children: [
-        Container(
-          width: 60,
-          height: 60,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(30),
-            border: Border.all(color: Colors.grey.shade300),
-          ),
-          child:
-              // Icon(
-              //   icon,
-              //   size: 40,
-              // )
-              Image.asset(
-            imagePath,
-            fit: BoxFit.scaleDown,
+        InkWell(
+          onTap: onTap,
+          child: Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all(color: Colors.grey.shade300),
+            ),
+            child: Image.asset(
+              imagePath,
+              fit: BoxFit.scaleDown,
+            ),
           ),
         ),
         const SizedBox(height: 5),

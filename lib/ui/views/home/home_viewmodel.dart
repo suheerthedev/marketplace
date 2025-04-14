@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/app/app.locator.dart';
+import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/models/product_model.dart';
 import 'package:marketplace/services/product_service.dart';
 import 'package:stacked/stacked.dart';
@@ -66,4 +67,8 @@ class HomeViewModel extends BaseViewModel {
       'image': 'assets/images/category_items/item_4.png',
     },
   ];
+
+  void navigateToCategory() {
+    navigationSerivce.navigateToCategoryView();
+  }
 }

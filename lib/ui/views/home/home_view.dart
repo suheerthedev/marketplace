@@ -153,30 +153,34 @@ class HomeView extends StackedView<HomeViewModel> {
                     const SizedBox(height: 10),
 
                     // Category Icons
-                    const SizedBox(
+                    SizedBox(
                       height: 90,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CategoryCard(
+                            onTap: viewModel.navigateToCategory,
                             name: 'Amplifiers',
                             imagePath:
                                 'assets/images/category_items/item_1.png',
                             icon: Icons.radio,
                           ),
                           CategoryCard(
+                            onTap: viewModel.navigateToCategory,
                             name: 'Turntables',
                             imagePath:
                                 'assets/images/category_items/item_2.png',
                             icon: Icons.album,
                           ),
                           CategoryCard(
+                            onTap: viewModel.navigateToCategory,
                             name: 'CD Players',
                             imagePath:
                                 'assets/images/category_items/item_3.png',
                             icon: Icons.album_outlined,
                           ),
                           CategoryCard(
+                            onTap: viewModel.navigateToCategory,
                             name: 'Cassette Players',
                             imagePath:
                                 'assets/images/category_items/item_4.png',
