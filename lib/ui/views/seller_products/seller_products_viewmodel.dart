@@ -17,6 +17,7 @@ class SellerProductsViewModel extends BaseViewModel {
 
   void addNewProduct() {
     // Navigate to add product screen
+    _navigationService.navigateToSellerAddProductView();
   }
 
   void viewProductDetails(int index) {

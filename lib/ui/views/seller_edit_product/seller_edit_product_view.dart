@@ -22,42 +22,37 @@ class SellerEditProductView extends StackedView<SellerEditProductViewModel> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text.rich(
-              TextSpan(
-                text: 'Product Image',
-                children: [
-                  TextSpan(text: ' *', style: TextStyle(color: Colors.red)),
-                ],
-              ),
-              style: TextStyle(fontWeight: FontWeight.w600),
-            ),
+            _buildLabel('Product Image'),
             const SizedBox(height: 10),
-            Container(
-              width: double.infinity,
-              height: 140,
-              decoration: BoxDecoration(
-                border: Border.all(color: lightContainerColor),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.image, size: 30, color: Colors.grey),
-                  const SizedBox(height: 5),
-                  Text('Select file',
+            GestureDetector(
+              onTap: viewModel.pickImage,
+              child: Container(
+                width: double.infinity,
+                height: 140,
+                decoration: BoxDecoration(
+                  border: Border.all(color: lightContainerColor),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.image, size: 30, color: Colors.grey),
+                    const SizedBox(height: 5),
+                    Text('Select file',
+                        style: GoogleFonts.roboto(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: lightTextColor)),
+                    const SizedBox(height: 5),
+                    Text(
+                      'Supported Formats : JPG, PNG only',
                       style: GoogleFonts.roboto(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: lightTextColor)),
-                  const SizedBox(height: 5),
-                  Text(
-                    'Supported Formats : JPG, PNG only',
-                    style: GoogleFonts.roboto(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w400,
-                        color: lightTextColor),
-                  ),
-                ],
+                          fontSize: 11,
+                          fontWeight: FontWeight.w400,
+                          color: lightTextColor),
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 20),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SellerEditProductViewModel extends BaseViewModel {
   int price = 705;
@@ -9,10 +10,19 @@ class SellerEditProductViewModel extends BaseViewModel {
   TextEditingController priceController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
 
+  // Variable to hold the selected image
+  XFile? selectedImage;
+
   SellerEditProductViewModel() {
     // Initialize controllers with current values
     priceController.text = price.toString();
     quantityController.text = quantity.toString();
+  }
+
+  Future<void> pickImage() async {
+    final ImagePicker _picker = ImagePicker();
+    selectedImage = await _picker.pickImage(source: ImageSource.gallery);
+    notifyListeners(); // Notify listeners to rebuild the UI
   }
 
   void onIncrementPrice() {

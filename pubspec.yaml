@@ -14,6 +14,7 @@ dependencies:
   font_awesome_flutter: ^10.8.0
   google_fonts: ^6.2.1
   iconsax_flutter: ^1.0.0
+  image_picker: ^1.1.2
   stacked: ^3.4.0
   stacked_services: ^1.1.0
 

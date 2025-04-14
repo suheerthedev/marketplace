@@ -30,16 +30,20 @@ class SellerProductsView extends StackedView<SellerProductsViewModel> {
                     fontSize: 22,
                     fontWeight: FontWeight.w600,
                     color: mainTextColor)),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-              decoration: BoxDecoration(
-                  color: brownContainerColor,
-                  borderRadius: BorderRadius.circular(5)),
-              child: Text("Add Product",
-                  style: GoogleFonts.roboto(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      color: secondaryTextColor)),
+            InkWell(
+              onTap: viewModel.addNewProduct,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                decoration: BoxDecoration(
+                    color: brownContainerColor,
+                    borderRadius: BorderRadius.circular(5)),
+                child: Text("Add Product",
+                    style: GoogleFonts.roboto(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: secondaryTextColor)),
+              ),
             ),
           ],
         ),
