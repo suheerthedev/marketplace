@@ -8,6 +8,7 @@ class SellerDashboardViewModel extends BaseViewModel {
 
   void navigateToNotifications() {
     // Navigate to notifications
+    _navigationService.navigateToNotificationView();
   }
 
   void navigateToOrders() {

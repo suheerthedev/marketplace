@@ -27,6 +27,7 @@ import 'package:marketplace/ui/views/seller_help_center/seller_help_center_view.
 import 'package:marketplace/ui/dialogs/confirmation/confirmation_dialog.dart';
 import 'package:marketplace/ui/views/seller_edit_product/seller_edit_product_view.dart';
 import 'package:marketplace/ui/views/seller_add_product/seller_add_product_view.dart';
+import 'package:marketplace/ui/views/notification/notification_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -54,6 +55,7 @@ import 'package:marketplace/ui/views/seller_add_product/seller_add_product_view.
     MaterialRoute(page: SellerHelpCenterView),
     MaterialRoute(page: SellerEditProductView),
     MaterialRoute(page: SellerAddProductView),
+    MaterialRoute(page: NotificationView),
 // @stacked-route
   ],
   dependencies: [
