@@ -168,8 +168,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                                   ),
                                 ]),
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
+                              padding: const EdgeInsets.all(8),
                               child: Image.asset(
                                 product.brandImagePath,
                               ),
