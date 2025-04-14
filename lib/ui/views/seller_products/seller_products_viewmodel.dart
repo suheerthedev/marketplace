@@ -3,7 +3,6 @@ import 'package:marketplace/services/product_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:marketplace/app/app.locator.dart';
-import 'package:marketplace/app/app.router.dart';
 
 class SellerProductsViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
