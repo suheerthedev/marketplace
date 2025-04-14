@@ -32,6 +32,7 @@ import 'package:marketplace/ui/views/seller_trending_products/seller_trending_pr
 import 'package:marketplace/ui/views/seller_invoice_detail/seller_invoice_detail_view.dart';
 import 'package:marketplace/ui/views/category/category_view.dart';
 import 'package:marketplace/ui/views/checkout/checkout_view.dart';
+import 'package:marketplace/ui/views/pay_now/pay_now_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -64,6 +65,7 @@ import 'package:marketplace/ui/views/checkout/checkout_view.dart';
     MaterialRoute(page: SellerInvoiceDetailView),
     MaterialRoute(page: CategoryView),
     MaterialRoute(page: CheckoutView),
+    MaterialRoute(page: PayNowView),
 // @stacked-route
   ],
   dependencies: [
