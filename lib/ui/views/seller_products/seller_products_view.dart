@@ -72,6 +72,8 @@ class SellerProductsView extends StackedView<SellerProductsViewModel> {
         itemBuilder: (context, index) {
           final card = viewModel.products[index];
           return _buildProductCard(
+            viewModel,
+            id: int.parse(card.id),
             name: card.title,
             image: card.imagePath,
             quantity: '30',
@@ -83,7 +85,9 @@ class SellerProductsView extends StackedView<SellerProductsViewModel> {
     );
   }
 
-  Widget _buildProductCard({
+  Widget _buildProductCard(
+    SellerProductsViewModel viewModel, {
+    required int id,
     required String name,
     required String image,
     required String quantity,
@@ -152,13 +156,7 @@ class SellerProductsView extends StackedView<SellerProductsViewModel> {
             color: secondaryBackgroundColor,
             surfaceTintColor: secondaryBackgroundColor,
             icon: const Icon(Icons.more_vert, size: 20),
-            onSelected: (value) {
-              if (value == 'edit') {
-                // Handle edit action
-              } else if (value == 'delete') {
-                // Handle delete action
-              }
-            },
+            onSelected: (value) => viewModel.onSelected(value, id),
             itemBuilder: (BuildContext context) {
               return [
                 const PopupMenuItem<String>(

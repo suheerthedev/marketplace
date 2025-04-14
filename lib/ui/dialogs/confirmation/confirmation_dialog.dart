@@ -31,9 +31,9 @@ class ConfirmationDialog extends StackedView<ConfirmationDialogModel> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 68.0),
+              padding: const EdgeInsets.symmetric(horizontal: 62.0),
               child: Text(
-                request.description ?? 'Are you sure you want to logout?',
+                request.title ?? 'Are you sure you want to logout?',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.roboto(
                   fontSize: 18,

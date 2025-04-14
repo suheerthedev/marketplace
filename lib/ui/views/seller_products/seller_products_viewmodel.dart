@@ -1,3 +1,4 @@
+import 'package:marketplace/app/app.dialogs.dart';
 import 'package:marketplace/services/product_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -6,6 +7,7 @@ import 'package:marketplace/app/app.router.dart';
 
 class SellerProductsViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
+  final _dialogService = locator<DialogService>();
   final productService = locator<ProductService>();
   List get products => productService.products;
 
@@ -21,20 +23,23 @@ class SellerProductsViewModel extends BaseViewModel {
     // Navigate to product details
   }
 
-  void navigateToIndex(int index) {
-    switch (index) {
-      case 0:
-        _navigationService.navigateToSellerDashboardView();
-        break;
-      case 1:
-        // Already on Products
-        break;
-      case 2:
-        _navigationService.navigateToSellerInboxView();
-        break;
-      case 3:
-        _navigationService.navigateToSellerAccountView();
-        break;
+  void onSelected(String value, int index) {
+    if (value == 'edit') {
+      editProduct(index);
+    } else if (value == 'delete') {
+      deleteProduct(index);
     }
+  }
+
+  void editProduct(int index) {
+    //Handle edit product
+  }
+
+  void deleteProduct(int index) {
+    _dialogService.showCustomDialog(
+        variant: DialogType.confirmation,
+        title: "Are you sure you want to delete this product?",
+        mainButtonTitle: 'Delete',
+        secondaryButtonTitle: 'Cancel');
   }
 }
