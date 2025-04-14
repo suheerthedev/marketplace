@@ -198,6 +198,7 @@ class SellerDashboardView extends StackedView<SellerDashboardViewModel> {
         ),
         verticalSpaceSmall,
         _buildInvoiceItem(
+          viewModel,
           invoiceId: '01234',
           productName: 'Product Name',
           amount: '\$ 700',
@@ -205,6 +206,7 @@ class SellerDashboardView extends StackedView<SellerDashboardViewModel> {
         ),
         verticalSpaceSmall,
         _buildInvoiceItem(
+          viewModel,
           invoiceId: '01234',
           productName: 'Product Name',
           amount: '\$ 700',
@@ -214,7 +216,8 @@ class SellerDashboardView extends StackedView<SellerDashboardViewModel> {
     );
   }
 
-  Widget _buildInvoiceItem({
+  Widget _buildInvoiceItem(
+    SellerDashboardViewModel viewModel, {
     required String invoiceId,
     required String productName,
     required String amount,
@@ -285,7 +288,7 @@ class SellerDashboardView extends StackedView<SellerDashboardViewModel> {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: viewModel.viewDetails,
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.zero,
                   minimumSize: const Size(0, 0),
