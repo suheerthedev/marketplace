@@ -29,6 +29,7 @@ import 'package:marketplace/ui/views/seller_edit_product/seller_edit_product_vie
 import 'package:marketplace/ui/views/seller_add_product/seller_add_product_view.dart';
 import 'package:marketplace/ui/views/notification/notification_view.dart';
 import 'package:marketplace/ui/views/seller_trending_products/seller_trending_products_view.dart';
+import 'package:marketplace/ui/views/seller_invoice_detail/seller_invoice_detail_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -58,6 +59,7 @@ import 'package:marketplace/ui/views/seller_trending_products/seller_trending_pr
     MaterialRoute(page: SellerAddProductView),
     MaterialRoute(page: NotificationView),
     MaterialRoute(page: SellerTrendingProductsView),
+    MaterialRoute(page: SellerInvoiceDetailView),
 // @stacked-route
   ],
   dependencies: [
