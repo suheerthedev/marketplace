@@ -65,15 +65,20 @@ class SellerDashboardView extends StackedView<SellerDashboardViewModel> {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: BoxDecoration(
-                border: Border.all(color: brownContainerColor),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Text(
-                'Add Product',
-                style: AppTextStyles.bodyText1.copyWith(color: brownTextColor),
+            InkWell(
+              onTap: viewModel.addNewProduct,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                decoration: BoxDecoration(
+                  border: Border.all(color: brownContainerColor),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Text(
+                  'Add Product',
+                  style:
+                      AppTextStyles.bodyText1.copyWith(color: brownTextColor),
+                ),
               ),
             ),
           ],

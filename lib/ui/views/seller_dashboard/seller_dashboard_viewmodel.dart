@@ -18,20 +18,7 @@ class SellerDashboardViewModel extends BaseViewModel {
     _navigationService.navigateToSellerProductsView();
   }
 
-  void navigateToIndex(int index) {
-    switch (index) {
-      case 0:
-        // Already on Dashboard
-        break;
-      case 1:
-        _navigationService.navigateToSellerProductsView();
-        break;
-      case 2:
-        _navigationService.navigateToSellerInboxView();
-        break;
-      case 3:
-        _navigationService.navigateToSellerAccountView();
-        break;
-    }
+  void addNewProduct() {
+    _navigationService.navigateToSellerAddProductView();
   }
 }
