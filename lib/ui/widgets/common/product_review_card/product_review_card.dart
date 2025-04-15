@@ -84,7 +84,7 @@ class ProductReviewCard extends StackedView<ProductReviewCardModel> {
                   child: OutlinedButton(
                     onPressed: viewModel.writeReview,
                     style: OutlinedButton.styleFrom(
-                      side: BorderSide(color: const Color(0xFF996E4E)),
+                      side: const BorderSide(color: Color(0xFF996E4E)),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
