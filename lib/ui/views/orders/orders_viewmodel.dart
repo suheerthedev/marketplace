@@ -1,7 +1,12 @@
+import 'package:marketplace/app/app.locator.dart';
+import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/models/order_model.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class OrdersViewModel extends BaseViewModel {
+  final _navigationService = locator<NavigationService>();
+
   final List<Order> _orders = [
     Order(
       id: '1',
@@ -25,6 +30,7 @@ class OrdersViewModel extends BaseViewModel {
   void checkStatus(String orderId) {
     // In a real app, this would navigate to an order status screen
     // or make an API call to get the latest status
+    _navigationService.navigateToCheckOrderStatusView();
     print('Checking status for order: $orderId');
   }
 
