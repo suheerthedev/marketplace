@@ -42,7 +42,7 @@ class AccountViewModel extends BaseViewModel {
   }
 
   void viewToReceive() {
-    // _navigationService.navigateToBuyerToReceiveView();
+    _navigationService.navigateToBuyerToReceiveView();
   }
 
   void viewOrderReturn() {
