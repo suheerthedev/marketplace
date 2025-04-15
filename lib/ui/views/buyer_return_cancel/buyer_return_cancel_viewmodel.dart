@@ -81,6 +81,7 @@ class BuyerReturnCancelViewModel extends BaseViewModel {
 
   void onTrackRefund(String productId) {
     // Navigate to refund tracking screen
+    _navigationService.navigateToTrackRefundView();
     print('Track refund for product: $productId');
   }
 }
