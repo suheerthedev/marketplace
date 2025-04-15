@@ -86,7 +86,7 @@ class BuyerReturnCancelView extends StackedView<BuyerReturnCancelViewModel> {
             child: Text(
               title,
               style: GoogleFonts.roboto(
-                fontSize: 14,
+                fontSize: 15,
                 fontWeight: FontWeight.w500,
                 color: isSelected ? const Color(0xFFB07B40) : Colors.grey,
               ),
