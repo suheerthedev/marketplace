@@ -28,4 +28,8 @@ class AccountViewModel extends BaseViewModel {
   void viewProfile() {
     _navigationService.navigateToBuyerProfileView();
   }
+
+  void viewOrders() {
+    _navigationService.navigateToOrdersView();
+  }
 }

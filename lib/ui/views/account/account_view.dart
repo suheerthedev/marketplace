@@ -88,7 +88,7 @@ class AccountView extends StackedView<AccountViewModel> {
               ),
             ),
             InkWell(
-              onTap: viewModel.viewProfile,
+              onTap: viewModel.viewOrders,
               child: Text(
                 'View All Orders',
                 style: GoogleFonts.roboto(

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/models/order_model.dart';
+import 'package:marketplace/ui/common/app_colors.dart';
+import 'package:marketplace/ui/widgets/common/main_app_bar/main_app_bar.dart';
+import 'package:marketplace/ui/widgets/common/order_card/order_card.dart';
 import 'package:stacked/stacked.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'orders_viewmodel.dart';
 
@@ -13,17 +18,41 @@ class OrdersView extends StackedView<OrdersViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-        child: const Center(child: Text("OrdersView")),
+      backgroundColor: Colors.white,
+      appBar: const MainAppBar(title: "My Orders"),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: viewModel.orders.isEmpty
+              ? _buildEmptyState()
+              : ListView.builder(
+                  itemCount: viewModel.orders.length,
+                  itemBuilder: (context, index) {
+                    final order = viewModel.orders[index];
+                    return OrderCard(
+                      order: order,
+                      onCheckStatus: () => viewModel.checkStatus(order.id),
+                      onBuyAgain: () => viewModel.buyAgain(order.id),
+                    );
+                  },
+                ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildEmptyState() {
+    return const Center(
+      child: Text(
+        "You haven't placed any orders yet.",
+        style: TextStyle(
+          color: Colors.grey,
+          fontSize: 16,
+        ),
       ),
     );
   }
 
   @override
-  OrdersViewModel viewModelBuilder(
-    BuildContext context,
-  ) =>
-      OrdersViewModel();
+  OrdersViewModel viewModelBuilder(BuildContext context) => OrdersViewModel();
 }
