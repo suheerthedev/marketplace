@@ -46,6 +46,6 @@ class AccountViewModel extends BaseViewModel {
   }
 
   void viewOrderReturn() {
-    // _navigationService.navigateToBuyerToOrderReturnView();
+    _navigationService.navigateToBuyerReturnCancelView();
   }
 }

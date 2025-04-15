@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/ui/widgets/common/main_app_bar/main_app_bar.dart';
 import 'package:stacked/stacked.dart';
 
 import 'buyer_return_cancel_viewmodel.dart';
@@ -13,7 +14,7 @@ class BuyerReturnCancelView extends StackedView<BuyerReturnCancelViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: const MainAppBar(title: "Returns & Cancellations"),
       body: Container(
         padding: const EdgeInsets.only(left: 25.0, right: 25.0),
         child: const Center(child: Text("BuyerReturnCancelView")),
