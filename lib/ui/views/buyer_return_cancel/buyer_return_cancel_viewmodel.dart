@@ -1,8 +1,12 @@
+import 'package:marketplace/app/app.locator.dart';
+import 'package:marketplace/app/app.router.dart';
 import 'package:stacked/stacked.dart';
 import 'package:marketplace/ui/widgets/common/product_return_card/product_return_card_model.dart';
 import 'package:marketplace/ui/widgets/common/product_cancel_card/product_cancel_card_model.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class BuyerReturnCancelViewModel extends BaseViewModel {
+  final NavigationService _navigationService = locator<NavigationService>();
   int _currentTabIndex = 0;
 
   final List<Map<String, dynamic>> _cancelledProducts = [
@@ -71,6 +75,7 @@ class BuyerReturnCancelViewModel extends BaseViewModel {
 
   void onRequestRefund(String productId) {
     // Navigate to refund request screen
+    _navigationService.navigateToRefundRequestView();
     print('Request refund for product: $productId');
   }
 
