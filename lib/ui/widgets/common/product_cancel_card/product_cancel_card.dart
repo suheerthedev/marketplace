@@ -3,30 +3,24 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:stacked/stacked.dart';
 
-import 'product_return_card_model.dart';
+import 'product_cancel_card_model.dart';
 
-class ProductReturnCard extends StackedView<ProductReturnCardModel> {
+class ProductCancelCard extends StackedView<ProductCancelCardModel> {
   final Map<String, dynamic> product;
   final VoidCallback? onCardTap;
-  final VoidCallback? onActionTap;
 
-  const ProductReturnCard({
+  const ProductCancelCard({
     Key? key,
     required this.product,
     this.onCardTap,
-    this.onActionTap,
   }) : super(key: key);
 
   @override
   Widget builder(
     BuildContext context,
-    ProductReturnCardModel viewModel,
+    ProductCancelCardModel viewModel,
     Widget? child,
   ) {
-    final hasAction = viewModel.hasActionButton;
-    final status = viewModel.product['status'] ?? '';
-    final isStatusSuccess = status == ReturnStatus.successful;
-
     return GestureDetector(
       onTap: viewModel.onCardTap,
       child: Container(
@@ -65,8 +59,8 @@ class ProductReturnCard extends StackedView<ProductReturnCardModel> {
                   color: Colors.grey.shade200,
                   child: const Center(
                     child: Icon(
-                      Icons.photo_camera_outlined,
-                      color: mainBackgroundColor,
+                      Icons.photo_camera,
+                      color: Colors.grey,
                       size: 32,
                     ),
                   ),
@@ -97,63 +91,36 @@ class ProductReturnCard extends StackedView<ProductReturnCardModel> {
                       ),
                       const SizedBox(height: 8),
 
-                      // Status or Action
-                      if (hasAction)
-                        // Action Button
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: TextButton(
-                            onPressed: viewModel.onActionTap,
-                            style: TextButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              minimumSize: const Size(10, 10),
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              foregroundColor: brownTextColor,
+                      // Cancelled Status with Icon
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.only(right: 6),
+                              padding: const EdgeInsets.all(1),
+                              decoration: const BoxDecoration(
+                                color: Colors.blue,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.check,
+                                color: Colors.white,
+                                size: 14,
+                              ),
                             ),
-                            child: Text(
-                              status,
+                            Text(
+                              CancelStatus.successful,
                               style: GoogleFonts.roboto(
                                 fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                color: brownTextColor,
+                                fontWeight: FontWeight.w400,
+                                color: mainTextColor,
                               ),
                             ),
-                          ),
-                        )
-                      else
-                        // Status Text with Icon
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              if (isStatusSuccess)
-                                Container(
-                                  margin: const EdgeInsets.only(right: 6),
-                                  padding: const EdgeInsets.all(1),
-                                  decoration: const BoxDecoration(
-                                    color: Colors.blue,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: const Icon(
-                                    Icons.check,
-                                    color: Colors.white,
-                                    size: 14,
-                                  ),
-                                ),
-                              Text(
-                                status,
-                                style: GoogleFonts.roboto(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w600,
-                                  color: isStatusSuccess
-                                      ? Colors.blue
-                                      : Colors.black54,
-                                ),
-                              ),
-                            ],
-                          ),
+                          ],
                         ),
+                      ),
                     ],
                   ),
                 ),
@@ -166,10 +133,9 @@ class ProductReturnCard extends StackedView<ProductReturnCardModel> {
   }
 
   @override
-  ProductReturnCardModel viewModelBuilder(BuildContext context) =>
-      ProductReturnCardModel(
+  ProductCancelCardModel viewModelBuilder(BuildContext context) =>
+      ProductCancelCardModel(
         product: product,
         onCardTap: onCardTap,
-        onActionTap: onActionTap,
       );
 }

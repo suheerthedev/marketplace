@@ -23,7 +23,10 @@ class MainAppBar extends StackedView<MainAppBarModel>
       title: Text(
         title,
         style: GoogleFonts.roboto(
-            color: mainTextColor, fontSize: 20, fontWeight: FontWeight.w600),
+            color: mainTextColor,
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0),
       ),
       backgroundColor: Colors.white,
       elevation: 0,
