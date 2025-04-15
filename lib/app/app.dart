@@ -35,6 +35,7 @@ import 'package:marketplace/ui/views/checkout/checkout_view.dart';
 import 'package:marketplace/ui/views/pay_now/pay_now_view.dart';
 import 'package:marketplace/ui/views/confirmation/confirmation_view.dart';
 import 'package:marketplace/ui/views/verification/verification_view.dart';
+import 'package:marketplace/ui/views/buyer_profile/buyer_profile_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -70,6 +71,7 @@ import 'package:marketplace/ui/views/verification/verification_view.dart';
     MaterialRoute(page: PayNowView),
     MaterialRoute(page: ConfirmationView),
     MaterialRoute(page: VerificationView),
+    MaterialRoute(page: BuyerProfileView),
 // @stacked-route
   ],
   dependencies: [
