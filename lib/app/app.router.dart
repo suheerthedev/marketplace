@@ -5,9 +5,9 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i44;
+import 'package:flutter/material.dart' as _i45;
 import 'package:flutter/material.dart';
-import 'package:marketplace/models/product_model.dart' as _i45;
+import 'package:marketplace/models/product_model.dart' as _i46;
 import 'package:marketplace/ui/views/account/account_view.dart' as _i12;
 import 'package:marketplace/ui/views/buyer_login/buyer_login_view.dart' as _i5;
 import 'package:marketplace/ui/views/buyer_profile/buyer_profile_view.dart'
@@ -39,6 +39,8 @@ import 'package:marketplace/ui/views/orders/orders_view.dart' as _i34;
 import 'package:marketplace/ui/views/pay_now/pay_now_view.dart' as _i30;
 import 'package:marketplace/ui/views/product_detail/product_detail_view.dart'
     as _i9;
+import 'package:marketplace/ui/views/redeem_voucher/redeem_voucher_view.dart'
+    as _i44;
 import 'package:marketplace/ui/views/refund_request/refund_request_view.dart'
     as _i41;
 import 'package:marketplace/ui/views/reset_password/reset_password_view.dart'
@@ -79,7 +81,7 @@ import 'package:marketplace/ui/views/voucher/voucher_view.dart' as _i43;
 import 'package:marketplace/ui/views/write_review/write_review_view.dart'
     as _i38;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i46;
+import 'package:stacked_services/stacked_services.dart' as _i47;
 
 class Routes {
   static const homeView = '/home-view';
@@ -166,6 +168,8 @@ class Routes {
 
   static const voucherView = '/voucher-view';
 
+  static const redeemVoucherView = '/redeem-voucher-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -209,6 +213,7 @@ class Routes {
     refundRequestView,
     trackRefundView,
     voucherView,
+    redeemVoucherView,
   };
 }
 
@@ -382,223 +387,227 @@ class StackedRouter extends _i1.RouterBase {
       Routes.voucherView,
       page: _i43.VoucherView,
     ),
+    _i1.RouteDef(
+      Routes.redeemVoucherView,
+      page: _i44.RedeemVoucherView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.BuyerSignUpView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.BuyerSignUpView(),
         settings: data,
       );
     },
     _i5.BuyerLoginView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.BuyerLoginView(),
         settings: data,
       );
     },
     _i6.ForgotPasswordView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.ForgotPasswordView(),
         settings: data,
       );
     },
     _i7.ResetPasswordView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.ResetPasswordView(),
         settings: data,
       );
     },
     _i8.MainView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.MainView(),
         settings: data,
       );
     },
     _i9.ProductDetailView: (data) {
       final args = data.getArgs<ProductDetailViewArguments>(nullOk: false);
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) =>
             _i9.ProductDetailView(product: args.product, key: args.key),
         settings: data,
       );
     },
     _i10.CartView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.CartView(),
         settings: data,
       );
     },
     _i11.SavedView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.SavedView(),
         settings: data,
       );
     },
     _i12.AccountView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i12.AccountView(),
         settings: data,
       );
     },
     _i13.SellerSignUpView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i13.SellerSignUpView(),
         settings: data,
       );
     },
     _i14.SellerDashboardView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i14.SellerDashboardView(),
         settings: data,
       );
     },
     _i15.SellerProductsView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i15.SellerProductsView(),
         settings: data,
       );
     },
     _i16.SellerMainView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i16.SellerMainView(),
         settings: data,
       );
     },
     _i17.SellerInboxView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i17.SellerInboxView(),
         settings: data,
       );
     },
     _i18.SellerAccountView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i18.SellerAccountView(),
         settings: data,
       );
     },
     _i19.SellerChatView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i19.SellerChatView(),
         settings: data,
       );
     },
     _i20.SellerProfileView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i20.SellerProfileView(),
         settings: data,
       );
     },
     _i21.SellerMyWalletView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i21.SellerMyWalletView(),
         settings: data,
       );
     },
     _i22.SellerHelpCenterView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i22.SellerHelpCenterView(),
         settings: data,
       );
     },
     _i23.SellerEditProductView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i23.SellerEditProductView(),
         settings: data,
       );
     },
     _i24.SellerAddProductView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i24.SellerAddProductView(),
         settings: data,
       );
     },
     _i25.NotificationView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i25.NotificationView(),
         settings: data,
       );
     },
     _i26.SellerTrendingProductsView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i26.SellerTrendingProductsView(),
         settings: data,
       );
     },
     _i27.SellerInvoiceDetailView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i27.SellerInvoiceDetailView(),
         settings: data,
       );
     },
     _i28.CategoryView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i28.CategoryView(),
         settings: data,
       );
     },
     _i29.CheckoutView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i29.CheckoutView(),
         settings: data,
       );
     },
     _i30.PayNowView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i30.PayNowView(),
         settings: data,
       );
     },
     _i31.ConfirmationView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i31.ConfirmationView(),
         settings: data,
       );
     },
     _i32.VerificationView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i32.VerificationView(),
         settings: data,
       );
     },
     _i33.BuyerProfileView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i33.BuyerProfileView(),
         settings: data,
       );
     },
     _i34.OrdersView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i34.OrdersView(),
         settings: data,
       );
     },
     _i35.CheckOrderStatusView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i35.CheckOrderStatusView(),
         settings: data,
       );
     },
     _i36.BuyerToPayView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i36.BuyerToPayView(),
         settings: data,
       );
     },
     _i37.BuyerToReviewView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i37.BuyerToReviewView(),
         settings: data,
       );
@@ -607,7 +616,7 @@ class StackedRouter extends _i1.RouterBase {
       final args = data.getArgs<WriteReviewViewArguments>(
         orElse: () => const WriteReviewViewArguments(),
       );
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => _i38.WriteReviewView(
             key: args.key,
             productId: args.productId,
@@ -616,32 +625,38 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i39.BuyerToReceiveView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i39.BuyerToReceiveView(),
         settings: data,
       );
     },
     _i40.BuyerReturnCancelView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i40.BuyerReturnCancelView(),
         settings: data,
       );
     },
     _i41.RefundRequestView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i41.RefundRequestView(),
         settings: data,
       );
     },
     _i42.TrackRefundView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i42.TrackRefundView(),
         settings: data,
       );
     },
     _i43.VoucherView: (data) {
-      return _i44.MaterialPageRoute<dynamic>(
+      return _i45.MaterialPageRoute<dynamic>(
         builder: (context) => const _i43.VoucherView(),
+        settings: data,
+      );
+    },
+    _i44.RedeemVoucherView: (data) {
+      return _i45.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i44.RedeemVoucherView(),
         settings: data,
       );
     },
@@ -660,9 +675,9 @@ class ProductDetailViewArguments {
     this.key,
   });
 
-  final _i45.Product product;
+  final _i46.Product product;
 
-  final _i44.Key? key;
+  final _i45.Key? key;
 
   @override
   String toString() {
@@ -688,7 +703,7 @@ class WriteReviewViewArguments {
     this.productName,
   });
 
-  final _i44.Key? key;
+  final _i45.Key? key;
 
   final String? productId;
 
@@ -713,7 +728,7 @@ class WriteReviewViewArguments {
   }
 }
 
-extension NavigatorStateExtension on _i46.NavigationService {
+extension NavigatorStateExtension on _i47.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -813,8 +828,8 @@ extension NavigatorStateExtension on _i46.NavigationService {
   }
 
   Future<dynamic> navigateToProductDetailView({
-    required _i45.Product product,
-    _i44.Key? key,
+    required _i46.Product product,
+    _i45.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1222,7 +1237,7 @@ extension NavigatorStateExtension on _i46.NavigationService {
   }
 
   Future<dynamic> navigateToWriteReviewView({
-    _i44.Key? key,
+    _i45.Key? key,
     String? productId,
     String? productName,
     int? routerId,
@@ -1304,6 +1319,20 @@ extension NavigatorStateExtension on _i46.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.voucherView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToRedeemVoucherView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.redeemVoucherView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -1409,8 +1438,8 @@ extension NavigatorStateExtension on _i46.NavigationService {
   }
 
   Future<dynamic> replaceWithProductDetailView({
-    required _i45.Product product,
-    _i44.Key? key,
+    required _i46.Product product,
+    _i45.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -1818,7 +1847,7 @@ extension NavigatorStateExtension on _i46.NavigationService {
   }
 
   Future<dynamic> replaceWithWriteReviewView({
-    _i44.Key? key,
+    _i45.Key? key,
     String? productId,
     String? productName,
     int? routerId,
@@ -1900,6 +1929,20 @@ extension NavigatorStateExtension on _i46.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.voucherView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithRedeemVoucherView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.redeemVoucherView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
