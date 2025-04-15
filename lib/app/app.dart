@@ -45,6 +45,7 @@ import 'package:marketplace/ui/views/buyer_to_receive/buyer_to_receive_view.dart
 import 'package:marketplace/ui/views/buyer_return_cancel/buyer_return_cancel_view.dart';
 import 'package:marketplace/ui/views/refund_request/refund_request_view.dart';
 import 'package:marketplace/ui/views/track_refund/track_refund_view.dart';
+import 'package:marketplace/ui/views/voucher/voucher_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -90,6 +91,7 @@ import 'package:marketplace/ui/views/track_refund/track_refund_view.dart';
     MaterialRoute(page: BuyerReturnCancelView),
     MaterialRoute(page: RefundRequestView),
     MaterialRoute(page: TrackRefundView),
+    MaterialRoute(page: VoucherView),
 // @stacked-route
   ],
   dependencies: [
