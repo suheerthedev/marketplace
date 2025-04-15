@@ -38,6 +38,7 @@ import 'package:marketplace/ui/views/verification/verification_view.dart';
 import 'package:marketplace/ui/views/buyer_profile/buyer_profile_view.dart';
 import 'package:marketplace/ui/views/orders/orders_view.dart';
 import 'package:marketplace/ui/views/check_order_status/check_order_status_view.dart';
+import 'package:marketplace/ui/views/buyer_to_pay/buyer_to_pay_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -76,6 +77,7 @@ import 'package:marketplace/ui/views/check_order_status/check_order_status_view.
     MaterialRoute(page: BuyerProfileView),
     MaterialRoute(page: OrdersView),
     MaterialRoute(page: CheckOrderStatusView),
+    MaterialRoute(page: BuyerToPayView),
 // @stacked-route
   ],
   dependencies: [
