@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/ui/widgets/common/main_app_bar/main_app_bar.dart';
 import 'package:stacked/stacked.dart';
 
 import 'voucher_viewmodel.dart';
@@ -13,10 +14,19 @@ class VoucherView extends StackedView<VoucherViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: Container(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-        child: const Center(child: Text("VoucherView")),
+      appBar: const MainAppBar(title: "Your Vouchers"),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: ListView.builder(
+              itemCount: viewModel.vouchers.length,
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {},
+                  child: Image.asset(viewModel.vouchers[index]),
+                );
+              }),
+        ),
       ),
     );
   }

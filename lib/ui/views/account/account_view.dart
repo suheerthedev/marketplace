@@ -25,7 +25,7 @@ class AccountView extends StackedView<AccountViewModel> {
               const SizedBox(height: 24),
               _buildOrdersSection(viewModel, context),
               const SizedBox(height: 24),
-              _buildPromotionsSection(context),
+              _buildPromotionsSection(viewModel, context),
               const SizedBox(height: 24),
               _buildGeneralSection(context, items: viewModel.generalItems),
               const SizedBox(height: 24),
@@ -154,7 +154,8 @@ class AccountView extends StackedView<AccountViewModel> {
     );
   }
 
-  Widget _buildPromotionsSection(BuildContext context) {
+  Widget _buildPromotionsSection(
+      AccountViewModel viewModel, BuildContext context) {
     return Row(
       children: [
         Expanded(
@@ -162,7 +163,7 @@ class AccountView extends StackedView<AccountViewModel> {
             title: 'Collect Vouchers',
             image: 'assets/images/icons/voucher.png',
             buttonText: 'Collect',
-            onTap: () {},
+            onTap: viewModel.viewVouchers,
           ),
         ),
         const SizedBox(width: 16),

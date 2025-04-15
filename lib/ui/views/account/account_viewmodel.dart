@@ -48,4 +48,8 @@ class AccountViewModel extends BaseViewModel {
   void viewOrderReturn() {
     _navigationService.navigateToBuyerReturnCancelView();
   }
+
+  void viewVouchers() {
+    _navigationService.navigateToVoucherView();
+  }
 }
