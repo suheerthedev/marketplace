@@ -38,7 +38,7 @@ class AccountViewModel extends BaseViewModel {
   }
 
   void viewToReview() {
-    // _navigationService.navigateToBuyerToReviewView();
+    _navigationService.navigateToBuyerToReviewView();
   }
 
   void viewToReceive() {
