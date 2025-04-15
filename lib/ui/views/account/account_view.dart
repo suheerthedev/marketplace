@@ -27,7 +27,8 @@ class AccountView extends StackedView<AccountViewModel> {
               const SizedBox(height: 24),
               _buildPromotionsSection(viewModel, context),
               const SizedBox(height: 24),
-              _buildGeneralSection(context, items: viewModel.generalItems),
+              _buildGeneralSection(viewModel, context,
+                  items: viewModel.generalItems),
               const SizedBox(height: 24),
               _buildLogoutButton(context),
             ],
@@ -239,7 +240,8 @@ class AccountView extends StackedView<AccountViewModel> {
     );
   }
 
-  Widget _buildGeneralSection(BuildContext context, {required List items}) {
+  Widget _buildGeneralSection(AccountViewModel viewModel, BuildContext context,
+      {required List items}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -251,31 +253,55 @@ class AccountView extends StackedView<AccountViewModel> {
           ),
         ),
         const SizedBox(height: 16),
-        _buildGeneralItem(generalItems: items),
+        _buildGeneralItem(viewModel, generalItems: items),
       ],
     );
   }
 
-  Widget _buildGeneralItem({required List generalItems}) {
+  Widget _buildGeneralItem(AccountViewModel viewModel,
+      {required List generalItems}) {
     return SizedBox(
-      child: ListView.separated(
-          shrinkWrap: true,
-          itemCount: generalItems.length,
-          separatorBuilder: (context, index) => const Divider(height: 0),
-          itemBuilder: (context, index) {
-            return ListTile(
-              contentPadding: EdgeInsets.zero,
-              leading:
-                  Icon(generalItems[index]['icon'], color: mainBackgroundColor),
-              title: Text(
-                generalItems[index]['title'],
-                style: GoogleFonts.roboto(fontSize: 14, color: mainTextColor),
-              ),
-              trailing:
-                  const Icon(Icons.chevron_right, color: lightBackgroundColor),
-              onTap: () {},
-            );
-          }),
+      child: ListView(
+        shrinkWrap: true,
+        children: [
+          _buildOptionTile(
+            title: 'Help Center',
+            icon: Icons.help_outline,
+            onTap: viewModel.viewHelpCenter,
+          ),
+          _buildOptionTile(
+            title: 'App for business',
+            icon: Icons.business,
+            onTap: viewModel.viewOrders,
+          ),
+          _buildOptionTile(
+            title: 'Terms & Policies',
+            icon: Icons.description_outlined,
+            onTap: viewModel.viewOrders,
+          ),
+          _buildOptionTile(
+            title: 'Language - English',
+            icon: Icons.language,
+            onTap: viewModel.viewOrders,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOptionTile(
+      {required String title,
+      required IconData icon,
+      required VoidCallback onTap}) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: Icon(icon, color: mainBackgroundColor),
+      title: Text(
+        title,
+        style: GoogleFonts.roboto(fontSize: 14, color: mainTextColor),
+      ),
+      trailing: const Icon(Icons.chevron_right, color: lightBackgroundColor),
+      onTap: onTap,
     );
   }
 

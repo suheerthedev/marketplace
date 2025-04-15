@@ -52,4 +52,8 @@ class AccountViewModel extends BaseViewModel {
   void viewVouchers() {
     _navigationService.navigateToVoucherView();
   }
+
+  void viewHelpCenter() {
+    _navigationService.navigateToBuyerHelpCenterView();
+  }
 }
