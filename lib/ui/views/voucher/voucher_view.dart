@@ -22,7 +22,7 @@ class VoucherView extends StackedView<VoucherViewModel> {
               itemCount: viewModel.vouchers.length,
               itemBuilder: (context, index) {
                 return InkWell(
-                  onTap: () {},
+                  onTap: viewModel.viewVoucher,
                   child: Image.asset(viewModel.vouchers[index]),
                 );
               }),
