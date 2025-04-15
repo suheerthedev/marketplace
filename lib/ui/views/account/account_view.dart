@@ -105,38 +105,52 @@ class AccountView extends StackedView<AccountViewModel> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             _buildOrderItem(
-                image: 'assets/images/icons/money.png', label: 'To Pay'),
+                image: 'assets/images/icons/money.png',
+                label: 'To Pay',
+                onTap: viewModel.viewToPay),
             _buildOrderItem(
-                image: 'assets/images/icons/star.png', label: 'To Review'),
+                image: 'assets/images/icons/star.png',
+                label: 'To Review',
+                onTap: viewModel.viewToReview),
             _buildOrderItem(
-                image: 'assets/images/icons/car.png', label: 'To Receive'),
+                image: 'assets/images/icons/car.png',
+                label: 'To Receive',
+                onTap: viewModel.viewToReceive),
             _buildOrderItem(
                 image: 'assets/images/icons/return.png',
-                label: 'Order Return\n& Cancellation'),
+                label: 'Order Return\n& Cancellation',
+                onTap: viewModel.viewOrderReturn),
           ],
         ),
       ],
     );
   }
 
-  Widget _buildOrderItem({required String image, required String label}) {
-    return Column(
-      spacing: 5,
-      children: [
-        Image.asset(
-          image,
-          fit: BoxFit.cover,
-        ),
-        Text(
-          label,
-          textAlign: TextAlign.center,
-          style: GoogleFonts.roboto(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              height: 0,
-              color: brownTextColor),
-        ),
-      ],
+  Widget _buildOrderItem({
+    required String image,
+    required String label,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        spacing: 5,
+        children: [
+          Image.asset(
+            image,
+            fit: BoxFit.cover,
+          ),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            style: GoogleFonts.roboto(
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                height: 0,
+                color: brownTextColor),
+          ),
+        ],
+      ),
     );
   }
 

@@ -32,4 +32,20 @@ class AccountViewModel extends BaseViewModel {
   void viewOrders() {
     _navigationService.navigateToOrdersView();
   }
+
+  void viewToPay() {
+    _navigationService.navigateToBuyerToPayView();
+  }
+
+  void viewToReview() {
+    // _navigationService.navigateToBuyerToReviewView();
+  }
+
+  void viewToReceive() {
+    // _navigationService.navigateToBuyerToReceiveView();
+  }
+
+  void viewOrderReturn() {
+    // _navigationService.navigateToBuyerToOrderReturnView();
+  }
 }
