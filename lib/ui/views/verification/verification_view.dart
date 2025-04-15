@@ -56,7 +56,7 @@ class VerificationView extends StackedView<VerificationViewModel> {
                   length: 4,
                   defaultPinTheme: PinTheme(
                     height: 60,
-                    width: 60,
+                    width: MediaQuery.of(context).size.width * 1,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.black),
                       borderRadius: BorderRadius.circular(10),
