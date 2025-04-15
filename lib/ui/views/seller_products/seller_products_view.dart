@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:marketplace/ui/widgets/common/btn_app_bar/btn_app_bar.dart';
 import 'package:marketplace/ui/widgets/common/search_bar/search_bar.dart';
 import 'package:stacked/stacked.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
@@ -17,36 +18,12 @@ class SellerProductsView extends StackedView<SellerProductsViewModel> {
   ) {
     return Scaffold(
       backgroundColor: secondaryBackgroundColor,
-      appBar: AppBar(
-        surfaceTintColor: secondaryBackgroundColor,
-        backgroundColor: secondaryBackgroundColor,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("Products",
-                style: GoogleFonts.roboto(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                    color: mainTextColor)),
-            InkWell(
-              onTap: viewModel.addNewProduct,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                decoration: BoxDecoration(
-                    color: brownContainerColor,
-                    borderRadius: BorderRadius.circular(5)),
-                child: Text("Add Product",
-                    style: GoogleFonts.roboto(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: secondaryTextColor)),
-              ),
-            ),
-          ],
-        ),
+      appBar: const BtnAppBar(
+        title: "Products",
+        btnText: "Add Product",
+        btnColor: brownContainerColor,
+        btnBorderColor: brownContainerColor,
+        btnTextColor: secondaryTextColor,
       ),
       body: SafeArea(
         child: Column(

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/app/app.locator.dart';
+import 'package:marketplace/app/app.router.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class AccountViewModel extends BaseViewModel {
+  final _navigationService = locator<NavigationService>();
   List generalItems = [
     {
       'icon': Icons.help_outline,
@@ -20,4 +24,8 @@ class AccountViewModel extends BaseViewModel {
       'title': 'Language - English',
     },
   ];
+
+  void viewProfile() {
+    _navigationService.navigateToBuyerProfileView();
+  }
 }

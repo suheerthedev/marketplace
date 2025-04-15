@@ -21,9 +21,9 @@ class AccountView extends StackedView<AccountViewModel> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildProfileSection(context),
+              _buildProfileSection(viewModel, context),
               const SizedBox(height: 24),
-              _buildOrdersSection(context),
+              _buildOrdersSection(viewModel, context),
               const SizedBox(height: 24),
               _buildPromotionsSection(context),
               const SizedBox(height: 24),
@@ -37,7 +37,8 @@ class AccountView extends StackedView<AccountViewModel> {
     );
   }
 
-  Widget _buildProfileSection(BuildContext context) {
+  Widget _buildProfileSection(
+      AccountViewModel viewModel, BuildContext context) {
     return Row(
       children: [
         CircleAvatar(
@@ -56,11 +57,14 @@ class AccountView extends StackedView<AccountViewModel> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            Text(
-              'View Profile',
-              style: GoogleFonts.roboto(
-                fontSize: 14,
-                color: Colors.grey[600],
+            InkWell(
+              onTap: viewModel.viewProfile,
+              child: Text(
+                'View Profile',
+                style: GoogleFonts.roboto(
+                  fontSize: 14,
+                  color: Colors.grey[600],
+                ),
               ),
             ),
           ],
@@ -69,7 +73,7 @@ class AccountView extends StackedView<AccountViewModel> {
     );
   }
 
-  Widget _buildOrdersSection(BuildContext context) {
+  Widget _buildOrdersSection(AccountViewModel viewModel, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -83,12 +87,14 @@ class AccountView extends StackedView<AccountViewModel> {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            TextButton(
-              onPressed: () {},
+            InkWell(
+              onTap: viewModel.viewProfile,
               child: Text(
                 'View All Orders',
                 style: GoogleFonts.roboto(
-                  color: const Color(0xFF996E4E),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: lightTextColor,
                 ),
               ),
             ),
