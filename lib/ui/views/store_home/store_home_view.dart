@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:marketplace/ui/widgets/store/store_app_bar/store_app_bar.dart';
 import 'package:marketplace/ui/widgets/store/store_header/store_header.dart';
-import 'package:marketplace/ui/widgets/store/store_product_card/store_product_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 
