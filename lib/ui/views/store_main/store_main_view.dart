@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
+import 'package:marketplace/ui/views/store_category/store_category_view.dart';
+import 'package:marketplace/ui/views/store_chat/store_chat_view.dart';
 import 'package:marketplace/ui/views/store_home/store_home_view.dart';
+import 'package:marketplace/ui/views/store_products/store_products_view.dart';
 import 'package:stacked/stacked.dart';
 
 import 'store_main_viewmodel.dart';
@@ -35,9 +38,9 @@ class StoreMainView extends StackedView<StoreMainViewModel> {
           },
           children: const [
             StoreHomeView(),
-            StoreHomeView(),
-            StoreHomeView(),
-            StoreHomeView(),
+            StoreProductsView(),
+            StoreCategoryView(),
+            StoreChatView(),
           ],
         ),
         bottomNavigationBar: NavigationBar(
