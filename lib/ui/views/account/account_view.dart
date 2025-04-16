@@ -311,30 +311,6 @@ class AccountView extends StackedView<AccountViewModel> {
     );
   }
 
-  Widget _buildLogoutButton(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: OutlinedButton(
-        onPressed: () {},
-        style: OutlinedButton.styleFrom(
-          side: const BorderSide(color: Color(0xFF996E4E)),
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-        ),
-        child: Text(
-          'Logout',
-          style: GoogleFonts.roboto(
-            color: const Color(0xFF996E4E),
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   AccountViewModel viewModelBuilder(
     BuildContext context,
