@@ -33,4 +33,12 @@ class ProductDetailViewModel extends BaseViewModel {
     rebuildUi();
     navigationService.navigateToCartView();
   }
+
+  void visitStore() {
+    navigationService.navigateToStoreHomeView();
+  }
+
+  void chat() {
+    navigationService.navigateToChatbotView();
+  }
 }

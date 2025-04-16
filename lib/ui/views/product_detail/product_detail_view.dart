@@ -215,7 +215,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
                       const SizedBox(height: 20),
 
                       //Store Section
-                      const StoreSection()
+                      StoreSection(onTap: viewModel.visitStore),
                     ],
                   ),
                 ),
@@ -242,7 +242,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
             // Store Button
             Expanded(
               child: InkWell(
-                onTap: () {},
+                onTap: viewModel.visitStore,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -266,7 +266,7 @@ class ProductDetailView extends StackedView<ProductDetailViewModel> {
             // Chat Button
             Expanded(
               child: InkWell(
-                onTap: () {},
+                onTap: viewModel.chat,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [

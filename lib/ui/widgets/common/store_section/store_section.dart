@@ -5,7 +5,8 @@ import 'package:stacked/stacked.dart';
 import 'store_section_model.dart';
 
 class StoreSection extends StackedView<StoreSectionModel> {
-  const StoreSection({super.key});
+  final VoidCallback onTap;
+  const StoreSection({super.key, required this.onTap});
 
   @override
   Widget builder(
@@ -44,18 +45,21 @@ class StoreSection extends StackedView<StoreSectionModel> {
                 ),
               ),
               const Spacer(),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  border: Border.all(color: brownContainerColor),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Text(
-                  "Visit Store",
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: brownTextColor,
+              GestureDetector(
+                onTap: onTap,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: brownContainerColor),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Text(
+                    "Visit Store",
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: brownTextColor,
+                    ),
                   ),
                 ),
               ),
