@@ -70,7 +70,7 @@ class BuyerHelpCenterView extends StackedView<BuyerHelpCenterViewModel> {
           Positioned(
             right: 16,
             bottom: 50,
-            child: _buildChatButton(),
+            child: _buildChatButton(viewModel),
           ),
         ],
       ),
@@ -134,32 +134,35 @@ class BuyerHelpCenterView extends StackedView<BuyerHelpCenterViewModel> {
     );
   }
 
-  Widget _buildChatButton() {
-    return Row(spacing: 10, children: [
-      Container(
-        decoration: BoxDecoration(
-          color: secondaryContainerColor,
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: mainContainerColor),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-          child: Text(
-            "I'm here to help you",
-            style: GoogleFonts.roboto(
-              fontSize: 10,
-              letterSpacing: -0.2,
-              color: mainTextColor,
+  Widget _buildChatButton(BuyerHelpCenterViewModel viewModel) {
+    return GestureDetector(
+      onTap: () => viewModel.navigateToChatbot(),
+      child: Row(spacing: 10, children: [
+        Container(
+          decoration: BoxDecoration(
+            color: secondaryContainerColor,
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: mainContainerColor),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            child: Text(
+              "I'm here to help you",
+              style: GoogleFonts.roboto(
+                fontSize: 10,
+                letterSpacing: -0.2,
+                color: mainTextColor,
+              ),
             ),
           ),
         ),
-      ),
-      Image.asset(
-        'assets/images/chatbot.png',
-        width: 50,
-        height: 50,
-      ),
-    ]);
+        Image.asset(
+          'assets/images/chatbot.png',
+          width: 50,
+          height: 50,
+        ),
+      ]),
+    );
 
     // return Container(
     //   decoration: BoxDecoration(

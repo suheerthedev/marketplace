@@ -1,4 +1,7 @@
+import 'package:marketplace/app/app.locator.dart';
+import 'package:marketplace/app/app.router.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class FAQItem {
   final String question;
@@ -13,6 +16,7 @@ class FAQItem {
 }
 
 class BuyerHelpCenterViewModel extends BaseViewModel {
+  final NavigationService _navigationService = locator<NavigationService>();
   final List<FAQItem> _faqItems = [
     FAQItem(
       question: 'How can I sure that products are authentic?',
@@ -41,5 +45,9 @@ class BuyerHelpCenterViewModel extends BaseViewModel {
   void toggleExpansion(int index) {
     _faqItems[index].isExpanded = !_faqItems[index].isExpanded;
     notifyListeners();
+  }
+
+  void navigateToChatbot() {
+    _navigationService.navigateToChatbotView();
   }
 }
