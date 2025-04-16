@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/app/app.router.dart';
@@ -81,51 +82,64 @@ class SellerSignUpView extends StackedView<SellerSignUpViewModel> {
                   ),
                   //terms and conditon text
                   Text.rich(
-                      textAlign: TextAlign.start,
-                      TextSpan(children: [
-                        TextSpan(
-                          text: "By signing up you agree to our ",
-                          style: GoogleFonts.roboto(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: mainTextColor),
-                        ),
-                        TextSpan(
-                          text: "Terms",
-                          style: GoogleFonts.roboto(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: brownTextColor),
-                        ),
-                        TextSpan(
-                          text: ", ",
-                          style: GoogleFonts.roboto(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: mainTextColor),
-                        ),
-                        TextSpan(
-                          text: "Privacy Policy",
-                          style: GoogleFonts.roboto(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: brownTextColor),
-                        ),
-                        TextSpan(
-                          text: ", and ",
-                          style: GoogleFonts.roboto(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: mainTextColor),
-                        ),
-                        TextSpan(
-                          text: "Cookie Use.",
-                          style: GoogleFonts.roboto(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                              color: brownTextColor),
-                        ),
-                      ])),
+                    textAlign: TextAlign.start,
+                    TextSpan(children: [
+                      TextSpan(
+                        text: "By signing up you agree to our ",
+                        style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: mainTextColor),
+                      ),
+                      TextSpan(
+                        text: "Terms",
+                        style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: brownTextColor),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            viewModel.onTermsAndConditionsTap();
+                          },
+                      ),
+                      TextSpan(
+                        text: ", ",
+                        style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: mainTextColor),
+                      ),
+                      TextSpan(
+                        text: "Privacy Policy",
+                        style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: brownTextColor),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            viewModel.onPrivacyPolicyTap();
+                          },
+                      ),
+                      TextSpan(
+                        text: ", and ",
+                        style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: mainTextColor),
+                      ),
+                      TextSpan(
+                        text: "Cookie Use.",
+                        style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: brownTextColor),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            viewModel.onCookieUseTap();
+                          },
+                      ),
+                    ]),
+                  ),
                 ],
               ),
               const Expanded(flex: 1, child: SizedBox()),
