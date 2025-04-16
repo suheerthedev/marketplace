@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
-import 'package:marketplace/ui/views/seller_account/seller_account_view.dart';
-import 'package:marketplace/ui/views/seller_dashboard/seller_dashboard_view.dart';
-import 'package:marketplace/ui/views/seller_inbox/seller_inbox_view.dart';
-import 'package:marketplace/ui/views/seller_products/seller_products_view.dart';
+import 'package:marketplace/ui/views/store_home/store_home_view.dart';
 import 'package:stacked/stacked.dart';
 
-import 'seller_main_viewmodel.dart';
+import 'store_main_viewmodel.dart';
 
-class SellerMainView extends StackedView<SellerMainViewModel> {
-  const SellerMainView({Key? key}) : super(key: key);
+class StoreMainView extends StackedView<StoreMainViewModel> {
+  const StoreMainView({Key? key}) : super(key: key);
 
   @override
   Widget builder(
     BuildContext context,
-    SellerMainViewModel viewModel,
+    StoreMainViewModel viewModel,
     Widget? child,
   ) {
     return PopScope(
@@ -37,10 +34,10 @@ class SellerMainView extends StackedView<SellerMainViewModel> {
             viewModel.notifyListeners();
           },
           children: const [
-            SellerDashboardView(),
-            SellerProductsView(),
-            SellerInboxView(),
-            SellerAccountView(),
+            StoreHomeView(),
+            StoreHomeView(),
+            StoreHomeView(),
+            StoreHomeView(),
           ],
         ),
         bottomNavigationBar: NavigationBar(
@@ -76,8 +73,8 @@ class SellerMainView extends StackedView<SellerMainViewModel> {
   }
 
   @override
-  SellerMainViewModel viewModelBuilder(
+  StoreMainViewModel viewModelBuilder(
     BuildContext context,
   ) =>
-      SellerMainViewModel();
+      StoreMainViewModel();
 }

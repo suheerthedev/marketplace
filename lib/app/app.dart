@@ -53,6 +53,7 @@ import 'package:marketplace/ui/views/privacy_policy/privacy_policy_view.dart';
 import 'package:marketplace/ui/views/terms_conditons/terms_conditons_view.dart';
 import 'package:marketplace/ui/dialogs/confirmation_two/confirmation_two_dialog.dart';
 import 'package:marketplace/ui/views/store_home/store_home_view.dart';
+import 'package:marketplace/ui/views/store_main/store_main_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -105,6 +106,7 @@ import 'package:marketplace/ui/views/store_home/store_home_view.dart';
     MaterialRoute(page: PrivacyPolicyView),
     MaterialRoute(page: TermsConditonsView),
     MaterialRoute(page: StoreHomeView),
+    MaterialRoute(page: StoreMainView),
 // @stacked-route
   ],
   dependencies: [

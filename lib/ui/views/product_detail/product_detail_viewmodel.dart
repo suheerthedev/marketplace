@@ -35,7 +35,7 @@ class ProductDetailViewModel extends BaseViewModel {
   }
 
   void visitStore() {
-    navigationService.navigateToStoreHomeView();
+    navigationService.navigateToStoreMainView();
   }
 
   void chat() {
