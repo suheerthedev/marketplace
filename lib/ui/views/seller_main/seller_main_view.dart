@@ -17,15 +17,9 @@ class SellerMainView extends StackedView<SellerMainViewModel> {
     SellerMainViewModel viewModel,
     Widget? child,
   ) {
-    return PopScope(
-      canPop: false,
-      onPopInvoked: (didPop) {
-        if (!didPop) {
-          final shouldPop = viewModel.onBackPressed();
-          if (shouldPop) {
-            Navigator.of(context).pop();
-          }
-        }
+    return WillPopScope(
+      onWillPop: () async {
+        return viewModel.onBackPressed();
       },
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -50,9 +44,9 @@ class SellerMainView extends StackedView<SellerMainViewModel> {
           onDestinationSelected: viewModel.changeNavbarIndex,
           destinations: const [
             NavigationDestination(
-              selectedIcon: Icon(Icons.store),
-              icon: Icon(Icons.store_outlined),
-              label: "Store",
+              selectedIcon: Icon(Icons.dashboard),
+              icon: Icon(Icons.dashboard_outlined),
+              label: "Dashboard",
             ),
             NavigationDestination(
               selectedIcon: Icon(Icons.inventory_2),
@@ -60,14 +54,14 @@ class SellerMainView extends StackedView<SellerMainViewModel> {
               label: "Products",
             ),
             NavigationDestination(
-              selectedIcon: Icon(Icons.category),
-              icon: Icon(Icons.category_outlined),
-              label: "Categories",
+              selectedIcon: Icon(Icons.message),
+              icon: Icon(Icons.message_outlined),
+              label: "Messages",
             ),
             NavigationDestination(
-              selectedIcon: Icon(Icons.chat),
-              icon: Icon(Icons.chat_outlined),
-              label: "Chat",
+              selectedIcon: Icon(Icons.person),
+              icon: Icon(Icons.person_outline),
+              label: "Account",
             ),
           ],
         ),
