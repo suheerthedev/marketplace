@@ -79,8 +79,8 @@ class ChatbotViewModel extends BaseViewModel {
   }
 
   // Placeholder for future API integration
-  Future<String> _getResponseFromAPI(String message) async {
-    // This would be replaced with actual API call
-    return "API response would go here based on: $message";
-  }
+  // Future<String> _getResponseFromAPI(String message) async {
+  // This would be replaced with actual API call
+  // return "API response would go here based on: $message";
+  // }
 }
