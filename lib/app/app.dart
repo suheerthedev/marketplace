@@ -55,6 +55,7 @@ import 'package:marketplace/ui/dialogs/confirmation_two/confirmation_two_dialog.
 import 'package:marketplace/ui/views/store_home/store_home_view.dart';
 import 'package:marketplace/ui/views/store_main/store_main_view.dart';
 import 'package:marketplace/ui/views/store_products/store_products_view.dart';
+import 'package:marketplace/ui/views/store_category/store_category_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -109,6 +110,7 @@ import 'package:marketplace/ui/views/store_products/store_products_view.dart';
     MaterialRoute(page: StoreHomeView),
     MaterialRoute(page: StoreMainView),
     MaterialRoute(page: StoreProductsView),
+    MaterialRoute(page: StoreCategoryView),
 // @stacked-route
   ],
   dependencies: [
