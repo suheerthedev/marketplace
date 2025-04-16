@@ -7,6 +7,7 @@ import 'package:marketplace/ui/widgets/common/custom_button/custom_button.dart';
 import 'package:marketplace/ui/widgets/common/custom_text_field/custom_text_field.dart';
 import 'package:marketplace/ui/widgets/common/social_button/social_button.dart';
 import 'package:stacked/stacked.dart';
+import 'package:flutter/gestures.dart';
 
 import 'buyer_sign_up_viewmodel.dart';
 
@@ -77,12 +78,64 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                         )),
                   ),
                   //terms and conditon text
-                  Text(
-                    "By signing up you agree to our Terms, Privacy Policy, and Cookie Use",
-                    style: GoogleFonts.roboto(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
+                  Text.rich(
+                    textAlign: TextAlign.start,
+                    TextSpan(children: [
+                      TextSpan(
+                        text: "By signing up you agree to our ",
+                        style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: mainTextColor),
+                      ),
+                      TextSpan(
+                        text: "Terms",
+                        style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: brownTextColor),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            viewModel.onTermsAndConditionsTap();
+                          },
+                      ),
+                      TextSpan(
+                        text: ", ",
+                        style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: mainTextColor),
+                      ),
+                      TextSpan(
+                        text: "Privacy Policy",
+                        style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: brownTextColor),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            viewModel.onPrivacyPolicyTap();
+                          },
+                      ),
+                      TextSpan(
+                        text: ", and ",
+                        style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
+                            color: mainTextColor),
+                      ),
+                      TextSpan(
+                        text: "Cookie Use.",
+                        style: GoogleFonts.roboto(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: brownTextColor),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            viewModel.onCookieUseTap();
+                          },
+                      ),
+                    ]),
                   ),
                 ],
               ),

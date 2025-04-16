@@ -50,6 +50,7 @@ import 'package:marketplace/ui/views/redeem_voucher/redeem_voucher_view.dart';
 import 'package:marketplace/ui/views/buyer_help_center/buyer_help_center_view.dart';
 import 'package:marketplace/ui/views/chatbot/chatbot_view.dart';
 import 'package:marketplace/ui/views/privacy_policy/privacy_policy_view.dart';
+import 'package:marketplace/ui/views/terms_conditons/terms_conditons_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -100,6 +101,7 @@ import 'package:marketplace/ui/views/privacy_policy/privacy_policy_view.dart';
     MaterialRoute(page: BuyerHelpCenterView),
     MaterialRoute(page: ChatbotView),
     MaterialRoute(page: PrivacyPolicyView),
+    MaterialRoute(page: TermsConditonsView),
 // @stacked-route
   ],
   dependencies: [
