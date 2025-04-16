@@ -16,81 +16,198 @@ class BuyerHelpCenterView extends StackedView<BuyerHelpCenterViewModel> {
     Widget? child,
   ) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: const MainAppBar(title: "Help Center"),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Welcome',
-              style: GoogleFonts.roboto(
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-                color: brownTextColor,
-              ),
-            ),
-            Text(
-              'To App Help Center',
-              style: GoogleFonts.roboto(
-                fontSize: 16,
-                color: brownTextColor,
-              ),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              'Top Questions',
-              style: GoogleFonts.roboto(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: ListView.separated(
-                  itemBuilder: (context, index) =>
-                      _buildQuestionTile(viewModel.questions[index]),
-                  separatorBuilder: (context, index) => const Divider(
-                        height: 0,
-                      ),
-                  itemCount: viewModel.questions.length),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildQuestionTile(String question) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Stack(
         children: [
-          Expanded(
-            child: Text(
-              question,
-              style: GoogleFonts.roboto(
-                fontSize: 14,
-                letterSpacing: -0.2,
-                color: mainTextColor,
-              ),
+          // Main content
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Welcome',
+                  style: GoogleFonts.roboto(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFFB07B40),
+                  ),
+                ),
+                Text(
+                  'To App Help Center',
+                  style: GoogleFonts.roboto(
+                    fontSize: 16,
+                    color: const Color(0xFFB07B40),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Text(
+                  'Top Questions',
+                  style: GoogleFonts.roboto(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Expanded(
+                  child: ListView.separated(
+                    itemCount: viewModel.faqItems.length,
+                    separatorBuilder: (context, index) =>
+                        const Divider(height: 1),
+                    itemBuilder: (context, index) {
+                      final faq = viewModel.faqItems[index];
+                      return _buildFAQItem(context, viewModel, index, faq);
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
-          const Icon(Icons.expand_more, color: Colors.black),
+
+          // Chat bot button
+          Positioned(
+            right: 16,
+            bottom: 50,
+            child: _buildChatButton(),
+          ),
         ],
       ),
     );
   }
 
-  @override
-  BuyerHelpCenterViewModel viewModelBuilder(
+  Widget _buildFAQItem(
     BuildContext context,
-  ) =>
+    BuyerHelpCenterViewModel viewModel,
+    int index,
+    FAQItem faq,
+  ) {
+    return Column(
+      children: [
+        // Question
+        InkWell(
+          onTap: () => viewModel.toggleExpansion(index),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 12.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    faq.question,
+                    style: GoogleFonts.roboto(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      letterSpacing: -0.2,
+                      color: Colors.black,
+                      height: 1.5,
+                    ),
+                  ),
+                ),
+                Icon(
+                  faq.isExpanded
+                      ? Icons.keyboard_arrow_up
+                      : Icons.keyboard_arrow_down,
+                  color: Colors.black54,
+                ),
+              ],
+            ),
+          ),
+        ),
+
+        // Answer (only visible when expanded)
+        if (faq.isExpanded)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12.0),
+            child: Text(
+              faq.answer,
+              style: GoogleFonts.roboto(
+                fontSize: 14,
+                letterSpacing: -0.2,
+                color: mainTextColor,
+                fontWeight: FontWeight.w300,
+                height: 1.5,
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+
+  Widget _buildChatButton() {
+    return Row(spacing: 10, children: [
+      Container(
+        decoration: BoxDecoration(
+          color: secondaryContainerColor,
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: mainContainerColor),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: Text(
+            "I'm here to help you",
+            style: GoogleFonts.roboto(
+              fontSize: 10,
+              letterSpacing: -0.2,
+              color: mainTextColor,
+            ),
+          ),
+        ),
+      ),
+      Image.asset(
+        'assets/images/chatbot.png',
+        width: 50,
+        height: 50,
+      ),
+    ]);
+
+    // return Container(
+    //   decoration: BoxDecoration(
+    //     color: Colors.red,
+    //     borderRadius: BorderRadius.circular(24),
+    //     boxShadow: [
+    //       BoxShadow(
+    //         color: Colors.black.withOpacity(0.1),
+    //         blurRadius: 8,
+    //         offset: const Offset(0, 2),
+    //       ),
+    //     ],
+    //   ),
+    //   child: Row(
+    //     children: [
+    //       // Text label
+    //       Padding(
+    //         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+    //         child: Text(
+    //           "I'm here to help you",
+    //           style: GoogleFonts.roboto(
+    //             fontSize: 12,
+    //             color: Colors.black54,
+    //           ),
+    //         ),
+    //       ),
+
+    //       // Chatbot image
+    //       Container(
+    //         width: 40,
+    //         height: 40,
+    //         decoration: BoxDecoration(
+    //           color: Colors.white,
+    //           borderRadius: BorderRadius.circular(20),
+    //         ),
+    //         child: Image.asset(
+    //           'assets/images/chatbot.png',
+    //           fit: BoxFit.cover,
+    //           width: 40,
+    //           height: 40,
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // );
+  }
+
+  @override
+  BuyerHelpCenterViewModel viewModelBuilder(BuildContext context) =>
       BuyerHelpCenterViewModel();
 }
