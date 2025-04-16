@@ -43,34 +43,36 @@ class StoreMainView extends StackedView<StoreMainViewModel> {
             StoreChatView(),
           ],
         ),
-        bottomNavigationBar: NavigationBar(
-          backgroundColor: secondaryBackgroundColor,
-          indicatorColor: Colors.transparent,
-          selectedIndex: viewModel.selectedIndex,
-          onDestinationSelected: viewModel.changeNavbarIndex,
-          destinations: const [
-            NavigationDestination(
-              selectedIcon: Icon(Icons.store),
-              icon: Icon(Icons.store_outlined),
-              label: "Store",
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(Icons.inventory_2),
-              icon: Icon(Icons.inventory_2_outlined),
-              label: "Products",
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(Icons.category),
-              icon: Icon(Icons.category_outlined),
-              label: "Categories",
-            ),
-            NavigationDestination(
-              selectedIcon: Icon(Icons.chat),
-              icon: Icon(Icons.chat_outlined),
-              label: "Chat",
-            ),
-          ],
-        ),
+        bottomNavigationBar: viewModel.selectedIndex == 3
+            ? null
+            : NavigationBar(
+                backgroundColor: secondaryBackgroundColor,
+                indicatorColor: Colors.transparent,
+                selectedIndex: viewModel.selectedIndex,
+                onDestinationSelected: viewModel.changeNavbarIndex,
+                destinations: const [
+                  NavigationDestination(
+                    selectedIcon: Icon(Icons.store),
+                    icon: Icon(Icons.store_outlined),
+                    label: "Store",
+                  ),
+                  NavigationDestination(
+                    selectedIcon: Icon(Icons.inventory_2),
+                    icon: Icon(Icons.inventory_2_outlined),
+                    label: "Products",
+                  ),
+                  NavigationDestination(
+                    selectedIcon: Icon(Icons.category),
+                    icon: Icon(Icons.category_outlined),
+                    label: "Categories",
+                  ),
+                  NavigationDestination(
+                    selectedIcon: Icon(Icons.chat),
+                    icon: Icon(Icons.chat_outlined),
+                    label: "Chat",
+                  ),
+                ],
+              ),
       ),
     );
   }
