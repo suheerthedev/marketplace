@@ -17,48 +17,54 @@ class SellerMainView extends StackedView<SellerMainViewModel> {
     SellerMainViewModel viewModel,
     Widget? child,
   ) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: PageView(
-        controller: viewModel.pageController,
-        onPageChanged: (index) {
-          viewModel.selectedIndex = index;
-          viewModel.notifyListeners();
-        },
-        children: const [
-          SellerDashboardView(),
-          SellerProductsView(),
-          SellerInboxView(),
-          SellerAccountView(),
-        ],
-      ),
-      bottomNavigationBar: NavigationBar(
-        backgroundColor: secondaryBackgroundColor,
-        indicatorColor: Colors.transparent,
-        selectedIndex: viewModel.selectedIndex,
-        onDestinationSelected: viewModel.changeNavbarIndex,
-        destinations: const [
-          NavigationDestination(
-            selectedIcon: Icon(Icons.dashboard),
-            icon: Icon(Icons.dashboard_outlined),
-            label: "Dashboard",
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.inventory_2),
-            icon: Icon(Icons.inventory_2_outlined),
-            label: "Products",
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.message),
-            icon: Icon(Icons.message_outlined),
-            label: "Messages",
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.person),
-            icon: Icon(Icons.person_outline),
-            label: "Account",
-          ),
-        ],
+    return WillPopScope(
+      onWillPop: () async {
+        return viewModel.onBackPressed();
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: PageView(
+          controller: viewModel.pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          onPageChanged: (index) {
+            viewModel.selectedIndex = index;
+            viewModel.notifyListeners();
+          },
+          children: const [
+            SellerDashboardView(),
+            SellerProductsView(),
+            SellerInboxView(),
+            SellerAccountView(),
+          ],
+        ),
+        bottomNavigationBar: NavigationBar(
+          backgroundColor: secondaryBackgroundColor,
+          indicatorColor: Colors.transparent,
+          selectedIndex: viewModel.selectedIndex,
+          onDestinationSelected: viewModel.changeNavbarIndex,
+          destinations: const [
+            NavigationDestination(
+              selectedIcon: Icon(Icons.dashboard),
+              icon: Icon(Icons.dashboard_outlined),
+              label: "Dashboard",
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.inventory_2),
+              icon: Icon(Icons.inventory_2_outlined),
+              label: "Products",
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.message),
+              icon: Icon(Icons.message_outlined),
+              label: "Messages",
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.person),
+              icon: Icon(Icons.person_outline),
+              label: "Account",
+            ),
+          ],
+        ),
       ),
     );
   }

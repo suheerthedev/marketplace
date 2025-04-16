@@ -13,7 +13,10 @@ class StoreHomeView extends StackedView<StoreHomeViewModel> {
     Widget? child,
   ) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
+        title: const Text("Store Home"),
+        centerTitle: true,
+      ),
       body: Container(
         padding: const EdgeInsets.only(left: 25.0, right: 25.0),
         child: const Center(child: Text("StoreHomeView")),

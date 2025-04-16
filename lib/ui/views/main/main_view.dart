@@ -17,48 +17,54 @@ class MainView extends StackedView<MainViewModel> {
     MainViewModel viewModel,
     Widget? child,
   ) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: PageView(
-        controller: viewModel.pageController,
-        onPageChanged: (index) {
-          viewModel.selectedIndex = index;
-          viewModel.notifyListeners();
-        },
-        children: const [
-          HomeView(),
-          CartView(),
-          SavedView(),
-          AccountView(),
-        ],
-      ),
-      bottomNavigationBar: NavigationBar(
-        backgroundColor: secondaryBackgroundColor,
-        indicatorColor: Colors.transparent,
-        selectedIndex: viewModel.selectedIndex,
-        onDestinationSelected: viewModel.changeNavbarIndex,
-        destinations: const [
-          NavigationDestination(
-            selectedIcon: Icon(Icons.home),
-            icon: Icon(Icons.home_outlined),
-            label: "Home",
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.shopping_cart),
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: "Cart",
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.favorite),
-            icon: Icon(Icons.favorite_border),
-            label: "Saved",
-          ),
-          NavigationDestination(
-            selectedIcon: Icon(Icons.person),
-            icon: Icon(Icons.person_outline),
-            label: "Account",
-          ),
-        ],
+    return WillPopScope(
+      onWillPop: () async {
+        return viewModel.onBackPressed();
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: PageView(
+          controller: viewModel.pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          onPageChanged: (index) {
+            viewModel.selectedIndex = index;
+            viewModel.notifyListeners();
+          },
+          children: const [
+            HomeView(),
+            CartView(),
+            SavedView(),
+            AccountView(),
+          ],
+        ),
+        bottomNavigationBar: NavigationBar(
+          backgroundColor: secondaryBackgroundColor,
+          indicatorColor: Colors.transparent,
+          selectedIndex: viewModel.selectedIndex,
+          onDestinationSelected: viewModel.changeNavbarIndex,
+          destinations: const [
+            NavigationDestination(
+              selectedIcon: Icon(Icons.home),
+              icon: Icon(Icons.home_outlined),
+              label: "Home",
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.shopping_cart),
+              icon: Icon(Icons.shopping_cart_outlined),
+              label: "Cart",
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.favorite),
+              icon: Icon(Icons.favorite_border),
+              label: "Saved",
+            ),
+            NavigationDestination(
+              selectedIcon: Icon(Icons.person),
+              icon: Icon(Icons.person_outline),
+              label: "Account",
+            ),
+          ],
+        ),
       ),
     );
   }
