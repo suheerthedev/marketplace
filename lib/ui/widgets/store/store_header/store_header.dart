@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 
 class StoreHeader extends StatelessWidget {
