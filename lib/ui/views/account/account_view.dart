@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
+import 'package:marketplace/ui/widgets/common/custom_button/custom_button.dart';
 import 'package:stacked/stacked.dart';
 
 import 'account_viewmodel.dart';
@@ -30,7 +31,12 @@ class AccountView extends StackedView<AccountViewModel> {
               _buildGeneralSection(viewModel, context,
                   items: viewModel.generalItems),
               const SizedBox(height: 24),
-              _buildLogoutButton(context),
+              CustomButton(
+                  title: "Logout",
+                  onTap: viewModel.logout,
+                  bgColor: secondaryBackgroundColor,
+                  textColor: brownTextColor,
+                  borderColor: brownContainerColor)
             ],
           ),
         ),
@@ -277,12 +283,12 @@ class AccountView extends StackedView<AccountViewModel> {
           _buildOptionTile(
             title: 'Terms & Policies',
             icon: Icons.description_outlined,
-            onTap: viewModel.viewOrders,
+            onTap: viewModel.viewTermsAndPolicies,
           ),
           _buildOptionTile(
             title: 'Language - English',
             icon: Icons.language,
-            onTap: viewModel.viewOrders,
+            onTap: () {},
           ),
         ],
       ),

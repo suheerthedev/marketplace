@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marketplace/app/app.dialogs.dart';
 import 'package:marketplace/app/app.locator.dart';
 import 'package:marketplace/app/app.router.dart';
 import 'package:stacked/stacked.dart';
@@ -6,6 +7,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 class AccountViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
+  final _dialogService = locator<DialogService>();
   List generalItems = [
     {
       'icon': Icons.help_outline,
@@ -55,5 +57,18 @@ class AccountViewModel extends BaseViewModel {
 
   void viewHelpCenter() {
     _navigationService.navigateToBuyerHelpCenterView();
+  }
+
+  void viewTermsAndPolicies() {
+    _navigationService.navigateToPrivacyPolicyView();
+  }
+
+  void logout() {
+    _dialogService.showCustomDialog(
+      variant: DialogType.confirmation,
+      title: 'Are you sure you want to logout?',
+      mainButtonTitle: 'Logout',
+      secondaryButtonTitle: 'Cancel',
+    );
   }
 }
