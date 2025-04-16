@@ -51,6 +51,7 @@ import 'package:marketplace/ui/views/buyer_help_center/buyer_help_center_view.da
 import 'package:marketplace/ui/views/chatbot/chatbot_view.dart';
 import 'package:marketplace/ui/views/privacy_policy/privacy_policy_view.dart';
 import 'package:marketplace/ui/views/terms_conditons/terms_conditons_view.dart';
+import 'package:marketplace/ui/dialogs/confirmation_two/confirmation_two_dialog.dart';
 // @stacked-import
 
 @StackedApp(
@@ -118,6 +119,7 @@ import 'package:marketplace/ui/views/terms_conditons/terms_conditons_view.dart';
   dialogs: [
     StackedDialog(classType: InfoAlertDialog),
     StackedDialog(classType: ConfirmationDialog),
+    StackedDialog(classType: ConfirmationTwoDialog),
 // @stacked-dialog
   ],
 )

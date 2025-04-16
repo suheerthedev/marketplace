@@ -55,9 +55,10 @@ class BuyerProfileViewModel extends BaseViewModel {
   void logout() {
     // In a real app, this would handle the logout process
     _dialogService.showCustomDialog(
-        variant: DialogType.confirmation,
+        variant: DialogType.confirmationTwo,
         title: "Are you sure you want to logout?",
         mainButtonTitle: "Logout",
-        secondaryButtonTitle: "Cancel");
+        secondaryButtonTitle: "Cancel",
+        additionalButtonTitle: "Logout from all devices");
   }
 }

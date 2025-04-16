@@ -8,11 +8,13 @@ import 'package:stacked_services/stacked_services.dart';
 
 import 'app.locator.dart';
 import '../ui/dialogs/confirmation/confirmation_dialog.dart';
+import '../ui/dialogs/confirmation_two/confirmation_two_dialog.dart';
 import '../ui/dialogs/info_alert/info_alert_dialog.dart';
 
 enum DialogType {
   infoAlert,
   confirmation,
+  confirmationTwo,
 }
 
 void setupDialogUi() {
@@ -23,6 +25,8 @@ void setupDialogUi() {
         InfoAlertDialog(request: request, completer: completer),
     DialogType.confirmation: (context, request, completer) =>
         ConfirmationDialog(request: request, completer: completer),
+    DialogType.confirmationTwo: (context, request, completer) =>
+        ConfirmationTwoDialog(request: request, completer: completer),
   };
 
   dialogService.registerCustomDialogBuilders(builders);
