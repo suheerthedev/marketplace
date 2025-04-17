@@ -10,12 +10,26 @@ class CustomTextField extends StackedView<CustomTextFieldModel> {
   final String hintText;
   final bool hasSuffix;
   final Widget? suffixIcon;
-  const CustomTextField(
-      {required this.title,
-      required this.hintText,
-      required this.hasSuffix,
-      this.suffixIcon,
-      super.key});
+  final Function(String)? onChanged;
+  final bool obscureText;
+  final TextInputType keyboardType;
+  final FocusNode? focusNode;
+  final TextEditingController? controller;
+  final String? errorText;
+
+  const CustomTextField({
+    required this.title,
+    required this.hintText,
+    required this.hasSuffix,
+    this.suffixIcon,
+    this.onChanged,
+    this.obscureText = false,
+    this.keyboardType = TextInputType.text,
+    this.focusNode,
+    this.controller,
+    this.errorText,
+    super.key,
+  });
 
   @override
   Widget builder(
@@ -35,6 +49,11 @@ class CustomTextField extends StackedView<CustomTextFieldModel> {
         SizedBox(
           height: 48,
           child: TextField(
+            controller: controller,
+            focusNode: focusNode,
+            obscureText: obscureText,
+            keyboardType: keyboardType,
+            onChanged: onChanged,
             decoration: InputDecoration(
               alignLabelWithHint: true,
               hintText: hintText,
@@ -54,6 +73,7 @@ class CustomTextField extends StackedView<CustomTextFieldModel> {
                 borderRadius: BorderRadius.circular(10),
                 borderSide: const BorderSide(color: Colors.red),
               ),
+              errorText: errorText,
             ),
           ),
         ),

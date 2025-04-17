@@ -21,64 +21,89 @@ class ResetPasswordView extends StackedView<ResetPasswordViewModel> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 25,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Reset Password",
-                    style: GoogleFonts.roboto(
-                        letterSpacing: -2,
-                        wordSpacing: 0,
-                        height: 0,
-                        color: mainTextColor,
-                        fontSize: 36,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  Text(
-                    "Enter your new password",
-                    style: GoogleFonts.roboto(
-                        color: lightTextColor,
-                        fontSize: 16,
-                        height: 0,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ],
-              ),
-              CustomTextField(
-                title: "New Password",
-                hintText: "Enter your password",
-                hasSuffix: true,
-                suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.visibility_off_outlined,
-                      color: iconColor,
-                    )),
-              ),
-              CustomTextField(
-                title: "Re-enter Password",
-                hintText: "Enter your password",
-                hasSuffix: true,
-                suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.visibility_off_outlined,
-                      color: iconColor,
-                    )),
-              ),
-              CustomButton(
-                title: "Save",
-                onTap: viewModel.navigateToLogin,
-                bgColor: mainBackgroundColor,
-                textColor: secondaryTextColor,
-                borderColor: lightBackgroundColor,
-              ),
-            ],
-          ),
+          child: viewModel.isBusy
+              ? const Center(child: CircularProgressIndicator())
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 25,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Reset Password",
+                          style: GoogleFonts.roboto(
+                              letterSpacing: -2,
+                              wordSpacing: 0,
+                              height: 0,
+                              color: mainTextColor,
+                              fontSize: 36,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          "Enter your new password",
+                          style: GoogleFonts.roboto(
+                              color: lightTextColor,
+                              fontSize: 16,
+                              height: 0,
+                              fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                    CustomTextField(
+                      title: "New Password",
+                      hintText: "Enter your password",
+                      hasSuffix: true,
+                      obscureText: !viewModel.isPasswordVisible,
+                      onChanged: viewModel.setPassword,
+                      suffixIcon: IconButton(
+                          onPressed: viewModel.togglePasswordVisibility,
+                          icon: Icon(
+                            viewModel.isPasswordVisible
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined,
+                            color: iconColor,
+                          )),
+                    ),
+                    CustomTextField(
+                      title: "Re-enter Password",
+                      hintText: "Enter your password",
+                      hasSuffix: true,
+                      obscureText: !viewModel.isConfirmPasswordVisible,
+                      onChanged: viewModel.setConfirmPassword,
+                      suffixIcon: IconButton(
+                          onPressed: viewModel.toggleConfirmPasswordVisibility,
+                          icon: Icon(
+                            viewModel.isConfirmPasswordVisible
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined,
+                            color: iconColor,
+                          )),
+                    ),
+
+                    // Error message if any
+                    if (viewModel.errorMessage != null)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Text(
+                          viewModel.errorMessage!,
+                          style: GoogleFonts.roboto(
+                            color: errorColor,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+
+                    CustomButton(
+                      title: "Save",
+                      onTap: viewModel.resetPassword,
+                      bgColor: mainBackgroundColor,
+                      textColor: secondaryTextColor,
+                      borderColor: lightBackgroundColor,
+                      isDisabled: !viewModel.isFormValid,
+                    ),
+                  ],
+                ),
         ),
       ),
     );

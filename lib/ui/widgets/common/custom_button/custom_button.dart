@@ -10,13 +10,17 @@ class CustomButton extends StackedView<CustomButtonModel> {
   final Color bgColor;
   final Color textColor;
   final Color borderColor;
-  const CustomButton(
-      {required this.title,
-      required this.onTap,
-      required this.bgColor,
-      required this.textColor,
-      required this.borderColor,
-      super.key});
+  final bool isDisabled;
+
+  const CustomButton({
+    required this.title,
+    required this.onTap,
+    required this.bgColor,
+    required this.textColor,
+    required this.borderColor,
+    this.isDisabled = false,
+    super.key,
+  });
 
   @override
   Widget builder(
@@ -27,23 +31,23 @@ class CustomButton extends StackedView<CustomButtonModel> {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.all(16),
-        backgroundColor: bgColor,
+        backgroundColor: isDisabled ? Colors.grey[300] : bgColor,
         shape: RoundedRectangleBorder(
           side: BorderSide(
-            color: borderColor,
+            color: isDisabled ? Colors.grey[400]! : borderColor,
             width: 1,
           ),
           borderRadius: BorderRadius.circular(10),
         ),
       ),
-      onPressed: onTap,
+      onPressed: isDisabled ? null : onTap,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             title,
             style: GoogleFonts.roboto(
-              color: textColor,
+              color: isDisabled ? Colors.grey[600] : textColor,
               fontWeight: FontWeight.w500,
               fontSize: 17,
             ),

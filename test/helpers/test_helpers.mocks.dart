@@ -8,6 +8,7 @@ import 'dart:ui' as _i6;
 
 import 'package:flutter/material.dart' as _i4;
 import 'package:marketplace/models/product_model.dart' as _i8;
+import 'package:marketplace/services/authentication_service.dart' as _i9;
 import 'package:marketplace/services/product_service.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i3;
@@ -794,3 +795,9 @@ class MockProductService extends _i1.Mock implements _i7.ProductService {
         returnValueForMissingStub: null,
       );
 }
+
+/// A class which mocks [AuthenticationService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAuthenticationService extends _i1.Mock
+    implements _i9.AuthenticationService {}

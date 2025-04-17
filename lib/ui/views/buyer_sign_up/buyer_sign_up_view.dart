@@ -21,206 +21,289 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
     Widget? child,
   ) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 22),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            spacing: 25,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Create an account",
-                    style: GoogleFonts.roboto(
-                        letterSpacing: -2,
-                        color: mainTextColor,
-                        fontSize: 36,
-                        height: 0,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  Text(
-                    "Let's create your account.",
-                    style: GoogleFonts.roboto(
-                        color: lightTextColor,
-                        fontSize: 16,
-                        height: 0,
-                        fontWeight: FontWeight.w400),
-                  ),
-                ],
-              ),
-
-              //All The TextFields
-              Column(
-                spacing: 20,
-                children: [
-                  const CustomTextField(
-                    title: "Name",
-                    hintText: "Enter your full name",
-                    hasSuffix: false,
-                  ),
-                  const CustomTextField(
-                    title: "Email",
-                    hintText: "abc@gmail.com",
-                    hasSuffix: false,
-                  ),
-                  CustomTextField(
-                    title: "Password",
-                    hintText: "Enter your password",
-                    hasSuffix: true,
-                    suffixIcon: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.visibility_off_outlined,
-                          color: iconColor,
-                        )),
-                  ),
-                  //terms and conditon text
-                  Text.rich(
-                    textAlign: TextAlign.start,
-                    TextSpan(children: [
-                      TextSpan(
-                        text: "By signing up you agree to our ",
-                        style: GoogleFonts.roboto(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: mainTextColor),
-                      ),
-                      TextSpan(
-                        text: "Terms",
-                        style: GoogleFonts.roboto(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: brownTextColor),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            viewModel.onTermsAndConditionsTap();
-                          },
-                      ),
-                      TextSpan(
-                        text: ", ",
-                        style: GoogleFonts.roboto(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: mainTextColor),
-                      ),
-                      TextSpan(
-                        text: "Privacy Policy",
-                        style: GoogleFonts.roboto(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: brownTextColor),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            viewModel.onPrivacyPolicyTap();
-                          },
-                      ),
-                      TextSpan(
-                        text: ", and ",
-                        style: GoogleFonts.roboto(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: mainTextColor),
-                      ),
-                      TextSpan(
-                        text: "Cookie Use.",
-                        style: GoogleFonts.roboto(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: brownTextColor),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            viewModel.onCookieUseTap();
-                          },
-                      ),
-                    ]),
-                  ),
-                ],
-              ),
-
-              //Create account button
-              Column(
-                spacing: 18,
-                children: [
-                  CustomButton(
-                    title: "Create Account",
-                    onTap: viewModel.navigationService.navigateToBuyerLoginView,
-                    bgColor: mainBackgroundColor,
-                    textColor: secondaryTextColor,
-                    borderColor: mainBackgroundColor,
-                  ),
-                  //Divider
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
+          child: viewModel.isBusy
+              ? const Center(child: CircularProgressIndicator())
+              : SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        child: const Divider(
-                          endIndent: 10,
-                          color: lightTextColor,
-                        ),
+                      // Header
+                      Text(
+                        "Create an account",
+                        style: GoogleFonts.roboto(
+                            letterSpacing: -2,
+                            color: mainTextColor,
+                            fontSize: 36,
+                            height: 0,
+                            fontWeight: FontWeight.w600),
                       ),
-                      Text("Or",
-                          style: GoogleFonts.roboto(color: lightTextColor)),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        child: const Divider(
-                          indent: 10,
-                          color: lightTextColor,
-                        ),
+                      Text(
+                        "Let's create your account.",
+                        style: GoogleFonts.roboto(
+                            color: lightTextColor,
+                            fontSize: 16,
+                            height: 0,
+                            fontWeight: FontWeight.w400),
                       ),
+                      const SizedBox(height: 20),
+
+                      //All The TextFields
+                      Column(
+                        children: [
+                          CustomTextField(
+                            title: "Name",
+                            hintText: "Enter your full name",
+                            hasSuffix: false,
+                            onChanged: viewModel.setName,
+                          ),
+                          const SizedBox(height: 14),
+                          CustomTextField(
+                            title: "Email",
+                            hintText: "abc@gmail.com",
+                            hasSuffix: false,
+                            onChanged: viewModel.setEmail,
+                          ),
+                          const SizedBox(height: 14),
+                          CustomTextField(
+                            title: "Password",
+                            hintText: "Enter your password",
+                            hasSuffix: true,
+                            obscureText: !viewModel.isPasswordVisible,
+                            onChanged: viewModel.setPassword,
+                            suffixIcon: IconButton(
+                                onPressed: viewModel.togglePasswordVisibility,
+                                icon: Icon(
+                                  viewModel.isPasswordVisible
+                                      ? Icons.visibility_outlined
+                                      : Icons.visibility_off_outlined,
+                                  color: iconColor,
+                                )),
+                          ),
+                          const SizedBox(height: 14),
+                          CustomTextField(
+                            title: "Country",
+                            hintText: "Enter your country",
+                            hasSuffix: false,
+                            onChanged: viewModel.setCountry,
+                          ),
+                          const SizedBox(height: 14),
+                          CustomTextField(
+                            title: "Phone Number",
+                            hintText: "+923001234567",
+                            hasSuffix: false,
+                            keyboardType: TextInputType.phone,
+                            onChanged: viewModel.setPhoneNumber,
+                          ),
+                          const SizedBox(height: 16),
+
+                          // Newsletter subscription checkbox
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: Checkbox(
+                                  checkColor: secondaryTextColor,
+                                  activeColor: brownContainerColor,
+                                  value: viewModel.newsletterSubscription,
+                                  onChanged: (value) => viewModel
+                                      .setNewsletterSubscription(value ?? true),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  side: BorderSide(color: Colors.grey[400]!),
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: GestureDetector(
+                                  onTap: () =>
+                                      viewModel.setNewsletterSubscription(
+                                          !viewModel.newsletterSubscription),
+                                  child: Text(
+                                    "Subscribe to newsletter for updates",
+                                    style: GoogleFonts.roboto(
+                                      fontSize: 14,
+                                      color: Colors.grey[600],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 14),
+
+                          // Error message if any
+                          if (viewModel.errorMessage != null)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 8.0),
+                              child: Text(
+                                viewModel.errorMessage!,
+                                style: GoogleFonts.roboto(
+                                  color: errorColor,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+
+                          //terms and conditon text
+                          Text.rich(
+                            textAlign: TextAlign.start,
+                            TextSpan(children: [
+                              TextSpan(
+                                text: "By signing up you agree to our ",
+                                style: GoogleFonts.roboto(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: mainTextColor),
+                              ),
+                              TextSpan(
+                                text: "Terms",
+                                style: GoogleFonts.roboto(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: brownTextColor),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    viewModel.onTermsAndConditionsTap();
+                                  },
+                              ),
+                              TextSpan(
+                                text: ", ",
+                                style: GoogleFonts.roboto(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: mainTextColor),
+                              ),
+                              TextSpan(
+                                text: "Privacy Policy",
+                                style: GoogleFonts.roboto(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: brownTextColor),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    viewModel.onPrivacyPolicyTap();
+                                  },
+                              ),
+                              TextSpan(
+                                text: ", and ",
+                                style: GoogleFonts.roboto(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    color: mainTextColor),
+                              ),
+                              TextSpan(
+                                text: "Cookie Use.",
+                                style: GoogleFonts.roboto(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: brownTextColor),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    viewModel.onCookieUseTap();
+                                  },
+                              ),
+                            ]),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 30),
+
+                      //Create account button
+                      Column(
+                        children: [
+                          CustomButton(
+                            title: "Create Account",
+                            onTap: viewModel.signUp,
+                            bgColor: mainBackgroundColor,
+                            textColor: secondaryTextColor,
+                            borderColor: mainBackgroundColor,
+                            isDisabled: !viewModel.isFormValid,
+                          ),
+                          const SizedBox(height: 18),
+                          //Divider
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                child: const Divider(
+                                  endIndent: 10,
+                                  color: lightTextColor,
+                                ),
+                              ),
+                              Text("Or",
+                                  style: GoogleFonts.roboto(
+                                      color: lightTextColor)),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                child: const Divider(
+                                  indent: 10,
+                                  color: lightTextColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 18),
+                          //Google Button
+                          SocialButton(
+                              title: "Sign Up with Google",
+                              onTap: viewModel.signUpWithGoogle,
+                              bgColor: secondaryBackgroundColor,
+                              textColor: mainTextColor,
+                              borderColor: lightBackgroundColor,
+                              hasIcon: true,
+                              icon: const Icon(
+                                FontAwesomeIcons.google,
+                                color: mainTextColor,
+                              ))
+                        ],
+                      ),
+
+                      const SizedBox(height: 30),
+
+                      //Footer
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Already have an account? ",
+                              style: GoogleFonts.roboto(
+                                  fontSize: 16,
+                                  color: lightTextColor,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            InkWell(
+                              onTap: viewModel
+                                  .navigationService.navigateToBuyerLoginView,
+                              child: Text(
+                                "Login",
+                                style: GoogleFonts.roboto(
+                                    color: mainTextColor,
+                                    fontSize: 16,
+                                    height: 1,
+                                    fontWeight: FontWeight.w500,
+                                    decoration: TextDecoration.underline),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
                     ],
                   ),
-
-                  //Google Button
-                  SocialButton(
-                      title: "Sign Up with Google",
-                      onTap: () {},
-                      bgColor: secondaryBackgroundColor,
-                      textColor: mainTextColor,
-                      borderColor: lightBackgroundColor,
-                      hasIcon: true,
-                      icon: const Icon(
-                        FontAwesomeIcons.google,
-                        color: mainTextColor,
-                      ))
-                ],
-              ),
-
-              //Footer
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Already have an account? ",
-                      style: GoogleFonts.roboto(
-                          fontSize: 16,
-                          color: lightTextColor,
-                          fontWeight: FontWeight.w400),
-                    ),
-                    InkWell(
-                      onTap:
-                          viewModel.navigationService.navigateToBuyerLoginView,
-                      child: Text(
-                        "Login",
-                        style: GoogleFonts.roboto(
-                            color: mainTextColor,
-                            fontSize: 16,
-                            height: 1,
-                            fontWeight: FontWeight.w500,
-                            decoration: TextDecoration.underline),
-                      ),
-                    )
-                  ],
                 ),
-              )
-            ],
-          ),
         ),
       ),
     );

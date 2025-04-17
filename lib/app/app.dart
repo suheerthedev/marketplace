@@ -57,6 +57,7 @@ import 'package:marketplace/ui/views/store_main/store_main_view.dart';
 import 'package:marketplace/ui/views/store_products/store_products_view.dart';
 import 'package:marketplace/ui/views/store_category/store_category_view.dart';
 import 'package:marketplace/ui/views/store_chat/store_chat_view.dart';
+import 'package:marketplace/services/authentication_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -120,6 +121,7 @@ import 'package:marketplace/ui/views/store_chat/store_chat_view.dart';
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: ProductService),
+    LazySingleton(classType: AuthenticationService),
 // @stacked-service
   ],
   bottomsheets: [
