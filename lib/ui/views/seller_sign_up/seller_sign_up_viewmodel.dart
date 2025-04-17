@@ -94,29 +94,29 @@ class SellerSignUpViewModel extends BaseViewModel {
   }
 
   Future<void> signUp() async {
-    if (!_isFormValid) return;
+    // if (!_isFormValid) return;
 
-    setBusy(true);
+    // setBusy(true);
 
-    try {
-      final success = await _authService.signUpSeller(
-        name: _name,
-        email: _email,
-        password: _password,
-        address: _address,
-        phoneNumber: _phoneNumber,
-      );
+    // try {
+    //   final success = await _authService.signUpSeller(
+    //     name: _name,
+    //     email: _email,
+    //     password: _password,
+    //     address: _address,
+    //     phoneNumber: _phoneNumber,
+    //   );
 
-      if (success) {
-        navigationService.navigateToVerificationView();
-      } else {
-        _errorMessage = _authService.error ?? 'Sign up failed';
-      }
-    } catch (e) {
-      _errorMessage = 'An unexpected error occurred';
-    } finally {
-      setBusy(false);
-    }
+    //   if (success) {
+    //     navigationService.navigateToVerificationView();
+    //   } else {
+    //     _errorMessage = _authService.error ?? 'Sign up failed';
+    //   }
+    // } catch (e) {
+    //   _errorMessage = 'An unexpected error occurred';
+    // } finally {
+    //   setBusy(false);
+    // }
   }
 
   Future<void> signUpWithGoogle() async {
@@ -128,7 +128,7 @@ class SellerSignUpViewModel extends BaseViewModel {
       if (success) {
         navigationService.navigateTo(Routes.sellerMainView);
       } else {
-        _errorMessage = _authService.error ?? 'Google sign in failed';
+        _errorMessage = _authService.errorMessage ?? 'Google sign in failed';
       }
     } catch (e) {
       _errorMessage = 'An unexpected error occurred';

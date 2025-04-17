@@ -5,7 +5,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class ForgotPasswordViewModel extends BaseViewModel {
-  final NavigationService navigationService = locator<NavigationService>();
+  final NavigationService _navigationService = locator<NavigationService>();
   final AuthenticationService _authService = locator<AuthenticationService>();
 
   String _email = '';
@@ -42,23 +42,32 @@ class ForgotPasswordViewModel extends BaseViewModel {
   }
 
   Future<void> requestPasswordReset() async {
-    if (!_isFormValid) return;
+    _navigationService.navigateToVerificationView();
+    // if (!_isFormValid) return;
 
-    setBusy(true);
+    // setBusy(true);
 
-    try {
-      final success = await _authService.requestPasswordReset(_email);
+    // try {
+    //   final success = await _authService.requestPasswordReset(_email);
 
-      if (success) {
-        navigationService.navigateToVerificationView();
-      } else {
-        _errorMessage =
-            _authService.error ?? 'Failed to request password reset';
-      }
-    } catch (e) {
-      _errorMessage = 'An unexpected error occurred';
-    } finally {
-      setBusy(false);
-    }
+    //   if (success) {
+    //     _navigationService.navigateToVerificationView();
+    //   } else {
+    //     _errorMessage =
+    //         _authService.errorMessage ?? 'Failed to request password reset';
+    //   }
+    // } catch (e) {
+    //   _errorMessage = 'An unexpected error occurred. Please try again.';
+    // } finally {
+    //   setBusy(false);
+    // }
+  }
+
+  void navigateBack() {
+    _navigationService.back();
+  }
+
+  void navigateToBuyerLoginView() {
+    _navigationService.navigateToBuyerLoginView();
   }
 }

@@ -82,7 +82,7 @@ class ForgotPasswordView extends StackedView<ForgotPasswordViewModel> {
                       isDisabled: !viewModel.isFormValid,
                     ),
                     InkWell(
-                      onTap: viewModel.navigationService.back,
+                      onTap: viewModel.navigateBack,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         spacing: 10,

@@ -1,419 +1,567 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:marketplace/app/app.locator.dart';
 import 'package:marketplace/app/app.logger.dart';
 import 'package:marketplace/config/api_config.dart';
+import 'package:marketplace/services/api_service.dart';
+import 'package:marketplace/services/token_service.dart';
+import 'package:marketplace/services/user_service.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:marketplace/models/auth_response_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+// Result enums for authentication operations
+enum AuthResult { success, error, emailNotVerified }
 
 class AuthenticationService {
   final log = getLogger('AuthenticationService');
   final _navigationService = locator<NavigationService>();
+  final UserService _userService = locator<UserService>();
+  final TokenService _tokenService = locator<TokenService>();
+  final ApiService _apiService = locator<ApiService>();
 
   final String _baseUrl = ApiConfig.baseUrl;
 
+  // Authentication state
   bool _isAuthenticated = false;
   String? _token;
   String? _userId;
   String? _userType; // 'buyer' or 'seller'
-  String? _error;
-  Map<String, String> _validationErrors = {};
+  String? _errorMessage;
 
   // Store user email during registration for OTP verification
   String? _pendingVerificationEmail;
 
+  // Additional fields for email verification status
+  bool _isEmailVerified = false;
+
+  UserModel? _currentUser;
+
+  // Getters
   bool get isAuthenticated => _isAuthenticated;
   String? get token => _token;
   String? get userId => _userId;
   String? get userType => _userType;
-  String? get error => _error;
-  Map<String, String> get validationErrors => _validationErrors;
+  String? get errorMessage => _errorMessage;
+  Map<String, String> get validationErrors => {};
   String? get pendingVerificationEmail => _pendingVerificationEmail;
+  bool get isEmailVerified => _isEmailVerified;
+  UserModel? get currentUser => _currentUser;
 
-  // Sign up method - connected to API
-  Future<bool> signUpBuyer({
-    required String name,
-    required String email,
-    required String password,
-    String country = 'Pakistan', // Default value
-    required String phoneNumber, // Make phone number required
-    bool newsletterSubscription = true, // Default to true
-  }) async {
+  // Initialize service - load saved token if available
+  Future<bool> initialize() async {
     try {
-      log.i('Signing up buyer: $email');
+      // TEMPORARILY COMMENTED FOR TESTING:
+      // Bypassing token validation and always returning not authenticated
+      // This will force the app to show the splash/login screen at startup
+      /*
+      final prefs = await SharedPreferences.getInstance();
+      final savedToken = prefs.getString('auth_token');
 
-      // Parse name into first and last name
-      final nameParts = name.trim().split(' ');
-      final firstName = nameParts.first;
-      final lastName =
-          nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '';
+      if (savedToken != null) {
+        _token = savedToken;
+        _isAuthenticated = true;
 
-      // Convert newsletterSubscription boolean to int
-      final newsLetterValue = newsletterSubscription ? 1 : 0;
-
-      // Build the registration URL with query parameters
-      final uri = Uri.parse('$_baseUrl${ApiConfig.registerEndpoint}').replace(
-        queryParameters: {
-          'first_name': firstName,
-          'last_name': lastName,
-          'email': email,
-          'password': password,
-          'country': country,
-          'phone_number': phoneNumber,
-          'newsletter_subscription': newsLetterValue.toString(),
-        },
-      );
-
-      // Send the request
-      final response = await http.post(uri);
-
-      log.i(
-          'Registration API response: ${response.statusCode}, Body: ${response.body}');
-
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final data = json.decode(response.body);
-
-        // Clear any previous validation errors
-        _validationErrors = {};
-
-        // Store user data
-        _userId = data['user_id']?.toString() ??
-            'user-${DateTime.now().millisecondsSinceEpoch}';
-        _userType = 'buyer';
-        _error = null;
-
-        // Store email for OTP verification
-        _pendingVerificationEmail = email;
-
-        return true;
-      } else {
-        // Handle validation errors (422) or other error responses
-        final errorData = json.decode(response.body);
-
-        // Clear previous validation errors
-        _validationErrors = {};
-
-        if (errorData is Map<String, dynamic>) {
-          // Extract validation errors from API response
-          final errors = <String>[];
-
-          // Process all error fields from the response
-          errorData.forEach((field, fieldErrors) {
-            if (fieldErrors is List) {
-              // Store field-specific errors in the validation errors map
-              _validationErrors[field] = fieldErrors.join(', ');
-
-              for (var error in fieldErrors) {
-                errors.add("• $error");
-              }
-            } else if (fieldErrors is String) {
-              // Store single error in the validation errors map
-              _validationErrors[field] = fieldErrors;
-
-              errors.add("• $fieldErrors");
-            }
-          });
-
-          // Join all errors with newlines for display
-          if (errors.isNotEmpty) {
-            _error = errors.join('\n');
-          } else {
-            _error =
-                'Registration failed with status code: ${response.statusCode}';
-          }
+        // Fetch user details using the token
+        final userData = await _fetchUserData(savedToken);
+        if (userData != null) {
+          _currentUser = userData;
+          return true;
         } else {
-          _error = errorData['message'] ??
-              'Registration failed with status code: ${response.statusCode}';
+          // Token might be invalid - clear it
+          await _clearAuthData();
+          return false;
         }
-
-        return false;
       }
-    } catch (e) {
-      log.e('Error signing up buyer: $e');
-      _error = e.toString();
-      return false;
-    }
-  }
+      */
 
-  // Verify OTP method - for email verification
-  Future<bool> verifyOTP(String email, String otp) async {
-    try {
-      log.i('Verifying OTP for: $email');
-
-      // Build the verification URL with query parameters
-      final uri = Uri.parse('$_baseUrl${ApiConfig.verifyOtpEndpoint}').replace(
-        queryParameters: {
-          'email': email,
-          'otp': otp,
-        },
-      );
-
-      // Send the request
-      final response = await http.post(uri);
-
-      log.i(
-          'OTP verification API response: ${response.statusCode}, Body: ${response.body}');
-
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-
-        // Clear pending verification email as it's now verified
-        _pendingVerificationEmail = null;
-        _error = null;
-
-        return true;
-      } else {
-        // Handle error responses
-        final errorData = json.decode(response.body);
-        _error = errorData['message'] ??
-            'OTP verification failed with status code: ${response.statusCode}';
-        return false;
-      }
-    } catch (e) {
-      log.e('Error verifying OTP: $e');
-      _error = e.toString();
-      return false;
-    }
-  }
-
-  // Resend OTP method
-  Future<bool> resendOTP(String email) async {
-    try {
-      log.i('Resending OTP for: $email');
-
-      // Build the resend OTP URL with query parameters
-      final uri = Uri.parse('$_baseUrl${ApiConfig.resendOtpEndpoint}').replace(
-        queryParameters: {
-          'email': email,
-        },
-      );
-
-      // Send the request
-      final response = await http.post(uri);
-
-      log.i(
-          'Resend OTP API response: ${response.statusCode}, Body: ${response.body}');
-
-      if (response.statusCode == 200) {
-        _error = null;
-        return true;
-      } else {
-        // Handle error responses
-        final errorData = json.decode(response.body);
-        _error = errorData['message'] ??
-            'Resend OTP failed with status code: ${response.statusCode}';
-        return false;
-      }
-    } catch (e) {
-      log.e('Error resending OTP: $e');
-      _error = e.toString();
-      return false;
-    }
-  }
-
-  // Sign up method for seller - will be updated with API
-  Future<bool> signUpSeller({
-    required String name,
-    required String email,
-    required String password,
-    String address = '', // Business address
-    String country = 'Pakistan', // Default value
-    required String phoneNumber, // Make phone number required
-    bool newsletterSubscription = true, // Default to true
-  }) async {
-    try {
-      log.i('Signing up seller: $email');
-
-      // Parse name into first and last name (for business name, use same field)
-      final nameParts = name.trim().split(' ');
-      final firstName = nameParts.first;
-      final lastName =
-          nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '';
-
-      // Convert newsletterSubscription boolean to int
-      final newsLetterValue = newsletterSubscription ? 1 : 0;
-
-      // Build the registration URL with query parameters
-      final uri = Uri.parse('$_baseUrl${ApiConfig.registerEndpoint}').replace(
-        queryParameters: {
-          'first_name': firstName,
-          'last_name': lastName,
-          'email': email,
-          'password': password,
-          'country': country,
-          'phone_number': phoneNumber,
-          'newsletter_subscription': newsLetterValue.toString(),
-          'user_type': 'seller', // Add seller type parameter
-          'business_address': address,
-        },
-      );
-
-      // Send the request
-      final response = await http.post(uri);
-
-      log.i(
-          'Registration API response: ${response.statusCode}, Body: ${response.body}');
-
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final data = json.decode(response.body);
-
-        // Clear any previous validation errors
-        _validationErrors = {};
-
-        // Store user data
-        _userId = data['user_id']?.toString() ??
-            'seller-${DateTime.now().millisecondsSinceEpoch}';
-        _userType = 'seller';
-        _error = null;
-
-        // Store email for OTP verification
-        _pendingVerificationEmail = email;
-
-        return true;
-      } else {
-        // Handle validation errors (422) or other error responses
-        final errorData = json.decode(response.body);
-
-        // Clear previous validation errors
-        _validationErrors = {};
-
-        if (errorData is Map<String, dynamic>) {
-          // Extract validation errors from API response
-          final errors = <String>[];
-
-          // Process all error fields from the response
-          errorData.forEach((field, fieldErrors) {
-            if (fieldErrors is List) {
-              // Store field-specific errors in the validation errors map
-              _validationErrors[field] = fieldErrors.join(', ');
-
-              for (var error in fieldErrors) {
-                errors.add("• $error");
-              }
-            } else if (fieldErrors is String) {
-              // Store single error in the validation errors map
-              _validationErrors[field] = fieldErrors;
-
-              errors.add("• $fieldErrors");
-            }
-          });
-
-          // Join all errors with newlines for display
-          if (errors.isNotEmpty) {
-            _error = errors.join('\n');
-          } else {
-            _error =
-                'Registration failed with status code: ${response.statusCode}';
-          }
-        } else {
-          _error = errorData['message'] ??
-              'Registration failed with status code: ${response.statusCode}';
-        }
-
-        return false;
-      }
-    } catch (e) {
-      log.e('Error signing up seller: $e');
-      _error = e.toString();
-      return false;
-    }
-  }
-
-  // Login method - will be connected to API
-  Future<bool> login({
-    required String email,
-    required String password,
-    String userType = 'buyer', // Default to buyer
-  }) async {
-    try {
-      log.i('Logging in $userType: $email');
-      // API integration will be added here
-      // For now, simulate a successful login
-
-      _isAuthenticated = true;
-      _token = 'sample-token-${DateTime.now().millisecondsSinceEpoch}';
-      _userId = '$userType-${DateTime.now().millisecondsSinceEpoch}';
-      _userType = userType;
-      _error = null;
-      _validationErrors = {};
-
-      return true;
-    } catch (e) {
-      log.e('Error logging in: $e');
+      // For testing: Always return false to force login flow
       _isAuthenticated = false;
       _token = null;
-      _userId = null;
-      _error = e.toString();
+      _currentUser = null;
+      return false;
+    } catch (e) {
+      log.e('Error initializing authentication: $e');
       return false;
     }
   }
 
-  // Logout method
-  Future<void> logout() async {
-    log.i('Logging out user');
-    _isAuthenticated = false;
-    _token = null;
-    _userId = null;
-    _userType = null;
-    _error = null;
-    _validationErrors = {};
+  // Fetch current user information
+  Future<void> _fetchCurrentUser() async {
+    try {
+      // Make an API call to get user information
+      final result = await _apiService.get('/me');
+
+      if (!result.containsKey('error')) {
+        final userData = result;
+
+        // Parse user ID
+        _userId = userData['id']?.toString();
+        _userType = userData['user_type'] ?? 'buyer';
+        _isEmailVerified = userData['is_email_verified'] ?? false;
+
+        // Create user data object for UserService
+        _userService.setUser(UserData(
+          userId: _userId ?? '',
+          name: '${userData['first_name'] ?? ''} ${userData['last_name'] ?? ''}'
+              .trim(),
+          email: userData['email'] ?? '',
+          userType: _userType ?? 'buyer',
+          isEmailVerified: _isEmailVerified,
+          phoneNumber: userData['phone_number'],
+          country: userData['country'],
+          profileImageUrl: userData['profile_image_url'],
+        ));
+      }
+    } catch (e) {
+      log.e('Error fetching current user: $e');
+    }
   }
 
-  // Password reset methods
+  // Register a new user
+  Future<AuthResult> register({
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String password,
+    required String phoneNumber,
+    String country = 'Pakistan',
+    bool newsletterSubscription = true,
+  }) async {
+    try {
+      _errorMessage = null;
+
+      // Prepare request body
+      final requestBody = {
+        'first_name': firstName,
+        'last_name': lastName,
+        'email': email,
+        'password': password,
+        'phone_number': phoneNumber,
+        'country': country,
+        'newsletter_subscription': newsletterSubscription ? 1 : 0,
+      };
+
+      log.i('Registration request body: $requestBody');
+
+      // Send registration request
+      // Use the exact endpoint from ApiConfig for consistency
+      final response =
+          await _apiService.post(ApiConfig.registerEndpoint, body: requestBody);
+
+      log.i('Registration response: $response');
+
+      // Parse response
+      final registerResponse = RegisterResponse.fromJson(response);
+
+      if (registerResponse.isSuccess) {
+        // Registration successful
+        _token = registerResponse.token;
+        _currentUser = registerResponse.user != null
+            ? UserModel(
+                id: registerResponse.user!.id,
+                name: registerResponse.user!.name,
+                email: registerResponse.user!.email)
+            : null;
+        _pendingVerificationEmail = email;
+
+        // Save token
+        if (_token != null) {
+          await _saveToken(_token!);
+        }
+
+        return AuthResult.success;
+      } else if (registerResponse.hasErrors) {
+        // Registration failed with validation errors
+        if (registerResponse.errors != null) {
+          _errorMessage = registerResponse.errors!.entries
+              .map((e) => "${e.key}: ${e.value.join(', ')}")
+              .join('\n');
+        } else {
+          _errorMessage = 'Registration failed. Please try again.';
+        }
+        return AuthResult.error;
+      } else if (response.containsKey('message')) {
+        // The API returned a message field (likely an error)
+        _errorMessage = response['message'];
+        return AuthResult.error;
+      } else {
+        // Unknown error
+        _errorMessage = 'Registration failed. Please try again.';
+        return AuthResult.error;
+      }
+    } catch (e) {
+      log.e('Registration error: $e');
+      _errorMessage = 'An unexpected error occurred. Please try again.';
+      return AuthResult.error;
+    }
+  }
+
+  // Verify OTP code
+  Future<AuthResult> verifyOtp({
+    required String email,
+    required String otp,
+  }) async {
+    try {
+      _errorMessage = null;
+
+      // Prepare request body
+      final requestBody = {
+        'email': email,
+        'otp': otp,
+      };
+
+      // Send OTP verification request
+      final response = await _apiService.post(ApiConfig.verifyOtpEndpoint,
+          body: requestBody);
+
+      // Parse response
+      final otpResponse = OtpVerificationResponse.fromJson(response);
+
+      if (otpResponse.isSuccess) {
+        // OTP verification successful
+        if (otpResponse.token != null) {
+          _token = otpResponse.token;
+          _isAuthenticated = true;
+          _pendingVerificationEmail = null;
+
+          // Save token
+          await _saveToken(_token!);
+        }
+
+        return AuthResult.success;
+      } else {
+        // OTP verification failed
+        _errorMessage = otpResponse.message ?? 'Invalid OTP. Please try again.';
+        return AuthResult.error;
+      }
+    } catch (e) {
+      log.e('OTP verification error: $e');
+      _errorMessage = 'An unexpected error occurred. Please try again.';
+      return AuthResult.error;
+    }
+  }
+
+  // Login user
+  Future<AuthResult> login({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      _errorMessage = null;
+
+      // Prepare query parameters for login
+      final queryParams = {
+        'email': email,
+        'password': password,
+      };
+
+      // Send login request
+      final response = await _apiService.post(ApiConfig.loginEndpoint,
+          queryParams: queryParams);
+
+      // Parse response
+      final loginResponse = LoginResponse.fromJson(response);
+
+      if (loginResponse.isSuccess) {
+        // Login successful and email is verified
+        _token = loginResponse.token;
+        _isAuthenticated = true;
+        _currentUser = loginResponse.user != null
+            ? UserModel(
+                id: loginResponse.user!.id,
+                name: loginResponse.user!.name,
+                email: loginResponse.user!.email)
+            : null;
+
+        // Save token
+        if (_token != null) {
+          await _saveToken(_token!);
+        }
+
+        return AuthResult.success;
+      } else if (loginResponse.isEmailNotVerified) {
+        // Login successful but email not verified
+        _pendingVerificationEmail = email;
+        _errorMessage = loginResponse.message ??
+            'Email not verified. Please verify your email.';
+        return AuthResult.emailNotVerified;
+      } else if (loginResponse.hasErrors) {
+        // Login failed with validation errors
+        if (loginResponse.errors != null &&
+            loginResponse.errors!.containsKey('email')) {
+          _errorMessage = loginResponse.errors!['email']!.join(', ');
+        } else {
+          _errorMessage =
+              loginResponse.message ?? 'Invalid credentials. Please try again.';
+        }
+        return AuthResult.error;
+      } else {
+        // Unknown error
+        _errorMessage =
+            loginResponse.message ?? 'Login failed. Please try again.';
+        return AuthResult.error;
+      }
+    } catch (e) {
+      log.e('Login error: $e');
+      _errorMessage = 'An unexpected error occurred. Please try again.';
+      return AuthResult.error;
+    }
+  }
+
+  // Logout user
+  Future<bool> logout() async {
+    try {
+      // Clear authentication data
+      await _clearAuthData();
+      return true;
+    } catch (e) {
+      log.e('Logout error: $e');
+      return false;
+    }
+  }
+
+  // Resend OTP
+  Future<bool> resendOtp({required String email}) async {
+    try {
+      _errorMessage = null;
+
+      // Prepare request body
+      final requestBody = {
+        'email': email,
+      };
+
+      // Send resend OTP request
+      final response = await _apiService.post(ApiConfig.resendOtpEndpoint,
+          body: requestBody);
+
+      if (response.containsKey('message')) {
+        return true;
+      } else {
+        _errorMessage = 'Failed to resend OTP. Please try again.';
+        return false;
+      }
+    } catch (e) {
+      log.e('Resend OTP error: $e');
+      _errorMessage = 'An unexpected error occurred. Please try again.';
+      return false;
+    }
+  }
+
+  // Request password reset
   Future<bool> requestPasswordReset(String email) async {
     try {
-      log.i('Requesting password reset for: $email');
-      // API integration will be added here
-      _error = null;
-      return true;
+      _errorMessage = null;
+
+      // Prepare request body
+      final requestBody = {
+        'email': email,
+      };
+
+      // Send password reset request
+      final response =
+          await _apiService.post('/forgot-password', body: requestBody);
+
+      // Parse response
+      final resetResponse = PasswordResetRequestResponse.fromJson(response);
+
+      if (resetResponse.isSuccess) {
+        // Password reset request successful, store email for verification
+        _pendingVerificationEmail = email;
+        return true;
+      } else {
+        // Password reset request failed
+        _errorMessage = resetResponse.error ??
+            'Failed to request password reset. Please try again.';
+        return false;
+      }
     } catch (e) {
-      log.e('Error requesting password reset: $e');
-      _error = e.toString();
+      log.e('Password reset request error: $e');
+      _errorMessage = 'An unexpected error occurred. Please try again.';
       return false;
     }
   }
 
+  // Verify reset code - if your API requires a separate step to verify the code
   Future<bool> verifyResetCode(String email, String code) async {
     try {
-      log.i('Verifying reset code for: $email');
-      // API integration will be added here
-      _error = null;
-      return true;
+      _errorMessage = null;
+
+      // Prepare request body
+      final requestBody = {
+        'email': email,
+        'code': code,
+      };
+
+      // Send verify reset code request
+      final response =
+          await _apiService.post('/verify-reset-code', body: requestBody);
+
+      if (response.containsKey('message') &&
+          response['message'].toString().contains('valid')) {
+        return true;
+      } else {
+        _errorMessage =
+            response['message'] ?? 'Invalid reset code. Please try again.';
+        return false;
+      }
     } catch (e) {
-      log.e('Error verifying reset code: $e');
-      _error = e.toString();
+      log.e('Verify reset code error: $e');
+      _errorMessage = 'An unexpected error occurred. Please try again.';
       return false;
     }
   }
 
-  Future<bool> resetPassword(String email, String newPassword) async {
+  // Reset password
+  Future<bool> resetPassword(String email, String newPassword,
+      {String? resetToken}) async {
     try {
-      log.i('Resetting password for: $email');
-      // API integration will be added here
-      _error = null;
-      return true;
+      _errorMessage = null;
+
+      // Prepare request body
+      final requestBody = {
+        'email': email,
+        'password': newPassword,
+        'password_confirmation': newPassword,
+      };
+
+      // Add reset token if provided
+      if (resetToken != null) {
+        requestBody['token'] = resetToken;
+      }
+
+      // Send reset password request
+      final response =
+          await _apiService.post('/reset-password', body: requestBody);
+
+      // Parse response
+      final resetResponse = PasswordResetResponse.fromJson(response);
+
+      if (resetResponse.isSuccess) {
+        // Password reset successful
+        return true;
+      } else {
+        // Password reset failed
+        _errorMessage = resetResponse.error ??
+            'Failed to reset password. Please try again.';
+        return false;
+      }
     } catch (e) {
-      log.e('Error resetting password: $e');
-      _error = e.toString();
+      log.e('Reset password error: $e');
+      _errorMessage = 'An unexpected error occurred. Please try again.';
       return false;
     }
   }
 
-  // Google Sign-In method - will be connected to API
+  // Fetch user data with token
+  Future<UserModel?> _fetchUserData(String token) async {
+    try {
+      final response = await _apiService.get('/me', token: token);
+
+      if (response.containsKey('id') && response.containsKey('email')) {
+        return UserModel(
+          id: response['id'],
+          name: response['name'] ?? '',
+          email: response['email'],
+        );
+      }
+
+      return null;
+    } catch (e) {
+      log.e('Error fetching user data: $e');
+      return null;
+    }
+  }
+
+  // Save authentication token
+  Future<void> _saveToken(String token) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('auth_token', token);
+    } catch (e) {
+      log.e('Error saving token: $e');
+    }
+  }
+
+  // Clear authentication data
+  Future<void> _clearAuthData() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('auth_token');
+
+      _token = null;
+      _isAuthenticated = false;
+      _currentUser = null;
+      _pendingVerificationEmail = null;
+    } catch (e) {
+      log.e('Error clearing auth data: $e');
+    }
+  }
+
+  // Google Sign-In
   Future<bool> signInWithGoogle() async {
     try {
-      log.i('Signing in with Google');
-      // API integration will be added here
+      _errorMessage = null;
 
-      _isAuthenticated = true;
-      _token = 'google-token-${DateTime.now().millisecondsSinceEpoch}';
-      _userId = 'google-user-${DateTime.now().millisecondsSinceEpoch}';
-      _userType = 'buyer'; // Default to buyer for Google sign-in
-      _error = null;
+      // Initialize Google Sign In
+      final GoogleSignIn googleSignIn = GoogleSignIn();
 
-      return true;
+      // Start the Google Sign In flow
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
+      // If user aborted the sign in flow
+      if (googleUser == null) {
+        _errorMessage = 'Google sign in was canceled';
+        return false;
+      }
+
+      // Get authentication details from Google
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      // Send to your backend
+      final response = await _apiService.post('/google-auth', body: {
+        'id_token': googleAuth.idToken,
+        'access_token': googleAuth.accessToken,
+        'email': googleUser.email,
+        'name': googleUser.displayName ?? '',
+        'profile_image': googleUser.photoUrl ?? '',
+      });
+
+      // Parse the response
+      if (response.containsKey('token')) {
+        // Set authentication state
+        _token = response['token'];
+        _isAuthenticated = true;
+
+        // Create UserModel from response
+        if (response.containsKey('user')) {
+          _currentUser = UserModel(
+            id: response['user']['id'],
+            name: response['user']['name'],
+            email: response['user']['email'],
+          );
+        }
+
+        // Save token
+        if (_token != null) {
+          await _saveToken(_token!);
+        }
+
+        return true;
+      } else if (response.containsKey('error') ||
+          response.containsKey('message')) {
+        _errorMessage =
+            response['error'] ?? response['message'] ?? 'Google sign in failed';
+        return false;
+      } else {
+        _errorMessage = 'Google sign in failed. Please try again.';
+        return false;
+      }
     } catch (e) {
-      log.e('Error signing in with Google: $e');
-      _error = e.toString();
+      log.e('Google sign in error: $e');
+      _errorMessage = 'An unexpected error occurred during Google sign in';
       return false;
     }
   }

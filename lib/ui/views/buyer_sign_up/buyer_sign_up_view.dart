@@ -367,8 +367,7 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                                   fontWeight: FontWeight.w400),
                             ),
                             InkWell(
-                              onTap: viewModel
-                                  .navigationService.navigateToBuyerLoginView,
+                              onTap: viewModel.navigateToBuyerLoginView,
                               child: Text(
                                 "Login",
                                 style: GoogleFonts.roboto(

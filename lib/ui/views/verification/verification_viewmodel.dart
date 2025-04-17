@@ -6,7 +6,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class VerificationViewModel extends BaseViewModel {
-  final NavigationService navigationService = locator<NavigationService>();
+  final NavigationService _navigationService = locator<NavigationService>();
   final DialogService _dialogService = locator<DialogService>();
   final AuthenticationService _authService = locator<AuthenticationService>();
 
@@ -62,17 +62,20 @@ class VerificationViewModel extends BaseViewModel {
     setBusy(true);
 
     try {
-      final success = await _authService.verifyOTP(email!, _verificationCode);
+      final result = await _authService.verifyOtp(
+        email: email!,
+        otp: _verificationCode,
+      );
 
-      if (success) {
+      if (result == AuthResult.success) {
         // After successful verification, navigate to login
-        navigationService.navigateToBuyerLoginView();
+        _navigationService.navigateToMainView();
       } else {
         // Show error dialog
         await _dialogService.showCustomDialog(
           variant: DialogType.error,
           title: 'Verification Failed',
-          description: _authService.error ??
+          description: _authService.errorMessage ??
               'Invalid verification code. Please try again.',
           mainButtonTitle: 'OK',
         );
@@ -104,7 +107,7 @@ class VerificationViewModel extends BaseViewModel {
     setBusy(true);
 
     try {
-      final success = await _authService.resendOTP(email!);
+      final success = await _authService.resendOtp(email: email!);
 
       if (success) {
         // Show success message
@@ -115,7 +118,7 @@ class VerificationViewModel extends BaseViewModel {
         await _dialogService.showCustomDialog(
           variant: DialogType.error,
           title: 'Resend Failed',
-          description: _authService.error ??
+          description: _authService.errorMessage ??
               'Failed to resend verification code. Please try again.',
           mainButtonTitle: 'OK',
         );

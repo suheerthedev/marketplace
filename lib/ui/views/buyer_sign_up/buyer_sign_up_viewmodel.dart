@@ -7,7 +7,7 @@ import 'package:stacked_services/stacked_services.dart';
 import '../../common/app_strings.dart';
 
 class BuyerSignUpViewModel extends BaseViewModel {
-  final NavigationService navigationService = locator<NavigationService>();
+  final NavigationService _navigationService = locator<NavigationService>();
   final DialogService _dialogService = locator<DialogService>();
   final AuthenticationService _authService = locator<AuthenticationService>();
 
@@ -138,12 +138,21 @@ class BuyerSignUpViewModel extends BaseViewModel {
   }
 
   Future<void> signUp() async {
+    if (!_isFormValid) return;
+
     _clearErrors();
     setBusy(true);
 
     try {
-      final success = await _authService.signUpBuyer(
-        name: _name,
+      // Parse name into first and last name
+      final nameParts = _name.trim().split(' ');
+      final firstName = nameParts.first;
+      final lastName =
+          nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '';
+
+      final result = await _authService.register(
+        firstName: firstName,
+        lastName: lastName,
         email: _email,
         password: _password,
         phoneNumber: _phoneNumber,
@@ -151,14 +160,32 @@ class BuyerSignUpViewModel extends BaseViewModel {
         newsletterSubscription: _newsletterSubscription,
       );
 
-      if (success) {
-        navigationService.navigateToVerificationView();
-      } else {
-        // Map API validation errors to specific fields
-        if (_authService.validationErrors.isNotEmpty) {
-          _processValidationErrors(_authService.validationErrors);
-        } else if (_authService.error != null) {
-          _generalError = _authService.error;
+      if (result == AuthResult.success) {
+        // Registration successful, navigate to verification view
+        _navigationService.navigateToVerificationView();
+      } else if (result == AuthResult.error) {
+        // Check for specific error messages from the auth service
+        if (_authService.errorMessage != null) {
+          // Simple error message handling
+          if (_authService.errorMessage!.toLowerCase().contains('email')) {
+            _emailError = _authService.errorMessage;
+          } else if (_authService.errorMessage!
+              .toLowerCase()
+              .contains('password')) {
+            _passwordError = _authService.errorMessage;
+          } else if (_authService.errorMessage!
+              .toLowerCase()
+              .contains('phone')) {
+            _phoneNumberError = _authService.errorMessage;
+          } else if (_authService.errorMessage!
+              .toLowerCase()
+              .contains('name')) {
+            _nameError = _authService.errorMessage;
+          } else {
+            _generalError = _authService.errorMessage;
+          }
+        } else {
+          _generalError = 'Registration failed. Please try again.';
         }
       }
     } catch (e) {
@@ -168,35 +195,24 @@ class BuyerSignUpViewModel extends BaseViewModel {
     }
   }
 
-  void _processValidationErrors(Map<String, String> errors) {
-    // Map API error keys to our form fields
-    errors.forEach((key, value) {
-      switch (key.toLowerCase()) {
-        case 'name':
-        case 'first_name':
-        case 'lastname':
-        case 'last_name':
-          _nameError = value;
-          break;
-        case 'email':
-          _emailError = value;
-          break;
-        case 'password':
-          _passwordError = value;
-          break;
-        case 'phone':
-        case 'phone_number':
-        case 'phonenumber':
-          _phoneNumberError = value;
-          break;
-        default:
-          // If we don't have a specific field for this error, set it as general error
-          _generalError = value;
-      }
-    });
+  void navigateToLogin() {
+    _navigationService.navigateToBuyerLoginView();
   }
 
-  Future<void> signUpWithGoogle() async {
+  // UI Navigation helper methods
+  void onTermsAndConditionsTap() {
+    _navigationService.navigateToTermsConditonsView();
+  }
+
+  void onPrivacyPolicyTap() {
+    _navigationService.navigateToPrivacyPolicyView();
+  }
+
+  void onCookieUseTap() {
+    _navigationService.navigateToPrivacyPolicyView();
+  }
+
+  void signUpWithGoogle() async {
     _clearErrors();
     setBusy(true);
 
@@ -204,27 +220,18 @@ class BuyerSignUpViewModel extends BaseViewModel {
       final success = await _authService.signInWithGoogle();
 
       if (success) {
-        navigationService.navigateToMainView();
+        _navigationService.navigateToMainView();
       } else {
-        _generalError = _authService.error ??
-            'Failed to sign in with Google. Please try again.';
+        _generalError = _authService.errorMessage ?? 'Google sign in failed';
       }
     } catch (e) {
-      _generalError = 'An unexpected error occurred. Please try again later.';
+      _generalError = 'An unexpected error occurred during Google sign in';
     } finally {
       setBusy(false);
     }
   }
 
-  void onTermsAndConditionsTap() {
-    navigationService.navigateToTermsConditonsView();
-  }
-
-  void onPrivacyPolicyTap() {
-    navigationService.navigateToPrivacyPolicyView();
-  }
-
-  void onCookieUseTap() {
-    navigationService.navigateToPrivacyPolicyView();
+  void navigateToBuyerLoginView() {
+    _navigationService.navigateToBuyerLoginView();
   }
 }

@@ -53,14 +53,14 @@ class StartupView extends StackedView<StartupViewModel> {
             children: [
               CustomButton(
                 title: "Continue as Buyer",
-                onTap: viewModel.navigationService.navigateToBuyerSignUpView,
+                onTap: viewModel.navigateToBuyerSignUpView,
                 bgColor: mainBackgroundColor,
                 textColor: secondaryTextColor,
                 borderColor: mainBackgroundColor,
               ),
               CustomButton(
                 title: "Continue as Seller",
-                onTap: viewModel.navigationService.navigateToSellerSignUpView,
+                onTap: viewModel.navigateToSellerSignUpView,
                 bgColor: secondaryBackgroundColor,
                 textColor: mainTextColor,
                 borderColor: mainBackgroundColor,

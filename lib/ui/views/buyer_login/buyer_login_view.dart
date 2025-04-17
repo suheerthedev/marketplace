@@ -66,6 +66,21 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                             hasSuffix: false,
                             onChanged: viewModel.setEmail,
                           ),
+                          if (viewModel.emailError != null)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 4.0, left: 2.0),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  viewModel.emailError!,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 12,
+                                    color: errorColor,
+                                  ),
+                                ),
+                              ),
+                            ),
                           const SizedBox(height: 14),
                           CustomTextField(
                             title: "Password",
@@ -82,18 +97,53 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                                   color: iconColor,
                                 )),
                           ),
+                          if (viewModel.passwordError != null)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 4.0, left: 2.0),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  viewModel.passwordError!,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 12,
+                                    color: errorColor,
+                                  ),
+                                ),
+                              ),
+                            ),
                           const SizedBox(height: 14),
 
-                          // Error message if any
-                          if (viewModel.errorMessage != null)
+                          // General error message if any
+                          if (viewModel.generalError != null)
                             Padding(
                               padding:
                                   const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                              child: Text(
-                                viewModel.errorMessage!,
-                                style: GoogleFonts.roboto(
-                                  color: errorColor,
-                                  fontSize: 14,
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: errorColor.withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      Icons.error_outline,
+                                      color: errorColor,
+                                      size: 16,
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: Text(
+                                        viewModel.generalError!,
+                                        style: GoogleFonts.roboto(
+                                          color: errorColor,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -108,8 +158,7 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                                 ),
                               ),
                               InkWell(
-                                onTap: viewModel.navigationService
-                                    .navigateToForgotPasswordView,
+                                onTap: viewModel.navigateToForgotPassword,
                                 child: Text(
                                   "Reset your password",
                                   style: GoogleFonts.roboto(
@@ -193,7 +242,7 @@ class BuyerLoginView extends StackedView<BuyerLoginViewModel> {
                                 fontWeight: FontWeight.w400),
                           ),
                           InkWell(
-                            onTap: viewModel.navigationService.back,
+                            onTap: viewModel.navigateBack,
                             child: Text(
                               "Join",
                               style: GoogleFonts.roboto(
