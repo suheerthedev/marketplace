@@ -16,6 +16,7 @@ class AuthenticationService {
   String? _userId;
   String? _userType; // 'buyer' or 'seller'
   String? _error;
+  Map<String, String> _validationErrors = {};
 
   // Store user email during registration for OTP verification
   String? _pendingVerificationEmail;
@@ -25,6 +26,7 @@ class AuthenticationService {
   String? get userId => _userId;
   String? get userType => _userType;
   String? get error => _error;
+  Map<String, String> get validationErrors => _validationErrors;
   String? get pendingVerificationEmail => _pendingVerificationEmail;
 
   // Sign up method - connected to API
@@ -33,7 +35,7 @@ class AuthenticationService {
     required String email,
     required String password,
     String country = 'Pakistan', // Default value
-    String phoneNumber = '', // Optional
+    required String phoneNumber, // Make phone number required
     bool newsletterSubscription = true, // Default to true
   }) async {
     try {
@@ -70,6 +72,9 @@ class AuthenticationService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = json.decode(response.body);
 
+        // Clear any previous validation errors
+        _validationErrors = {};
+
         // Store user data
         _userId = data['user_id']?.toString() ??
             'user-${DateTime.now().millisecondsSinceEpoch}';
@@ -81,10 +86,45 @@ class AuthenticationService {
 
         return true;
       } else {
-        // Handle error responses
+        // Handle validation errors (422) or other error responses
         final errorData = json.decode(response.body);
-        _error = errorData['message'] ??
-            'Registration failed with status code: ${response.statusCode}';
+
+        // Clear previous validation errors
+        _validationErrors = {};
+
+        if (errorData is Map<String, dynamic>) {
+          // Extract validation errors from API response
+          final errors = <String>[];
+
+          // Process all error fields from the response
+          errorData.forEach((field, fieldErrors) {
+            if (fieldErrors is List) {
+              // Store field-specific errors in the validation errors map
+              _validationErrors[field] = fieldErrors.join(', ');
+
+              for (var error in fieldErrors) {
+                errors.add("• $error");
+              }
+            } else if (fieldErrors is String) {
+              // Store single error in the validation errors map
+              _validationErrors[field] = fieldErrors;
+
+              errors.add("• $fieldErrors");
+            }
+          });
+
+          // Join all errors with newlines for display
+          if (errors.isNotEmpty) {
+            _error = errors.join('\n');
+          } else {
+            _error =
+                'Registration failed with status code: ${response.statusCode}';
+          }
+        } else {
+          _error = errorData['message'] ??
+              'Registration failed with status code: ${response.statusCode}';
+        }
+
         return false;
       }
     } catch (e) {
@@ -177,7 +217,7 @@ class AuthenticationService {
     required String password,
     String address = '', // Business address
     String country = 'Pakistan', // Default value
-    String phoneNumber = '', // Optional
+    required String phoneNumber, // Make phone number required
     bool newsletterSubscription = true, // Default to true
   }) async {
     try {
@@ -216,6 +256,9 @@ class AuthenticationService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final data = json.decode(response.body);
 
+        // Clear any previous validation errors
+        _validationErrors = {};
+
         // Store user data
         _userId = data['user_id']?.toString() ??
             'seller-${DateTime.now().millisecondsSinceEpoch}';
@@ -227,10 +270,45 @@ class AuthenticationService {
 
         return true;
       } else {
-        // Handle error responses
+        // Handle validation errors (422) or other error responses
         final errorData = json.decode(response.body);
-        _error = errorData['message'] ??
-            'Registration failed with status code: ${response.statusCode}';
+
+        // Clear previous validation errors
+        _validationErrors = {};
+
+        if (errorData is Map<String, dynamic>) {
+          // Extract validation errors from API response
+          final errors = <String>[];
+
+          // Process all error fields from the response
+          errorData.forEach((field, fieldErrors) {
+            if (fieldErrors is List) {
+              // Store field-specific errors in the validation errors map
+              _validationErrors[field] = fieldErrors.join(', ');
+
+              for (var error in fieldErrors) {
+                errors.add("• $error");
+              }
+            } else if (fieldErrors is String) {
+              // Store single error in the validation errors map
+              _validationErrors[field] = fieldErrors;
+
+              errors.add("• $fieldErrors");
+            }
+          });
+
+          // Join all errors with newlines for display
+          if (errors.isNotEmpty) {
+            _error = errors.join('\n');
+          } else {
+            _error =
+                'Registration failed with status code: ${response.statusCode}';
+          }
+        } else {
+          _error = errorData['message'] ??
+              'Registration failed with status code: ${response.statusCode}';
+        }
+
         return false;
       }
     } catch (e) {
@@ -256,6 +334,7 @@ class AuthenticationService {
       _userId = '$userType-${DateTime.now().millisecondsSinceEpoch}';
       _userType = userType;
       _error = null;
+      _validationErrors = {};
 
       return true;
     } catch (e) {
@@ -276,6 +355,7 @@ class AuthenticationService {
     _userId = null;
     _userType = null;
     _error = null;
+    _validationErrors = {};
   }
 
   // Password reset methods

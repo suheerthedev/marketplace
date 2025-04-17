@@ -12,6 +12,7 @@ class SellerSignUpViewModel extends BaseViewModel {
   String _email = '';
   String _password = '';
   String _address = '';
+  String _phoneNumber = '';
   String? _errorMessage;
   bool _isPasswordVisible = false;
   bool _isFormValid = false;
@@ -20,6 +21,7 @@ class SellerSignUpViewModel extends BaseViewModel {
   String get email => _email;
   String get password => _password;
   String get address => _address;
+  String get phoneNumber => _phoneNumber;
   String? get errorMessage => _errorMessage;
   bool get isPasswordVisible => _isPasswordVisible;
   bool get isFormValid => _isFormValid;
@@ -44,6 +46,11 @@ class SellerSignUpViewModel extends BaseViewModel {
     _validateForm();
   }
 
+  void setPhoneNumber(String value) {
+    _phoneNumber = value;
+    _validateForm();
+  }
+
   void togglePasswordVisibility() {
     _isPasswordVisible = !_isPasswordVisible;
     notifyListeners();
@@ -52,13 +59,20 @@ class SellerSignUpViewModel extends BaseViewModel {
   void _validateForm() {
     _errorMessage = null;
 
-    if (_name.isEmpty || _email.isEmpty || _password.isEmpty) {
+    if (_name.isEmpty ||
+        _email.isEmpty ||
+        _password.isEmpty ||
+        _address.isEmpty ||
+        _phoneNumber.isEmpty) {
       _isFormValid = false;
     } else if (!_isValidEmail(_email)) {
       _errorMessage = 'Please enter a valid email address';
       _isFormValid = false;
     } else if (_password.length < 6) {
       _errorMessage = 'Password must be at least 6 characters';
+      _isFormValid = false;
+    } else if (!_isValidPhoneNumber(_phoneNumber)) {
+      _errorMessage = 'Please enter a valid phone number';
       _isFormValid = false;
     } else {
       _isFormValid = true;
@@ -72,6 +86,13 @@ class SellerSignUpViewModel extends BaseViewModel {
     return emailRegExp.hasMatch(email);
   }
 
+  bool _isValidPhoneNumber(String phoneNumber) {
+    // Basic validation for international phone numbers
+    // Allows +, spaces, and digits, minimum 10 digits
+    final phoneRegExp = RegExp(r'^\+?[0-9\s]{10,15}$');
+    return phoneRegExp.hasMatch(phoneNumber.replaceAll(RegExp(r'[-()\s]'), ''));
+  }
+
   Future<void> signUp() async {
     if (!_isFormValid) return;
 
@@ -82,10 +103,12 @@ class SellerSignUpViewModel extends BaseViewModel {
         name: _name,
         email: _email,
         password: _password,
+        address: _address,
+        phoneNumber: _phoneNumber,
       );
 
       if (success) {
-        navigationService.navigateTo(Routes.sellerMainView);
+        navigationService.navigateToVerificationView();
       } else {
         _errorMessage = _authService.error ?? 'Sign up failed';
       }

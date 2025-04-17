@@ -1,3 +1,4 @@
+import 'package:marketplace/app/app.dialogs.dart';
 import 'package:marketplace/app/app.locator.dart';
 import 'package:marketplace/app/app.router.dart';
 import 'package:marketplace/services/authentication_service.dart';
@@ -6,6 +7,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 class VerificationViewModel extends BaseViewModel {
   final NavigationService navigationService = locator<NavigationService>();
+  final DialogService _dialogService = locator<DialogService>();
   final AuthenticationService _authService = locator<AuthenticationService>();
 
   String _verificationCode = '';
@@ -66,10 +68,23 @@ class VerificationViewModel extends BaseViewModel {
         // After successful verification, navigate to login
         navigationService.navigateToBuyerLoginView();
       } else {
-        _errorMessage = _authService.error ?? 'Invalid verification code';
+        // Show error dialog
+        await _dialogService.showCustomDialog(
+          variant: DialogType.error,
+          title: 'Verification Failed',
+          description: _authService.error ??
+              'Invalid verification code. Please try again.',
+          mainButtonTitle: 'OK',
+        );
       }
     } catch (e) {
-      _errorMessage = 'An unexpected error occurred';
+      // Show error dialog for unexpected errors
+      await _dialogService.showCustomDialog(
+        variant: DialogType.error,
+        title: 'Unexpected Error',
+        description: 'An unexpected error occurred. Please try again later.',
+        mainButtonTitle: 'OK',
+      );
     } finally {
       setBusy(false);
     }
@@ -77,8 +92,12 @@ class VerificationViewModel extends BaseViewModel {
 
   Future<void> resendCode() async {
     if (email == null) {
-      _errorMessage = 'No email address found for verification.';
-      notifyListeners();
+      await _dialogService.showCustomDialog(
+        variant: DialogType.error,
+        title: 'Resend Failed',
+        description: 'No email address found for verification.',
+        mainButtonTitle: 'OK',
+      );
       return;
     }
 
@@ -88,14 +107,28 @@ class VerificationViewModel extends BaseViewModel {
       final success = await _authService.resendOTP(email!);
 
       if (success) {
+        // Show success message
         _errorMessage = 'Verification code resent successfully!';
+        notifyListeners();
       } else {
-        _errorMessage =
-            _authService.error ?? 'Failed to resend verification code';
+        // Show error dialog
+        await _dialogService.showCustomDialog(
+          variant: DialogType.error,
+          title: 'Resend Failed',
+          description: _authService.error ??
+              'Failed to resend verification code. Please try again.',
+          mainButtonTitle: 'OK',
+        );
       }
     } catch (e) {
-      _errorMessage =
-          'An error occurred while resending the code: ${e.toString()}';
+      // Show error dialog for unexpected errors
+      await _dialogService.showCustomDialog(
+        variant: DialogType.error,
+        title: 'Unexpected Error',
+        description:
+            'An error occurred while resending the code. Please try again later.',
+        mainButtonTitle: 'OK',
+      );
     } finally {
       setBusy(false);
     }

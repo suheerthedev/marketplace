@@ -60,6 +60,21 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                             hasSuffix: false,
                             onChanged: viewModel.setName,
                           ),
+                          if (viewModel.nameError != null)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 4.0, left: 2.0),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  viewModel.nameError!,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 12,
+                                    color: errorColor,
+                                  ),
+                                ),
+                              ),
+                            ),
                           const SizedBox(height: 14),
                           CustomTextField(
                             title: "Email",
@@ -67,6 +82,21 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                             hasSuffix: false,
                             onChanged: viewModel.setEmail,
                           ),
+                          if (viewModel.emailError != null)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 4.0, left: 2.0),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  viewModel.emailError!,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 12,
+                                    color: errorColor,
+                                  ),
+                                ),
+                              ),
+                            ),
                           const SizedBox(height: 14),
                           CustomTextField(
                             title: "Password",
@@ -83,6 +113,21 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                                   color: iconColor,
                                 )),
                           ),
+                          if (viewModel.passwordError != null)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 4.0, left: 2.0),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  viewModel.passwordError!,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 12,
+                                    color: errorColor,
+                                  ),
+                                ),
+                              ),
+                            ),
                           const SizedBox(height: 14),
                           CustomTextField(
                             title: "Country",
@@ -98,6 +143,21 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                             keyboardType: TextInputType.phone,
                             onChanged: viewModel.setPhoneNumber,
                           ),
+                          if (viewModel.phoneNumberError != null)
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 4.0, left: 2.0),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  viewModel.phoneNumberError!,
+                                  style: GoogleFonts.roboto(
+                                    fontSize: 12,
+                                    color: errorColor,
+                                  ),
+                                ),
+                              ),
+                            ),
                           const SizedBox(height: 16),
 
                           // Newsletter subscription checkbox
@@ -141,14 +201,35 @@ class BuyerSignUpView extends StackedView<BuyerSignUpViewModel> {
                           const SizedBox(height: 14),
 
                           // Error message if any
-                          if (viewModel.errorMessage != null)
+                          if (viewModel.generalError != null)
                             Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: Text(
-                                viewModel.errorMessage!,
-                                style: GoogleFonts.roboto(
-                                  color: errorColor,
-                                  fontSize: 14,
+                              padding:
+                                  const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: errorColor.withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Icon(
+                                      Icons.error_outline,
+                                      color: errorColor,
+                                      size: 16,
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: Text(
+                                        viewModel.generalError!,
+                                        style: GoogleFonts.roboto(
+                                          color: errorColor,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
-import 'package:marketplace/ui/common/ui_helpers.dart';
+import 'package:marketplace/ui/widgets/common/custom_button/custom_button.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import 'error_dialog_model.dart';
-
-const double _graphicSize = 60;
 
 class ErrorDialog extends StackedView<ErrorDialogModel> {
   final DialogRequest request;
@@ -25,77 +24,135 @@ class ErrorDialog extends StackedView<ErrorDialogModel> {
     Widget? child,
   ) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       backgroundColor: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        request.title ?? 'Hello Stacked Dialog!!',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                      if (request.description != null) ...[
-                        verticalSpaceTiny,
-                        Text(
-                          request.description!,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: kcMediumGrey,
-                          ),
-                          maxLines: 3,
-                          softWrap: true,
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
-                Container(
-                  width: _graphicSize,
-                  height: _graphicSize,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFFF6E7B0),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(_graphicSize / 2),
-                    ),
-                  ),
-                  alignment: Alignment.center,
-                  child: const Text('⭐️', style: TextStyle(fontSize: 30)),
-                )
-              ],
+            // Error icon
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: errorColor.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.error_outline,
+                color: errorColor,
+                size: 30,
+              ),
             ),
-            verticalSpaceMedium,
-            GestureDetector(
-              onTap: () => completer(DialogResponse(confirmed: true)),
-              child: Container(
-                height: 50,
-                width: double.infinity,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Text(
-                  'Got it',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
+            const SizedBox(height: 16),
+
+            // Title
+            Text(
+              request.title ?? viewModel.title,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: mainTextColor,
+              ),
+            ),
+            const SizedBox(height: 10),
+
+            // Description or error message
+            if (request.description != null)
+              Text(
+                request.description!,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  color: lightTextColor,
                 ),
               ),
+
+            // Validation errors list
+            if (request.data != null &&
+                request.data is Map &&
+                request.data.containsKey('validationErrors') &&
+                request.data['validationErrors'] is Map<String, String> &&
+                (request.data['validationErrors'] as Map).isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ...(request.data['validationErrors'] as Map<String, String>)
+                        .entries
+                        .map((entry) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 4),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '• ',
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                color: errorColor,
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                '${entry.key}: ${entry.value}',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  color: lightTextColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ],
+                ),
+              ),
+
+            const SizedBox(height: 20),
+
+            // Buttons
+            Row(
+              children: [
+                // Retry button (if provided)
+                if (request.data != null &&
+                    request.data is Map &&
+                    request.data.containsKey('onRetry'))
+                  Expanded(
+                    child: CustomButton(
+                      title: "Try Again",
+                      onTap: () {
+                        completer(DialogResponse(
+                            confirmed: true, data: {'retry': true}));
+                      },
+                      bgColor: Colors.white,
+                      textColor: mainTextColor,
+                      borderColor: mainBackgroundColor,
+                    ),
+                  ),
+
+                // Spacer between buttons
+                if (request.data != null &&
+                    request.data is Map &&
+                    request.data.containsKey('onRetry'))
+                  const SizedBox(width: 10),
+
+                // Main button
+                Expanded(
+                  child: CustomButton(
+                    title: request.mainButtonTitle ?? viewModel.mainButtonTitle,
+                    onTap: () {
+                      completer(DialogResponse(confirmed: true));
+                    },
+                    bgColor: mainBackgroundColor,
+                    textColor: Colors.white,
+                    borderColor: mainBackgroundColor,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -104,5 +161,19 @@ class ErrorDialog extends StackedView<ErrorDialogModel> {
   }
 
   @override
-  ErrorDialogModel viewModelBuilder(BuildContext context) => ErrorDialogModel();
+  ErrorDialogModel viewModelBuilder(BuildContext context) => ErrorDialogModel(
+        title: request.title ?? 'Error',
+        description: request.description,
+        validationErrors: request.data != null &&
+                request.data is Map &&
+                request.data.containsKey('validationErrors')
+            ? request.data['validationErrors']
+            : null,
+        onRetry: request.data != null &&
+                request.data is Map &&
+                request.data.containsKey('onRetry')
+            ? request.data['onRetry']
+            : null,
+        mainButtonTitle: request.mainButtonTitle ?? 'Got it',
+      );
 }
