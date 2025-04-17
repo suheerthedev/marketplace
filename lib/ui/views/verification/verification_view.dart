@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:marketplace/config/api_config.dart';
 import 'package:marketplace/ui/common/app_colors.dart';
 import 'package:marketplace/ui/widgets/common/custom_button/custom_button.dart';
 import 'package:pinput/pinput.dart';
@@ -136,7 +137,7 @@ class VerificationView extends StackedView<VerificationViewModel> {
                       const SizedBox(height: 15),
                       Center(
                         child: Text(
-                          "You can request up to 60 codes per minute",
+                          "You can request up to ${ApiConfig.otpRequestsPerMinute} codes per minute",
                           style: GoogleFonts.roboto(
                               color: lightTextColor,
                               fontSize: 12,

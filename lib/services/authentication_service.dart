@@ -2,13 +2,14 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:marketplace/app/app.locator.dart';
 import 'package:marketplace/app/app.logger.dart';
+import 'package:marketplace/config/api_config.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class AuthenticationService {
   final log = getLogger('AuthenticationService');
   final _navigationService = locator<NavigationService>();
 
-  final String _baseUrl = 'https://iownthisone-ecom-backend.devop360.com';
+  final String _baseUrl = ApiConfig.baseUrl;
 
   bool _isAuthenticated = false;
   String? _token;
@@ -48,7 +49,7 @@ class AuthenticationService {
       final newsLetterValue = newsletterSubscription ? 1 : 0;
 
       // Build the registration URL with query parameters
-      final uri = Uri.parse('$_baseUrl/register').replace(
+      final uri = Uri.parse('$_baseUrl${ApiConfig.registerEndpoint}').replace(
         queryParameters: {
           'first_name': firstName,
           'last_name': lastName,
@@ -99,7 +100,7 @@ class AuthenticationService {
       log.i('Verifying OTP for: $email');
 
       // Build the verification URL with query parameters
-      final uri = Uri.parse('$_baseUrl/verify-otp/').replace(
+      final uri = Uri.parse('$_baseUrl${ApiConfig.verifyOtpEndpoint}').replace(
         queryParameters: {
           'email': email,
           'otp': otp,
@@ -140,7 +141,7 @@ class AuthenticationService {
       log.i('Resending OTP for: $email');
 
       // Build the resend OTP URL with query parameters
-      final uri = Uri.parse('$_baseUrl/resend-otp').replace(
+      final uri = Uri.parse('$_baseUrl${ApiConfig.resendOtpEndpoint}').replace(
         queryParameters: {
           'email': email,
         },
@@ -192,7 +193,7 @@ class AuthenticationService {
       final newsLetterValue = newsletterSubscription ? 1 : 0;
 
       // Build the registration URL with query parameters
-      final uri = Uri.parse('$_baseUrl/register').replace(
+      final uri = Uri.parse('$_baseUrl${ApiConfig.registerEndpoint}').replace(
         queryParameters: {
           'first_name': firstName,
           'last_name': lastName,

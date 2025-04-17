@@ -800,4 +800,176 @@ class MockProductService extends _i1.Mock implements _i7.ProductService {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthenticationService extends _i1.Mock
-    implements _i9.AuthenticationService {}
+    implements _i9.AuthenticationService {
+  @override
+  bool get isAuthenticated => (super.noSuchMethod(
+        Invocation.getter(#isAuthenticated),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  _i5.Future<bool> signUpBuyer({
+    required String? name,
+    required String? email,
+    required String? password,
+    String? country = 'Pakistan',
+    String? phoneNumber = '',
+    bool? newsletterSubscription = true,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signUpBuyer,
+          [],
+          {
+            #name: name,
+            #email: email,
+            #password: password,
+            #country: country,
+            #phoneNumber: phoneNumber,
+            #newsletterSubscription: newsletterSubscription,
+          },
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+
+  @override
+  _i5.Future<bool> verifyOTP(
+    String? email,
+    String? otp,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #verifyOTP,
+          [
+            email,
+            otp,
+          ],
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+
+  @override
+  _i5.Future<bool> resendOTP(String? email) => (super.noSuchMethod(
+        Invocation.method(
+          #resendOTP,
+          [email],
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+
+  @override
+  _i5.Future<bool> signUpSeller({
+    required String? name,
+    required String? email,
+    required String? password,
+    String? address = '',
+    String? country = 'Pakistan',
+    String? phoneNumber = '',
+    bool? newsletterSubscription = true,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #signUpSeller,
+          [],
+          {
+            #name: name,
+            #email: email,
+            #password: password,
+            #address: address,
+            #country: country,
+            #phoneNumber: phoneNumber,
+            #newsletterSubscription: newsletterSubscription,
+          },
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+
+  @override
+  _i5.Future<bool> login({
+    required String? email,
+    required String? password,
+    String? userType = 'buyer',
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #login,
+          [],
+          {
+            #email: email,
+            #password: password,
+            #userType: userType,
+          },
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+
+  @override
+  _i5.Future<void> logout() => (super.noSuchMethod(
+        Invocation.method(
+          #logout,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  _i5.Future<bool> requestPasswordReset(String? email) => (super.noSuchMethod(
+        Invocation.method(
+          #requestPasswordReset,
+          [email],
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+
+  @override
+  _i5.Future<bool> verifyResetCode(
+    String? email,
+    String? code,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #verifyResetCode,
+          [
+            email,
+            code,
+          ],
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+
+  @override
+  _i5.Future<bool> resetPassword(
+    String? email,
+    String? newPassword,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #resetPassword,
+          [
+            email,
+            newPassword,
+          ],
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+
+  @override
+  _i5.Future<bool> signInWithGoogle() => (super.noSuchMethod(
+        Invocation.method(
+          #signInWithGoogle,
+          [],
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+}
