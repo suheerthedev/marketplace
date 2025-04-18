@@ -60,6 +60,7 @@ import 'package:marketplace/ui/views/store_chat/store_chat_view.dart';
 import 'package:marketplace/services/authentication_service.dart';
 import 'package:marketplace/services/user_service.dart';
 import 'package:marketplace/ui/dialogs/error/error_dialog.dart';
+import 'package:marketplace/ui/views/seller_login/seller_login_view.dart';
 // @stacked-import
 
 @StackedApp(
@@ -116,6 +117,7 @@ import 'package:marketplace/ui/dialogs/error/error_dialog.dart';
     MaterialRoute(page: StoreProductsView),
     MaterialRoute(page: StoreCategoryView),
     MaterialRoute(page: StoreChatView),
+    MaterialRoute(page: SellerLoginView),
 // @stacked-route
   ],
   dependencies: [

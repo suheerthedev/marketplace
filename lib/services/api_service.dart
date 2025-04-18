@@ -14,7 +14,7 @@ class ApiService {
     String? token,
   }) async {
     try {
-      // Ensure proper URL formatting (no double slashes)
+      // Ensure proper URL formatting
       String url = baseUrl;
       if (endpoint.startsWith('/')) {
         url += endpoint;
@@ -36,7 +36,10 @@ class ApiService {
       return _processResponse(response);
     } catch (e) {
       log.e('GET Request Error: $e');
-      return {'error': e.toString()};
+      return {
+        'error': e.toString(),
+        'statusCode': 500,
+      };
     }
   }
 
@@ -46,10 +49,9 @@ class ApiService {
     Object? body,
     Map<String, dynamic>? queryParams,
     String? token,
-    bool isFormData = false,
   }) async {
     try {
-      // Ensure proper URL formatting (no double slashes)
+      // Ensure proper URL formatting
       String url = baseUrl;
       if (endpoint.startsWith('/')) {
         url += endpoint;
@@ -62,17 +64,13 @@ class ApiService {
         queryParameters: queryParams,
       );
 
-      // Prepare headers based on content type
-      final headers = _prepareHeaders(token, isFormData: isFormData);
+      // Prepare headers
+      final headers = _prepareHeaders(token);
 
-      // Process body based on content type
-      Object? processedBody;
-      if (body != null) {
-        if (body is Map && !isFormData) {
-          processedBody = jsonEncode(body);
-        } else {
-          processedBody = body;
-        }
+      // Process body
+      String? processedBody;
+      if (body != null && body is Map) {
+        processedBody = jsonEncode(body);
       }
 
       log.i('POST Request: $uri');
@@ -85,19 +83,19 @@ class ApiService {
       return _processResponse(response);
     } catch (e) {
       log.e('POST Request Error: $e');
-      return {'error': e.toString()};
+      return {
+        'error': e.toString(),
+        'statusCode': 500,
+      };
     }
   }
 
   // Helper method to prepare headers
-  Map<String, String> _prepareHeaders(String? token,
-      {bool isFormData = false}) {
-    final headers = <String, String>{};
-
-    // Add content type if not form data
-    if (!isFormData) {
-      headers['Content-Type'] = 'application/json';
-    }
+  Map<String, String> _prepareHeaders(String? token) {
+    final headers = <String, String>{
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
 
     // Add authorization token if available
     if (token != null) {
@@ -112,23 +110,20 @@ class ApiService {
     log.i('Response Status: ${response.statusCode}');
     log.i('Response Body: ${response.body}');
 
-    // For 406 errors, return a more helpful error
-    if (response.statusCode == 406) {
-      return {
-        'error': 'Server rejected the request format (406 Not Acceptable)',
-        'message': 'Please check your API endpoint format and headers',
-        'statusCode': response.statusCode,
-      };
-    }
+    // Always include status code in the response
+    Map<String, dynamic> result = {
+      'statusCode': response.statusCode,
+    };
 
     try {
       // Try to parse JSON response
       if (response.body.isNotEmpty) {
         final jsonData = json.decode(response.body);
-        return jsonData;
-      } else {
-        return {};
+        // Add JSON data to result
+        result.addAll(jsonData);
       }
+
+      return result;
     } catch (e) {
       log.e('Error parsing response: $e');
       return {

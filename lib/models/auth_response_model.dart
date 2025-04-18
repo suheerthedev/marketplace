@@ -26,38 +26,65 @@ class RegisterResponse {
   final String? token;
   final UserModel? user;
   final Map<String, List<String>>? errors;
+  final int statusCode;
 
   RegisterResponse({
     this.token,
     this.user,
     this.errors,
+    required this.statusCode,
   });
 
   factory RegisterResponse.fromJson(Map<String, dynamic> json) {
-    // Check if response contains errors
-    if (json.containsKey('errors')) {
+    final int statusCode = json['statusCode'] ?? 500;
+
+    // Handle 422 errors (email already taken)
+    if (statusCode == 422 &&
+        json.containsKey('email') &&
+        json['email'] is List) {
       return RegisterResponse(
-        errors: _parseErrors(json['errors']),
+        errors: {
+          'email': List<String>.from(json['email']),
+        },
+        statusCode: statusCode,
       );
     }
 
-    // Check for specific field errors like email
+    // For 200 success responses
+    if (statusCode == 200) {
+      return RegisterResponse(
+        token: json['token'],
+        user:
+            json.containsKey('user') ? UserModel.fromJson(json['user']) : null,
+        statusCode: statusCode,
+      );
+    }
+
+    // For other error cases
+    if (json.containsKey('errors')) {
+      return RegisterResponse(
+        errors: _parseErrors(json['errors']),
+        statusCode: statusCode,
+      );
+    }
+
+    // If email errors included directly at the root (common pattern)
     if (json.containsKey('email') && json['email'] is List) {
       return RegisterResponse(
         errors: {
           'email': List<String>.from(json['email']),
         },
+        statusCode: statusCode,
       );
     }
 
-    // Otherwise, process successful response
+    // Default case
     return RegisterResponse(
-      token: json['token'],
-      user: json.containsKey('user') ? UserModel.fromJson(json['user']) : null,
+      statusCode: statusCode,
     );
   }
 
-  bool get isSuccess => token != null && user != null;
+  bool get isSuccess => statusCode == 200 && token != null && user != null;
   bool get hasErrors => errors != null && errors!.isNotEmpty;
 
   // Helper method to parse error messages from API
@@ -83,27 +110,27 @@ class RegisterResponse {
 class OtpVerificationResponse {
   final String? message;
   final String? token;
-  final bool isSuccess;
+  final int statusCode;
 
   OtpVerificationResponse({
     this.message,
     this.token,
-    required this.isSuccess,
+    required this.statusCode,
   });
 
   factory OtpVerificationResponse.fromJson(Map<String, dynamic> json) {
-    final message = json['message'] ?? '';
-
-    // Check if verification was successful
-    final isSuccess = message.contains('verified successfully') ||
-        message.contains('already verified');
+    final int statusCode = json['statusCode'] ?? 500;
+    final String? message = json['message'];
 
     return OtpVerificationResponse(
       message: message,
       token: json['token'],
-      isSuccess: isSuccess,
+      statusCode: statusCode,
     );
   }
+
+  bool get isSuccess => statusCode == 200;
+  bool get isInvalidOtp => statusCode == 400 && message == 'Invalid OTP';
 }
 
 // Response model for login
@@ -113,6 +140,7 @@ class LoginResponse {
   final bool? emailVerified;
   final String? message;
   final Map<String, List<String>>? errors;
+  final int statusCode;
 
   LoginResponse({
     this.token,
@@ -120,35 +148,53 @@ class LoginResponse {
     this.emailVerified,
     this.message,
     this.errors,
+    required this.statusCode,
   });
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
-    // Check if response contains errors
-    if (json.containsKey('errors')) {
+    final int statusCode = json['statusCode'] ?? 500;
+
+    // For 422 error responses (invalid credentials)
+    if (statusCode == 422 && json.containsKey('errors')) {
       return LoginResponse(
         errors: _parseErrors(json['errors']),
         message: json['message'],
+        statusCode: statusCode,
       );
     }
 
-    // Check if email is not verified
-    if (json.containsKey('email_verified') && json['email_verified'] == false) {
-      return LoginResponse(
-        emailVerified: false,
-        message: json['message'],
-      );
+    // For 200 responses, check if email is verified
+    if (statusCode == 200) {
+      if (json.containsKey('email_verified') &&
+          json['email_verified'] == false) {
+        // Email not verified
+        return LoginResponse(
+          emailVerified: false,
+          message: json['message'],
+          statusCode: statusCode,
+        );
+      } else {
+        // Login successful
+        return LoginResponse(
+          token: json['token'],
+          emailVerified: json['email_verified'],
+          user: json.containsKey('user')
+              ? UserModel.fromJson(json['user'])
+              : null,
+          statusCode: statusCode,
+        );
+      }
     }
 
-    // Otherwise, process successful login response
+    // Default case
     return LoginResponse(
-      token: json['token'],
-      emailVerified: json['email_verified'],
-      user: json.containsKey('user') ? UserModel.fromJson(json['user']) : null,
+      message: json['message'],
+      statusCode: statusCode,
     );
   }
 
-  bool get isSuccess => token != null && user != null;
-  bool get isEmailNotVerified => emailVerified == false;
+  bool get isSuccess => statusCode == 200 && token != null && user != null;
+  bool get isEmailNotVerified => statusCode == 200 && emailVerified == false;
   bool get hasErrors => errors != null && errors!.isNotEmpty;
 
   // Helper method to parse error messages from API
@@ -170,100 +216,93 @@ class LoginResponse {
   }
 }
 
+// Response model for resend OTP
+class ResendOtpResponse {
+  final String? message;
+  final int statusCode;
+
+  ResendOtpResponse({
+    this.message,
+    required this.statusCode,
+  });
+
+  factory ResendOtpResponse.fromJson(Map<String, dynamic> json) {
+    final int statusCode = json['statusCode'] ?? 500;
+    return ResendOtpResponse(
+      message: json['message'],
+      statusCode: statusCode,
+    );
+  }
+
+  bool get isSuccess => statusCode == 200;
+  bool get isEmailNotRegistered =>
+      statusCode == 400 && message?.contains('not registered') == true;
+}
+
 // Response model for password reset request
 class PasswordResetRequestResponse {
   final String? message;
-  final bool isSuccess;
   final String? error;
+  final int statusCode;
 
   PasswordResetRequestResponse({
     this.message,
-    required this.isSuccess,
     this.error,
+    required this.statusCode,
   });
 
   factory PasswordResetRequestResponse.fromJson(Map<String, dynamic> json) {
-    // Check if the response contains a success message
-    if (json.containsKey('message')) {
-      final message = json['message'] as String?;
-      final isSuccess = message != null &&
-          (message.contains('reset link sent') ||
-              message.contains('password reset') ||
-              message.contains('otp sent'));
+    final int statusCode = json['statusCode'] ?? 500;
+    final String? message = json['message'];
 
+    // Success response
+    if (statusCode == 200) {
       return PasswordResetRequestResponse(
         message: message,
-        isSuccess: isSuccess,
-        error: isSuccess ? null : message,
+        statusCode: statusCode,
       );
     }
 
-    // Check if the response contains errors
-    if (json.containsKey('error') || json.containsKey('errors')) {
-      final error = json['error'] ??
-          (json['errors'] is Map
-              ? json['errors'].values.first.toString()
-              : json['errors'].toString());
-
-      return PasswordResetRequestResponse(
-        isSuccess: false,
-        error: error.toString(),
-      );
-    }
-
-    // Default case
+    // Error response
     return PasswordResetRequestResponse(
-      isSuccess: false,
-      error: 'Unknown response from server',
+      error: message ?? json['error'],
+      statusCode: statusCode,
     );
   }
+
+  bool get isSuccess => statusCode == 200;
 }
 
 // Response model for password reset
 class PasswordResetResponse {
   final String? message;
-  final bool isSuccess;
   final String? error;
+  final int statusCode;
 
   PasswordResetResponse({
     this.message,
-    required this.isSuccess,
     this.error,
+    required this.statusCode,
   });
 
   factory PasswordResetResponse.fromJson(Map<String, dynamic> json) {
-    // Check if the response contains a success message
-    if (json.containsKey('message')) {
-      final message = json['message'] as String?;
-      final isSuccess = message != null &&
-          (message.contains('password updated') ||
-              message.contains('password changed') ||
-              message.contains('successfully reset'));
+    final int statusCode = json['statusCode'] ?? 500;
+    final String? message = json['message'];
 
+    // Success response
+    if (statusCode == 200) {
       return PasswordResetResponse(
         message: message,
-        isSuccess: isSuccess,
-        error: isSuccess ? null : message,
+        statusCode: statusCode,
       );
     }
 
-    // Check if the response contains errors
-    if (json.containsKey('error') || json.containsKey('errors')) {
-      final error = json['error'] ??
-          (json['errors'] is Map
-              ? json['errors'].values.first.toString()
-              : json['errors'].toString());
-
-      return PasswordResetResponse(
-        isSuccess: false,
-        error: error.toString(),
-      );
-    }
-
-    // Default case
+    // Error response
     return PasswordResetResponse(
-      isSuccess: false,
-      error: 'Unknown response from server',
+      error: message ?? json['error'],
+      statusCode: statusCode,
     );
   }
+
+  bool get isSuccess => statusCode == 200;
 }

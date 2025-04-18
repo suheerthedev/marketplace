@@ -809,91 +809,81 @@ class MockAuthenticationService extends _i1.Mock
       ) as bool);
 
   @override
-  _i5.Future<bool> signUpBuyer({
-    required String? name,
+  Map<String, String> get validationErrors => (super.noSuchMethod(
+        Invocation.getter(#validationErrors),
+        returnValue: <String, String>{},
+        returnValueForMissingStub: <String, String>{},
+      ) as Map<String, String>);
+
+  @override
+  bool get isEmailVerified => (super.noSuchMethod(
+        Invocation.getter(#isEmailVerified),
+        returnValue: false,
+        returnValueForMissingStub: false,
+      ) as bool);
+
+  @override
+  _i5.Future<bool> initialize() => (super.noSuchMethod(
+        Invocation.method(
+          #initialize,
+          [],
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+
+  @override
+  _i5.Future<_i9.AuthResult> register({
+    required String? firstName,
+    required String? lastName,
     required String? email,
     required String? password,
+    required String? phoneNumber,
     String? country = 'Pakistan',
-    String? phoneNumber = '',
     bool? newsletterSubscription = true,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #signUpBuyer,
+          #register,
           [],
           {
-            #name: name,
+            #firstName: firstName,
+            #lastName: lastName,
             #email: email,
             #password: password,
-            #country: country,
             #phoneNumber: phoneNumber,
+            #country: country,
             #newsletterSubscription: newsletterSubscription,
           },
         ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i5.Future<_i9.AuthResult>.value(_i9.AuthResult.success),
+        returnValueForMissingStub:
+            _i5.Future<_i9.AuthResult>.value(_i9.AuthResult.success),
+      ) as _i5.Future<_i9.AuthResult>);
 
   @override
-  _i5.Future<bool> verifyOTP(
-    String? email,
-    String? otp,
-  ) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #verifyOTP,
-          [
-            email,
-            otp,
-          ],
-        ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
-
-  @override
-  _i5.Future<bool> resendOTP(String? email) => (super.noSuchMethod(
-        Invocation.method(
-          #resendOTP,
-          [email],
-        ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
-
-  @override
-  _i5.Future<bool> signUpSeller({
-    required String? name,
+  _i5.Future<_i9.AuthResult> verifyOtp({
     required String? email,
-    required String? password,
-    String? address = '',
-    String? country = 'Pakistan',
-    String? phoneNumber = '',
-    bool? newsletterSubscription = true,
+    required String? otp,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
-          #signUpSeller,
+          #verifyOtp,
           [],
           {
-            #name: name,
             #email: email,
-            #password: password,
-            #address: address,
-            #country: country,
-            #phoneNumber: phoneNumber,
-            #newsletterSubscription: newsletterSubscription,
+            #otp: otp,
           },
         ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+        returnValue: _i5.Future<_i9.AuthResult>.value(_i9.AuthResult.success),
+        returnValueForMissingStub:
+            _i5.Future<_i9.AuthResult>.value(_i9.AuthResult.success),
+      ) as _i5.Future<_i9.AuthResult>);
 
   @override
-  _i5.Future<bool> login({
+  _i5.Future<_i9.AuthResult> login({
     required String? email,
     required String? password,
-    String? userType = 'buyer',
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -902,22 +892,33 @@ class MockAuthenticationService extends _i1.Mock
           {
             #email: email,
             #password: password,
-            #userType: userType,
           },
+        ),
+        returnValue: _i5.Future<_i9.AuthResult>.value(_i9.AuthResult.success),
+        returnValueForMissingStub:
+            _i5.Future<_i9.AuthResult>.value(_i9.AuthResult.success),
+      ) as _i5.Future<_i9.AuthResult>);
+
+  @override
+  _i5.Future<bool> logout() => (super.noSuchMethod(
+        Invocation.method(
+          #logout,
+          [],
         ),
         returnValue: _i5.Future<bool>.value(false),
         returnValueForMissingStub: _i5.Future<bool>.value(false),
       ) as _i5.Future<bool>);
 
   @override
-  _i5.Future<void> logout() => (super.noSuchMethod(
+  _i5.Future<bool> resendOtp({required String? email}) => (super.noSuchMethod(
         Invocation.method(
-          #logout,
+          #resendOtp,
           [],
+          {#email: email},
         ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+        returnValue: _i5.Future<bool>.value(false),
+        returnValueForMissingStub: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
 
   @override
   _i5.Future<bool> requestPasswordReset(String? email) => (super.noSuchMethod(
@@ -949,8 +950,9 @@ class MockAuthenticationService extends _i1.Mock
   @override
   _i5.Future<bool> resetPassword(
     String? email,
-    String? newPassword,
-  ) =>
+    String? newPassword, {
+    String? resetToken,
+  }) =>
       (super.noSuchMethod(
         Invocation.method(
           #resetPassword,
@@ -958,6 +960,7 @@ class MockAuthenticationService extends _i1.Mock
             email,
             newPassword,
           ],
+          {#resetToken: resetToken},
         ),
         returnValue: _i5.Future<bool>.value(false),
         returnValueForMissingStub: _i5.Future<bool>.value(false),
